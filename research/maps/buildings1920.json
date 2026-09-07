@@ -1,0 +1,3371 @@
+{
+ "_status": "PRELIMINARY (automatic thresholds on georeferenced 1920 and 1933 plans; manual review pending)",
+ "origin": {
+  "lat": 54.3825003,
+  "lon": 18.6262664,
+  "enu": "metres east/north of origin"
+ },
+ "streets": [
+  {
+   "today": "Adama Mickiewicza",
+   "1920": "Bärenweg",
+   "note": "existed 1920 on the same alignment; west of Sochaczewska it continued west as the road to Bärenwinkel (gardener Lenz nursery). Name since 1902."
+  },
+  {
+   "today": "Jana Kochanowskiego",
+   "1920": "Posadowskyweg",
+   "note": "existed 1920; the northern part (north of Mickiewicza) ended at Justweg / Hst. Reichskolonie; the southern part existed with the Wohnungs-Genossenschaft rows on both sides."
+  },
+  {
+   "today": "Sochaczewska",
+   "1920": "Neptunweg",
+   "note": "existed 1920 (renamed Maximilian-Block-Weg after 1931)."
+  },
+  {
+   "today": "Sebastiana Klonowicza",
+   "1920": "Marineweg",
+   "note": "existed 1920 (present already on the 1912 plan)."
+  },
+  {
+   "today": "Mikołaja Reja",
+   "1920": "Leegstrieß (road along the Strießbach)",
+   "note": "on the 1920 plan the road/stream south of the colony runs on a slightly different (more diagonal NW-SE) course; 1933 plan shows Leegstrieß on today's alignment."
+  },
+  {
+   "today": "Dzielna",
+   "1920": "Simsonweg",
+   "note": "not on the 1920 plan (laid out with the 1920s/30s housing south of the Strießbach); present on 1933 plan."
+  },
+  {
+   "today": "Modrzewskiego (outside 220 m)",
+   "1920": "Justweg",
+   "note": "existed 1920, led to Hst. Reichskolonie."
+  },
+  {
+   "today": "Aleja Gen. J. Hallera (west edge)",
+   "1920": "(not yet) Ostseestraße",
+   "note": "Ostseestraße was laid out from 1920; not on the 1920 plan."
+  },
+  {
+   "today": "Strzyża (stream)",
+   "1920": "Strießbach",
+   "note": "stream south of the colony"
+  }
+ ],
+ "buildings": [
+  {
+   "osm_id": 92356368,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    1.2,
+    -1.8
+   ],
+   "dist_m": 2.2,
+   "area_m2": 223.8,
+   "addr": "Adama Mickiewicza 43",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.26,
+    "ink_fraction_1920": 0.14
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 92356365,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    -18.4,
+    6.9
+   ],
+   "dist_m": 19.7,
+   "area_m2": 216.4,
+   "addr": "Adama Mickiewicza 41",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.37,
+    "ink_fraction_1920": 0.16
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 92356369,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    19.0,
+    -10.0
+   ],
+   "dist_m": 21.5,
+   "area_m2": 226.5,
+   "addr": "Adama Mickiewicza 45",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.3,
+    "ink_fraction_1920": 0.38
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 1370742792,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -3.0,
+    -26.6
+   ],
+   "dist_m": 26.8,
+   "area_m2": 37.5,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.36
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 734200513,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -28.8,
+    -3.9
+   ],
+   "dist_m": 29.0,
+   "area_m2": 125.9,
+   "addr": null,
+   "building": "industrial",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.06
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92358118,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    13.9,
+    -28.3
+   ],
+   "dist_m": 31.5,
+   "area_m2": 208.1,
+   "addr": "Jana Kochanowskiego 76",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.16,
+    "ink_fraction_1920": 0.1
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 92356375,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    -34.1,
+    15.0
+   ],
+   "dist_m": 37.3,
+   "area_m2": 158.8,
+   "addr": "Adama Mickiewicza 39A",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.49,
+    "ink_fraction_1920": 0.25
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 759629833,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -4.9,
+    -42.9
+   ],
+   "dist_m": 43.2,
+   "area_m2": 43.1,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.31
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1436691439,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -42.7,
+    -7.2
+   ],
+   "dist_m": 43.3,
+   "area_m2": 20.0,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1436691440,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -44.4,
+    -4.2
+   ],
+   "dist_m": 44.6,
+   "area_m2": 19.0,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92358117,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    5.8,
+    -46.1
+   ],
+   "dist_m": 46.4,
+   "area_m2": 190.1,
+   "addr": "Jana Kochanowskiego 74",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.51,
+    "ink_fraction_1920": 0.53
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 1436691441,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -46.6,
+    -1.9
+   ],
+   "dist_m": 46.6,
+   "area_m2": 19.1,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1245929985,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -48.4,
+    0.7
+   ],
+   "dist_m": 48.4,
+   "area_m2": 21.1,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92356372,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    -46.4,
+    22.9
+   ],
+   "dist_m": 51.7,
+   "area_m2": 160.8,
+   "addr": "Adama Mickiewicza 39",
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.37,
+    "ink_fraction_1920": 0.37
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 92358185,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    42.1,
+    -34.9
+   ],
+   "dist_m": 54.6,
+   "area_m2": 456.4,
+   "addr": null,
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.42,
+    "ink_fraction_1920": 0.21
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 755656561,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -12.4,
+    -54.4
+   ],
+   "dist_m": 55.8,
+   "area_m2": 41.9,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.05,
+    "ink_fraction_1920": 0.61
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 755656564,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -55.9,
+    4.1
+   ],
+   "dist_m": 56.0,
+   "area_m2": 19.4,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370742793,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    1.3,
+    -56.1
+   ],
+   "dist_m": 56.1,
+   "area_m2": 17.9,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.84,
+    "ink_fraction_1920": 0.26
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 759629832,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    6.1,
+    -56.5
+   ],
+   "dist_m": 56.9,
+   "area_m2": 21.4,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.55,
+    "ink_fraction_1920": 0.43
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 1436691445,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -58.6,
+    5.4
+   ],
+   "dist_m": 58.9,
+   "area_m2": 18.7,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370742794,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    4.4,
+    -60.4
+   ],
+   "dist_m": 60.5,
+   "area_m2": 27.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.43,
+    "ink_fraction_1920": 0.32
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 1217187837,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -10.5,
+    -60.7
+   ],
+   "dist_m": 61.6,
+   "area_m2": 41.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.34
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1436691444,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -61.3,
+    6.7
+   ],
+   "dist_m": 61.7,
+   "area_m2": 18.0,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92358725,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    53.9,
+    30.1
+   ],
+   "dist_m": 61.8,
+   "area_m2": 669.5,
+   "addr": null,
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.18,
+    "ink_fraction_1920": 0.15
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 1436691443,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -64.0,
+    8.0
+   ],
+   "dist_m": 64.5,
+   "area_m2": 19.0,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.05,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370742795,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    37.6,
+    -55.8
+   ],
+   "dist_m": 67.3,
+   "area_m2": 18.8,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.7,
+    "ink_fraction_1920": 0.12
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 1436691442,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -66.7,
+    9.4
+   ],
+   "dist_m": 67.4,
+   "area_m2": 19.4,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92356363,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    -63.6,
+    28.9
+   ],
+   "dist_m": 69.9,
+   "area_m2": 162.6,
+   "addr": "Adama Mickiewicza 37",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.24,
+    "ink_fraction_1920": 0.49
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 1370878253,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    70.9,
+    1.1
+   ],
+   "dist_m": 70.9,
+   "area_m2": 19.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.5,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 1370878254,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    74.2,
+    -0.5
+   ],
+   "dist_m": 74.2,
+   "area_m2": 18.2,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.28,
+    "ink_fraction_1920": 0.02
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 92358184,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    68.9,
+    -29.2
+   ],
+   "dist_m": 74.8,
+   "area_m2": 222.3,
+   "addr": "Adama Mickiewicza 49",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.19,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 1217187887,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    70.6,
+    26.6
+   ],
+   "dist_m": 75.4,
+   "area_m2": 42.8,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.38
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878252,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    75.5,
+    3.3
+   ],
+   "dist_m": 75.6,
+   "area_m2": 29.1,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.51,
+    "ink_fraction_1920": 0.22
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 92350262,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    37.3,
+    -66.2
+   ],
+   "dist_m": 76.0,
+   "area_m2": 194.3,
+   "addr": "Jana Kochanowskiego 73",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.6,
+    "ink_fraction_1920": 0.1
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 92358121,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -1.4,
+    -76.6
+   ],
+   "dist_m": 76.6,
+   "area_m2": 192.0,
+   "addr": "Jana Kochanowskiego 72",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.53,
+    "ink_fraction_1920": 0.14
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 1423992702,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    12.1,
+    76.2
+   ],
+   "dist_m": 77.1,
+   "area_m2": 6.3,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.25
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 755656570,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    77.6,
+    -1.7
+   ],
+   "dist_m": 77.6,
+   "area_m2": 24.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.67,
+    "ink_fraction_1920": 0.07
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 1370878251,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    78.1,
+    6.4
+   ],
+   "dist_m": 78.3,
+   "area_m2": 20.0,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.41,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 1370878250,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    80.6,
+    8.6
+   ],
+   "dist_m": 81.1,
+   "area_m2": 16.0,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.36,
+    "ink_fraction_1920": 0.18
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 1423992700,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    81.5,
+    11.6
+   ],
+   "dist_m": 82.3,
+   "area_m2": 15.8,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.47,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 92352275,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    -76.7,
+    33.6
+   ],
+   "dist_m": 83.8,
+   "area_m2": 161.1,
+   "addr": "Adama Mickiewicza 35",
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.18,
+    "ink_fraction_1920": 0.23
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 1436691438,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -31.4,
+    -79.0
+   ],
+   "dist_m": 85.0,
+   "area_m2": 4.9,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.4
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 755656566,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    83.4,
+    -28.6
+   ],
+   "dist_m": 88.2,
+   "area_m2": 54.3,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.12
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1436691435,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    73.4,
+    -52.3
+   ],
+   "dist_m": 90.1,
+   "area_m2": 4.1,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.87
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92350261,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    37.8,
+    -85.2
+   ],
+   "dist_m": 93.2,
+   "area_m2": 180.5,
+   "addr": "Jana Kochanowskiego 71",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.7,
+    "ink_fraction_1920": 0.23
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 92358120,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -5.1,
+    -93.9
+   ],
+   "dist_m": 94.1,
+   "area_m2": 181.1,
+   "addr": "Jana Kochanowskiego 70",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.6,
+    "ink_fraction_1920": 0.13
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 92119885,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    94.7,
+    -9.3
+   ],
+   "dist_m": 95.2,
+   "area_m2": 23.1,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.34
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878248,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    95.8,
+    -5.9
+   ],
+   "dist_m": 96.0,
+   "area_m2": 23.0,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.05,
+    "ink_fraction_1920": 0.04
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878247,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    96.9,
+    -2.6
+   ],
+   "dist_m": 97.0,
+   "area_m2": 23.0,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.2
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878246,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    98.1,
+    0.8
+   ],
+   "dist_m": 98.1,
+   "area_m2": 23.1,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.17
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1423992701,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    72.4,
+    66.4
+   ],
+   "dist_m": 98.3,
+   "area_m2": 10.6,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.14
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878245,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    99.2,
+    4.1
+   ],
+   "dist_m": 99.3,
+   "area_m2": 22.7,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.22
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878244,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    100.4,
+    7.4
+   ],
+   "dist_m": 100.6,
+   "area_m2": 23.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.11
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 837984149,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    19.7,
+    -98.9
+   ],
+   "dist_m": 100.9,
+   "area_m2": 6.9,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.14,
+    "ink_fraction_1920": 0.16
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 1370878243,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    101.5,
+    10.7
+   ],
+   "dist_m": 102.0,
+   "area_m2": 23.1,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.49
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92352274,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -93.1,
+    43.9
+   ],
+   "dist_m": 103.0,
+   "area_m2": 219.8,
+   "addr": "Adama Mickiewicza 33",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.06,
+    "ink_fraction_1920": 0.35
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878242,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    102.6,
+    14.0
+   ],
+   "dist_m": 103.5,
+   "area_m2": 22.7,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.41
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93304317,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -74.1,
+    72.5
+   ],
+   "dist_m": 103.7,
+   "area_m2": 206.0,
+   "addr": "Sebastiana Klonowicza 2A",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.29
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878241,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    103.7,
+    17.3
+   ],
+   "dist_m": 105.2,
+   "area_m2": 22.8,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.17
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 837984148,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    18.3,
+    -104.8
+   ],
+   "dist_m": 106.3,
+   "area_m2": 6.9,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.13,
+    "ink_fraction_1920": 0.17
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 1370878240,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    104.9,
+    20.6
+   ],
+   "dist_m": 106.9,
+   "area_m2": 23.1,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.05,
+    "ink_fraction_1920": 0.29
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93307409,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    67.3,
+    84.6
+   ],
+   "dist_m": 108.1,
+   "area_m2": 66.1,
+   "addr": "Jana Kochanowskiego 81",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.41
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878239,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    106.0,
+    24.0
+   ],
+   "dist_m": 108.6,
+   "area_m2": 23.1,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.05,
+    "ink_fraction_1920": 0.23
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93304319,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -67.7,
+    85.1
+   ],
+   "dist_m": 108.7,
+   "area_m2": 123.7,
+   "addr": "Sebastiana Klonowicza 2B",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.28
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92350260,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    34.8,
+    -104.2
+   ],
+   "dist_m": 109.9,
+   "area_m2": 178.2,
+   "addr": "Jana Kochanowskiego 69",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.7,
+    "ink_fraction_1920": 0.21
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 1370878238,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    107.1,
+    27.3
+   ],
+   "dist_m": 110.5,
+   "area_m2": 22.7,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.27
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878237,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    108.2,
+    30.6
+   ],
+   "dist_m": 112.5,
+   "area_m2": 22.7,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.39
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92358119,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -10.0,
+    -114.0
+   ],
+   "dist_m": 114.4,
+   "area_m2": 180.8,
+   "addr": "Jana Kochanowskiego 68",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.65,
+    "ink_fraction_1920": 0.11
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 1370878236,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    109.3,
+    33.9
+   ],
+   "dist_m": 114.5,
+   "area_m2": 23.1,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.24
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878235,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    110.5,
+    37.2
+   ],
+   "dist_m": 116.6,
+   "area_m2": 23.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.4
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878234,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    111.6,
+    40.6
+   ],
+   "dist_m": 118.7,
+   "area_m2": 23.1,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.2
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93303780,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -92.0,
+    75.4
+   ],
+   "dist_m": 118.9,
+   "area_m2": 122.4,
+   "addr": "Adama Mickiewicza 38",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.21
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93307406,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    72.1,
+    94.8
+   ],
+   "dist_m": 119.1,
+   "area_m2": 127.1,
+   "addr": "Jana Kochanowskiego 83",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.24
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92352273,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -107.9,
+    51.7
+   ],
+   "dist_m": 119.7,
+   "area_m2": 156.7,
+   "addr": "Adama Mickiewicza 31",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88481090,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    20.4,
+    118.7
+   ],
+   "dist_m": 120.4,
+   "area_m2": 338.8,
+   "addr": "Sebastiana Klonowicza 1A",
+   "building": "kindergarten",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.35
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878233,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    112.7,
+    43.9
+   ],
+   "dist_m": 121.0,
+   "area_m2": 23.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.33
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878232,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    113.9,
+    47.2
+   ],
+   "dist_m": 123.3,
+   "area_m2": 23.1,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.12
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93304322,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    -63.7,
+    107.1
+   ],
+   "dist_m": 124.5,
+   "area_m2": 120.4,
+   "addr": "Sebastiana Klonowicza 2C",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.15,
+    "ink_fraction_1920": 0.38
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 261929774,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    -82.3,
+    94.1
+   ],
+   "dist_m": 125.0,
+   "area_m2": 19.4,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.13,
+    "ink_fraction_1920": 0.53
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 1370878231,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    115.0,
+    50.6
+   ],
+   "dist_m": 125.6,
+   "area_m2": 23.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.34
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88463274,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    30.4,
+    -122.8
+   ],
+   "dist_m": 126.5,
+   "area_m2": 178.9,
+   "addr": "Jana Kochanowskiego 67",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.77,
+    "ink_fraction_1920": 0.16
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 1370878216,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    -85.1,
+    95.3
+   ],
+   "dist_m": 127.7,
+   "area_m2": 18.1,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.12,
+    "ink_fraction_1920": 0.22
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 1370878230,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    116.1,
+    53.9
+   ],
+   "dist_m": 128.0,
+   "area_m2": 22.9,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93303779,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    -97.1,
+    84.5
+   ],
+   "dist_m": 128.7,
+   "area_m2": 182.1,
+   "addr": "Adama Mickiewicza 36A",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.26,
+    "ink_fraction_1920": 0.17
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 90722541,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    76.3,
+    105.2
+   ],
+   "dist_m": 129.9,
+   "area_m2": 68.3,
+   "addr": "Jana Kochanowskiego 85",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.36
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878215,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -87.8,
+    96.4
+   ],
+   "dist_m": 130.4,
+   "area_m2": 18.7,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.07,
+    "ink_fraction_1920": 0.65
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878229,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    117.3,
+    57.2
+   ],
+   "dist_m": 130.5,
+   "area_m2": 23.8,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.17
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 90722442,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -12.4,
+    -131.3
+   ],
+   "dist_m": 131.9,
+   "area_m2": 196.7,
+   "addr": "Jana Kochanowskiego 66",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.67,
+    "ink_fraction_1920": 0.12
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 93304325,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -58.8,
+    118.8
+   ],
+   "dist_m": 132.5,
+   "area_m2": 116.5,
+   "addr": "Sebastiana Klonowicza 2D",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.36
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878228,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    118.4,
+    60.6
+   ],
+   "dist_m": 133.0,
+   "area_m2": 23.8,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878214,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    -90.5,
+    97.6
+   ],
+   "dist_m": 133.1,
+   "area_m2": 18.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.12,
+    "ink_fraction_1920": 0.19
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 1370742796,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    33.9,
+    -129.8
+   ],
+   "dist_m": 134.1,
+   "area_m2": 32.9,
+   "addr": null,
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.15,
+    "ink_fraction_1920": 0.02
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 261929778,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -78.2,
+    110.1
+   ],
+   "dist_m": 135.0,
+   "area_m2": 20.6,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.4
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92352272,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -122.0,
+    58.6
+   ],
+   "dist_m": 135.3,
+   "area_m2": 162.9,
+   "addr": "Adama Mickiewicza 29",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878213,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -93.3,
+    98.8
+   ],
+   "dist_m": 135.9,
+   "area_m2": 20.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.09,
+    "ink_fraction_1920": 0.2
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 89767273,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    58.7,
+    123.4
+   ],
+   "dist_m": 136.7,
+   "area_m2": 64.6,
+   "addr": "Jana Kochanowskiego 82",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.31
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878222,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -81.0,
+    111.3
+   ],
+   "dist_m": 137.6,
+   "area_m2": 19.0,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.24
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878221,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -83.8,
+    112.4
+   ],
+   "dist_m": 140.2,
+   "area_m2": 19.5,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.54
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93304328,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -54.1,
+    130.1
+   ],
+   "dist_m": 140.9,
+   "area_m2": 116.8,
+   "addr": "Sebastiana Klonowicza 2E",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.4
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 90722503,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    21.7,
+    -139.6
+   ],
+   "dist_m": 141.2,
+   "area_m2": 194.0,
+   "addr": "Jana Kochanowskiego 65",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.69,
+    "ink_fraction_1920": 0.2
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 90722438,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    87.2,
+    112.5
+   ],
+   "dist_m": 142.4,
+   "area_m2": 129.3,
+   "addr": "Jana Kochanowskiego 87",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.32
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 420862720,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    12.0,
+    141.9
+   ],
+   "dist_m": 142.4,
+   "area_m2": 30.7,
+   "addr": null,
+   "building": "service",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.19
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878220,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -86.6,
+    113.6
+   ],
+   "dist_m": 142.9,
+   "area_m2": 19.5,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.45
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93303778,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -110.9,
+    90.2
+   ],
+   "dist_m": 143.0,
+   "area_m2": 119.2,
+   "addr": "Adama Mickiewicza 36",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.07,
+    "ink_fraction_1920": 0.27
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92352271,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -131.0,
+    62.6
+   ],
+   "dist_m": 145.2,
+   "area_m2": 119.5,
+   "addr": "Adama Mickiewicza 27A",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.06
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878218,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -89.4,
+    114.9
+   ],
+   "dist_m": 145.5,
+   "area_m2": 19.1,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.37
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93308862,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    62.7,
+    133.9
+   ],
+   "dist_m": 147.8,
+   "area_m2": 124.6,
+   "addr": "Jana Kochanowskiego 84",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.23
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878217,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -92.6,
+    115.6
+   ],
+   "dist_m": 148.1,
+   "area_m2": 19.2,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.02
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 437295906,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -148.5,
+    -6.8
+   ],
+   "dist_m": 148.7,
+   "area_m2": 141.2,
+   "addr": null,
+   "building": "warehouse",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.5
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93304330,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -47.6,
+    141.6
+   ],
+   "dist_m": 149.4,
+   "area_m2": 119.5,
+   "addr": "Sebastiana Klonowicza 2F",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.08,
+    "ink_fraction_1920": 0.34
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88463291,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    -24.4,
+    -148.6
+   ],
+   "dist_m": 150.6,
+   "area_m2": 243.3,
+   "addr": "Jana Kochanowskiego 64",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.77,
+    "ink_fraction_1920": 0.23
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 1370878219,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -94.8,
+    117.7
+   ],
+   "dist_m": 151.1,
+   "area_m2": 18.4,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.36
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370742791,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    14.0,
+    -151.0
+   ],
+   "dist_m": 151.6,
+   "area_m2": 17.5,
+   "addr": null,
+   "building": "residential",
+   "evidence": {
+    "brown_fraction_1933": 0.39,
+    "ink_fraction_1920": 0.35
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 1423992661,
+   "verdict": "modified",
+   "confidence": "low",
+   "centroid_enu": [
+    -97.6,
+    118.4
+   ],
+   "dist_m": 153.5,
+   "area_m2": 20.2,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.1,
+    "ink_fraction_1920": 0.46
+   },
+   "why": "partial overlap with a 1933 footprint; check manually"
+  },
+  {
+   "osm_id": 93303777,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -123.1,
+    97.3
+   ],
+   "dist_m": 156.9,
+   "area_m2": 123.2,
+   "addr": "Adama Mickiewicza 34",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.33
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1436691446,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -150.7,
+    43.8
+   ],
+   "dist_m": 157.0,
+   "area_m2": 22.0,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93308863,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    67.6,
+    143.5
+   ],
+   "dist_m": 158.6,
+   "area_m2": 66.7,
+   "addr": "Jana Kochanowskiego 86",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.19
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92352270,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -144.1,
+    68.4
+   ],
+   "dist_m": 159.6,
+   "area_m2": 138.6,
+   "addr": "Adama Mickiewicza 27",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.17
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1436691447,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -154.2,
+    43.9
+   ],
+   "dist_m": 160.3,
+   "area_m2": 17.9,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88463270,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    25.3,
+    -159.3
+   ],
+   "dist_m": 161.3,
+   "area_m2": 268.3,
+   "addr": "Jana Kochanowskiego 63",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.11
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88481067,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -12.3,
+    160.8
+   ],
+   "dist_m": 161.3,
+   "area_m2": 127.7,
+   "addr": "Sebastiana Klonowicza 3",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.23
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88507130,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    31.5,
+    158.8
+   ],
+   "dist_m": 161.9,
+   "area_m2": 374.2,
+   "addr": "Sebastiana Klonowicza 3A",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.26
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1436691448,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -157.2,
+    44.0
+   ],
+   "dist_m": 163.2,
+   "area_m2": 18.8,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 90722433,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    96.6,
+    133.0
+   ],
+   "dist_m": 164.4,
+   "area_m2": 116.0,
+   "addr": "Jana Kochanowskiego 89",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.23
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370742808,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    58.8,
+    153.8
+   ],
+   "dist_m": 164.6,
+   "area_m2": 17.0,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.87,
+    "ink_fraction_1920": 0.71
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 93303776,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -128.3,
+    103.9
+   ],
+   "dist_m": 165.1,
+   "area_m2": 130.7,
+   "addr": "Adama Mickiewicza 32",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.07,
+    "ink_fraction_1920": 0.4
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1436691449,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -160.2,
+    44.2
+   ],
+   "dist_m": 166.1,
+   "area_m2": 18.6,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92352268,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -164.3,
+    25.9
+   ],
+   "dist_m": 166.3,
+   "area_m2": 314.7,
+   "addr": "Aleja Generała Józefa Hallera 109",
+   "building": "university",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878211,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -45.9,
+    -160.7
+   ],
+   "dist_m": 167.1,
+   "area_m2": 28.2,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.11
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370742807,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    60.0,
+    156.5
+   ],
+   "dist_m": 167.7,
+   "area_m2": 16.5,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.84,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 437295907,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -163.2,
+    44.5
+   ],
+   "dist_m": 169.2,
+   "area_m2": 19.5,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88481066,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -39.9,
+    165.4
+   ],
+   "dist_m": 170.1,
+   "area_m2": 126.3,
+   "addr": "Sebastiana Klonowicza 4",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.36
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878209,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    13.0,
+    -171.0
+   ],
+   "dist_m": 171.5,
+   "area_m2": 21.6,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.84,
+    "ink_fraction_1920": 0.11
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 137268134,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    143.2,
+    -94.4
+   ],
+   "dist_m": 171.6,
+   "area_m2": 6192.2,
+   "addr": null,
+   "building": "warehouse",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.04
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 755656562,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -46.5,
+    -165.3
+   ],
+   "dist_m": 171.7,
+   "area_m2": 30.2,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.15
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 92352269,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -157.9,
+    68.9
+   ],
+   "dist_m": 172.3,
+   "area_m2": 141.8,
+   "addr": "Adama Mickiewicza 25",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93303775,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -136.5,
+    106.3
+   ],
+   "dist_m": 173.0,
+   "area_m2": 57.4,
+   "addr": "Adama Mickiewicza 30",
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.09,
+    "ink_fraction_1920": 0.24
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93310549,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -6.7,
+    174.4
+   ],
+   "dist_m": 174.5,
+   "area_m2": 126.3,
+   "addr": "Sebastiana Klonowicza 5",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.06,
+    "ink_fraction_1920": 0.3
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878210,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    12.4,
+    -174.1
+   ],
+   "dist_m": 174.6,
+   "area_m2": 20.4,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 1.0,
+    "ink_fraction_1920": 0.19
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 1217187791,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    10.1,
+    174.4
+   ],
+   "dist_m": 174.7,
+   "area_m2": 20.5,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.66
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370742810,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    100.8,
+    144.7
+   ],
+   "dist_m": 176.3,
+   "area_m2": 17.8,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.05,
+    "ink_fraction_1920": 0.01
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 420898880,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -171.2,
+    45.5
+   ],
+   "dist_m": 177.2,
+   "area_m2": 76.3,
+   "addr": null,
+   "building": "service",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 89767264,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    75.2,
+    160.8
+   ],
+   "dist_m": 177.5,
+   "area_m2": 125.1,
+   "addr": "Jana Kochanowskiego 88",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.19
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370742809,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    122.2,
+    128.8
+   ],
+   "dist_m": 177.5,
+   "area_m2": 32.6,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.16
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878227,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    12.3,
+    177.1
+   ],
+   "dist_m": 177.5,
+   "area_m2": 19.8,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.49
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 755656568,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    11.7,
+    -177.2
+   ],
+   "dist_m": 177.6,
+   "area_m2": 21.0,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 1.0,
+    "ink_fraction_1920": 0.08
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 1370878226,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    13.1,
+    180.4
+   ],
+   "dist_m": 180.8,
+   "area_m2": 20.7,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.53
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88382338,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -164.3,
+    -78.4
+   ],
+   "dist_m": 182.0,
+   "area_m2": 1784.1,
+   "addr": "Aleja Generała Józefa Hallera 107",
+   "building": "university",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.04
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88474961,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    180.9,
+    19.9
+   ],
+   "dist_m": 182.0,
+   "area_m2": 3521.8,
+   "addr": null,
+   "building": "warehouse",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93304333,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -34.4,
+    178.8
+   ],
+   "dist_m": 182.1,
+   "area_m2": 119.9,
+   "addr": "Sebastiana Klonowicza 6",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.29
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 90722522,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    105.7,
+    151.4
+   ],
+   "dist_m": 184.7,
+   "area_m2": 117.8,
+   "addr": "Jana Kochanowskiego 91",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.31
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88463272,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -172.3,
+    69.6
+   ],
+   "dist_m": 185.8,
+   "area_m2": 141.9,
+   "addr": "Adama Mickiewicza 23",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88463296,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -35.7,
+    -182.5
+   ],
+   "dist_m": 186.0,
+   "area_m2": 313.7,
+   "addr": "Jana Kochanowskiego 62",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.54,
+    "ink_fraction_1920": 0.05
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 93310551,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -1.2,
+    187.2
+   ],
+   "dist_m": 187.2,
+   "area_m2": 126.6,
+   "addr": "Sebastiana Klonowicza 7",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.39
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 261929773,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -148.3,
+    115.3
+   ],
+   "dist_m": 187.8,
+   "area_m2": 111.7,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.07
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93311506,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -108.1,
+    155.5
+   ],
+   "dist_m": 189.4,
+   "area_m2": 631.4,
+   "addr": null,
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.29
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93303774,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -156.4,
+    108.6
+   ],
+   "dist_m": 190.4,
+   "area_m2": 267.9,
+   "addr": "Adama Mickiewicza 28",
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.04
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1217188014,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    59.2,
+    183.0
+   ],
+   "dist_m": 192.4,
+   "area_m2": 19.9,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.09
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93311498,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -66.4,
+    182.1
+   ],
+   "dist_m": 193.8,
+   "area_m2": 400.6,
+   "addr": null,
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.2
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93304334,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -30.1,
+    191.9
+   ],
+   "dist_m": 194.3,
+   "area_m2": 129.2,
+   "addr": "Sebastiana Klonowicza 8",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.32
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878225,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    60.5,
+    185.9
+   ],
+   "dist_m": 195.5,
+   "area_m2": 18.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.17
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88463298,
+   "verdict": "existed1920",
+   "confidence": "medium",
+   "centroid_enu": [
+    19.5,
+    -195.3
+   ],
+   "dist_m": 196.3,
+   "area_m2": 315.7,
+   "addr": "Jana Kochanowskiego 61",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.53,
+    "ink_fraction_1920": 0.17
+   },
+   "why": "row/house drawn on 1920 plan (hatched block) and 1933 plan (brown footprint) at this position"
+  },
+  {
+   "osm_id": 1370878224,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    61.6,
+    188.6
+   ],
+   "dist_m": 198.4,
+   "area_m2": 18.3,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.06,
+    "ink_fraction_1920": 0.13
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878207,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -188.4,
+    -67.1
+   ],
+   "dist_m": 200.0,
+   "area_m2": 89.9,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 261929769,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -141.4,
+    143.2
+   ],
+   "dist_m": 201.3,
+   "area_m2": 47.7,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.29
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878223,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    62.8,
+    191.4
+   ],
+   "dist_m": 201.5,
+   "area_m2": 19.5,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.07,
+    "ink_fraction_1920": 0.19
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 90722454,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    122.2,
+    162.4
+   ],
+   "dist_m": 203.2,
+   "area_m2": 117.5,
+   "addr": "Jana Kochanowskiego 93",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.43
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93303773,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -171.1,
+    110.9
+   ],
+   "dist_m": 203.8,
+   "area_m2": 165.5,
+   "addr": "Adama Mickiewicza 26",
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.05,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878394,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -140.3,
+    149.2
+   ],
+   "dist_m": 204.8,
+   "area_m2": 20.6,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.08,
+    "ink_fraction_1920": 0.26
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88481094,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    2.1,
+    205.3
+   ],
+   "dist_m": 205.3,
+   "area_m2": 124.9,
+   "addr": "Sebastiana Klonowicza 9",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.32
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 93308864,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    85.7,
+    188.3
+   ],
+   "dist_m": 206.9,
+   "area_m2": 299.4,
+   "addr": null,
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.24
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878393,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -143.3,
+    149.4
+   ],
+   "dist_m": 207.1,
+   "area_m2": 19.7,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.47
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 88507153,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    53.8,
+    200.6
+   ],
+   "dist_m": 207.6,
+   "area_m2": 369.4,
+   "addr": "Sebastiana Klonowicza 3B",
+   "building": "apartments",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.14
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 89767267,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    185.4,
+    95.2
+   ],
+   "dist_m": 208.4,
+   "area_m2": 2056.4,
+   "addr": null,
+   "building": "yes",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.2
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878392,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -146.3,
+    149.7
+   ],
+   "dist_m": 209.3,
+   "area_m2": 19.6,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.04,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878391,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -149.3,
+    149.9
+   ],
+   "dist_m": 211.6,
+   "area_m2": 19.5,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 261929779,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -184.9,
+    107.4
+   ],
+   "dist_m": 213.8,
+   "area_m2": 35.9,
+   "addr": null,
+   "building": "retail",
+   "evidence": {
+    "brown_fraction_1933": 0.07,
+    "ink_fraction_1920": 0.2
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878390,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -152.3,
+    150.1
+   ],
+   "dist_m": 213.8,
+   "area_m2": 19.7,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878395,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -188.6,
+    103.5
+   ],
+   "dist_m": 215.2,
+   "area_m2": 16.7,
+   "addr": null,
+   "building": "retail",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 261929771,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -171.0,
+    130.8
+   ],
+   "dist_m": 215.3,
+   "area_m2": 48.2,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.37,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "present on 1933 plan but no building drawn here on 1920 plan: built 1921-1933"
+  },
+  {
+   "osm_id": 1370878389,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -155.2,
+    150.3
+   ],
+   "dist_m": 216.1,
+   "area_m2": 19.1,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.01,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 192269089,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    135.3,
+    -169.2
+   ],
+   "dist_m": 216.6,
+   "area_m2": 441.5,
+   "addr": null,
+   "building": "office",
+   "evidence": {
+    "brown_fraction_1933": 0.0,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 1370878388,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -158.1,
+    150.6
+   ],
+   "dist_m": 218.4,
+   "area_m2": 19.7,
+   "addr": null,
+   "building": "outbuilding",
+   "evidence": {
+    "brown_fraction_1933": 0.03,
+    "ink_fraction_1920": 0.0
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  },
+  {
+   "osm_id": 261929770,
+   "verdict": "absent",
+   "confidence": "medium",
+   "centroid_enu": [
+    -85.1,
+    202.4
+   ],
+   "dist_m": 219.6,
+   "area_m2": 22.7,
+   "addr": null,
+   "building": "garage",
+   "evidence": {
+    "brown_fraction_1933": 0.02,
+    "ink_fraction_1920": 0.27
+   },
+   "why": "nothing drawn here on 1920 or 1933 plan (built after 1933, mostly post-1945)"
+  }
+ ],
+ "vanished": [],
+ "landcover": []
+}

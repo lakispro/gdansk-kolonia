@@ -1,0 +1,19 @@
+plan_der_stadt_danzig_1908_10k.jpg	http://maps.mapywig.org/m/City_plans/Central_Europe/PLAN_DER_STADT_DANZIG_10K_1908_SLUB-KS_1666.jpg	PLAN DER STADT DANZIG 1908 200 dpi
+plan_von_danzig_1911_10k.jpg	http://maps.mapywig.org/m/City_plans/Central_Europe/PLAN_VON_DANZIG_10K_1911_bc_elb.jpg	PLAN VON DANZIG 1911 400 dpi
+stephan_strassennamen_danzigs_1911.pdf	http://maps.mapywig.org/m/m_documents/DE//W.STEPHAN_DIE_STRASSENNAHMEN_DANZIGS_1911_bc_elb.pdf	W.STEPHAN: DIE STRASSENNAHMEN DANZIGS 1911
+plan_der_stadt_danzig_1912.jpg	http://maps.mapywig.org/m/City_plans/Central_Europe/AMPG_Plan_der_Stadt_Danzig_1912.jpg	Plan der Stadt Danzig Gdańsk 1912 300 dpi
+stadtplan_1920_10k_PAN.jpg	http://maps.mapywig.org/m/City_plans/Central_Europe/PLAN_DER_STADT_DANZIG_10K_1920_WA51_25068_PAN-D6797-r1920.jpg	PLAN DER STADT DANZIG 1920 300 dpi
+stadtplan_1921_10k_PAN.jpg	http://maps.mapywig.org/m/City_plans/Central_Europe/PLAN_DER_STADT_DANZIG_10K_1921_WA51_25071_PAN-D11566-r1921.jpg	PLAN DER STADT DANZIG 1921 300 dpi
+pharus_danzig_ca1922_400dpi.jpg	http://maps.mapywig.org/m/City_plans/Central_Europe/PHARUS-PLAN_DANZIG_8K_Danziger-Verlagsgesellschaft_m.b.jpg	PHARUS-PLAN DANZIG PLAN GDAŃSKA ±1922 400 dpi
+pharus_danzig_ca1929_600dpi.jpg	http://maps.mapywig.org/m/City_plans/Central_Europe/PHARUS-PLAN_DANZIG_8K_ca_1929_nnTcksl_BN_Sygn._ZZK_34_730.jpg	PHARUS-PLAN DANZIG ±1929 600 dpi
+pharus_danzig_mit_langfuhr_ca1930.jpg	http://maps.mapywig.org/m/City_plans/Central_Europe/AMPG_Gdansk_pharus_danzig_mit_langfuhr.jpg	Pharus-Plan Danzig mit Langfur Gdańsk ±1930 300 dpi
+plan_von_danzig_1933_10k.jpg	http://maps.mapywig.org/m/City_plans/Central_Europe/PLAN_von_DANZIG_1933_10K.jpg	PLAN von DANZIG Gdańsk 1933 400 dpi
+pharus_danzig_1938.jpg	http://maps.mapywig.org/m/City_plans/Central_Europe/GDAŃSK_Pharus-Plan_Danzig_8K_1938_BCUWr-c8200032635-0001.jpg	Pharus-Plan Danzig Gdańsk 1938 300 dpi
+plan_wrzeszcz_1946_AMPG.jpg	http://maps.mapywig.org/m/City_plans/Central_Europe/AMPG_plan_1946_wrzeszcz.jpg	Gdańsk - Wrzeszcz Gdańsk - Wrzeszcz 1946 300 dpi
+gsgs4496_danzig_north_1944.jpg	http://maps.mapywig.org/m/City_plans/ALLIED/GSGS_4435_Poland_4496_Danzig/GSGS_4496_TOWN_PLAN_OF_DANZIG_(NORTH)_10K_1944.jpg	DANZIG (NORTH) Gdańsk 1944 300 dpi
+tk25_1677_danzig_1910_300dpi.jpg	http://maps.mapywig.org/m/German_maps/series/025K_TK25/1677_(391)_Danzig_1910_IfL_MB1677(1910).jpg	Danzig 1910 300 dpi
+tk25_1677_danzig_1918_600dpi.jpg	http://maps.mapywig.org/m/German_maps/series/025K_TK25/1677_(391)_Danzig_1918.jpg	Danzig Gdańsk 1918 600 dpi
+tk25_1677_danzig_1940_600dpi.jpg	http://maps.mapywig.org/m/German_maps/series/025K_TK25/1677_(391)_Danzig_1940_UW.jpg	Danzig Gdańsk 1940 600 dpi
+wig25_P31-S27-E_gdansk_1936_600dpi.jpg	http://maps.mapywig.org/m/WIG_maps/series/025K/P31-S27-E_GDANSK_1936_2_LoC_G6520_s25_.P6.jpg	GDAŃSK 1936 600 dpi
+tk25_1677_danzig_1919_WIG_reprint_600dpi.jpg	http://maps.mapywig.org/m/WIG_maps/series/025K_old/1677_(391)_Danzig_Dow._G._Kart._1919_nnVnxh1_BN_Sygn.ZZK_S-20_300_A.jpg	Danzig [Dow. Gł. Kart., 1919] 1919 600 dpi
+wig25_rejon_pomorze_27_gdansk_1926_400dpi.jpg	http://maps.mapywig.org/m/WIG_maps/series/025K_old/REJON_POMORZE_ARK_27_(391)_GDANSK_(DANZIG)_1926.jpg	REJON POMORZE - ARKUSZ 27 - GDAŃSK (DANZIG) GDAŃSK 1926 400 dpi

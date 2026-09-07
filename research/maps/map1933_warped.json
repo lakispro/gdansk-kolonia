@@ -1,0 +1,94 @@
+{
+ "source": "plan_von_danzig_1933_10k.jpg (Plan von Danzig 1933, 2. Auflage, St\u00e4dt. Vermessungsamt, 1:10000, 400 dpi scan via mapywig/Mapster)",
+ "output": "map1933_warped.png, 2400x2400 px, 0.25 m/px, north up, ENU E,N in [-300,300] m",
+ "pixel_to_enu": "E = a*px + b*py + c ; N = d*px + e*py + f",
+ "affine": {
+  "a": 0.6299881150855032,
+  "b": 0.009181058984002843,
+  "c": -5329.342492825388,
+  "d": -0.0037696426449116104,
+  "e": -0.6743011818634908,
+  "f": 6921.46033646002
+ },
+ "warped_px_to_enu": "E = -300 + 0.25*x ; N = 300 - 0.25*y",
+ "scale_m_per_px": [
+  0.6299993931383233,
+  0.6743636820785711
+ ],
+ "rotation_deg": -0.34283509637845955,
+ "control_points": [
+  {
+   "src_px": [
+    8352,
+    10222
+   ],
+   "enu": [
+    29,
+    2
+   ],
+   "residual_m": 5.5,
+   "what": "Baerenweg x Posadowskyweg"
+  },
+  {
+   "src_px": [
+    8482,
+    10252
+   ],
+   "enu": [
+    108,
+    -26
+   ],
+   "residual_m": 2.6,
+   "what": "Baerenweg x railway"
+  },
+  {
+   "src_px": [
+    8293,
+    10520
+   ],
+   "enu": [
+    -7,
+    -205
+   ],
+   "residual_m": 2.0,
+   "what": "Striessbach x Posadowskyweg"
+  },
+  {
+   "src_px": [
+    8410,
+    10537
+   ],
+   "enu": [
+    64,
+    -214
+   ],
+   "residual_m": 2.1,
+   "what": "Striessbach x railway"
+  },
+  {
+   "src_px": [
+    8095,
+    10095
+   ],
+   "enu": [
+    -136,
+    85
+   ],
+   "residual_m": 1.4,
+   "what": "Baerenweg bend x Neptunweg"
+  },
+  {
+   "src_px": [
+    8207,
+    10140
+   ],
+   "enu": [
+    -69,
+    50
+   ],
+   "residual_m": 4.4,
+   "what": "Marineweg x Baerenweg"
+  }
+ ],
+ "rms_residual_m": 3.3
+}

@@ -1,0 +1,66 @@
+[
+ {
+  "name": "01-crossing-spawn",
+  "x": 93,
+  "z": 20.3,
+  "yaw": 1.175,
+  "pitch": 0.06
+ },
+ {
+  "name": "01b-keeper-house",
+  "x": 80,
+  "z": 14,
+  "yaw": -1.9,
+  "pitch": 0.1
+ },
+ {
+  "name": "02-junction-from-west",
+  "x": 2,
+  "z": 3,
+  "yaw": -1.45,
+  "pitch": 0.08
+ },
+ {
+  "name": "02b-bakery-corner",
+  "x": 44,
+  "z": 4,
+  "yaw": -1.2,
+  "pitch": 0.12
+ },
+ {
+  "name": "03-home-baerenweg9",
+  "x": 37,
+  "z": 13,
+  "yaw": 1.45,
+  "pitch": 0.12
+ },
+ {
+  "name": "04b-dairy",
+  "x": 30,
+  "z": 22,
+  "yaw": 1.9,
+  "pitch": 0.1
+ },
+ {
+  "name": "04-posadowskyweg",
+  "x": 21,
+  "z": 72,
+  "yaw": 0.1,
+  "pitch": 0.08
+ },
+ {
+  "name": "05-marktplatz-gardens",
+  "x": 42,
+  "z": -34,
+  "yaw": 1.6,
+  "pitch": 0.1
+ },
+ {
+  "name": "07-map",
+  "x": 30,
+  "z": 9,
+  "yaw": 1.45,
+  "pitch": 0.0,
+  "map": true
+ }
+]

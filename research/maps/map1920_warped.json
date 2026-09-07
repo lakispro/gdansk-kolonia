@@ -1,0 +1,95 @@
+{
+ "source": "stadtplan_1920_10k_PAN.jpg (Plan der Stadt Danzig 1920, St\u00e4dt. Vermessungsamt, 1:10000, 300 dpi scan via mapywig/Mapster)",
+ "output": "map1920_warped.png, 2400x2400 px, 0.25 m/px, north up, covers ENU E,N in [-300,300] m around origin 54.3825003N 18.6262664E",
+ "pixel_to_enu": "E = a*px + b*py + c ; N = d*px + e*py + f (px,py = source-scan pixel, y down)",
+ "affine": {
+  "a": 0.6196471358756672,
+  "b": 0.47033506156401805,
+  "c": -5709.851698191655,
+  "d": 0.2761634090297542,
+  "e": -0.6563085335764975,
+  "f": 3208.2225647612136
+ },
+ "warped_px_to_enu": "E = -300 + 0.25*x ; N = 300 - 0.25*y",
+ "scale_m_per_px": [
+  0.6784016520365004,
+  0.8074378993964559
+ ],
+ "rotation_deg_of_scan_x_axis_from_east": 24.02150545518888,
+ "control_points": [
+  {
+   "src_px": [
+    4209.7,
+    6652.1
+   ],
+   "enu": [
+    29,
+    2
+   ],
+   "residual_m": 3.4,
+   "what": "Baerenweg x Posadowskyweg (Mickiewicza x Kochanowskiego)"
+  },
+  {
+   "src_px": [
+    4081.6,
+    6475.1
+   ],
+   "enu": [
+    -136,
+    85
+   ],
+   "residual_m": 1.1,
+   "what": "Baerenweg bend x Neptunweg (Mickiewicza x Sochaczewska)"
+  },
+  {
+   "src_px": [
+    4275.4,
+    6728.7
+   ],
+   "enu": [
+    108,
+    -26
+   ],
+   "residual_m": 4.0,
+   "what": "Baerenweg x railway level crossing"
+  },
+  {
+   "src_px": [
+    4065.4,
+    6926.1
+   ],
+   "enu": [
+    64,
+    -214
+   ],
+   "residual_m": 2.9,
+   "what": "road/stream along Striessbach x railway"
+  },
+  {
+   "src_px": [
+    4647.4,
+    6463.2
+   ],
+   "enu": [
+    208,
+    250
+   ],
+   "residual_m": 1.8,
+   "what": "railway centreline near Hst. Reichskolonie (lateral only)"
+  },
+  {
+   "src_px": [
+    4126.9,
+    6414.0
+   ],
+   "enu": [
+    -136,
+    140
+   ],
+   "residual_m": 1.7,
+   "what": "Neptunweg axis 55 m north of Baerenweg (lateral only)"
+  }
+ ],
+ "rms_residual_m": 2.7,
+ "note": "The 1920 plan is a compiled 1:10000 city plan; the Reichskolonie is drawn schematically (row blocks, streets slightly rotated, railway bend exaggerated). Positional accuracy after affine fit ~5-8 m in the block core, worse (10-20 m) beyond 250 m. Use map1933_warped.png for footprint-level geometry."
+}
