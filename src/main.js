@@ -61,10 +61,11 @@ const RADIUS = 150;
 
 async function build() {
   const [sceneData, veg, parcels, terrain] = await Promise.all(['scene', 'vegetation', 'parcels', 'terrain'].map((n) => fetch(`data/${n}.json`).then((r) => r.json())));
+  const overrides = await fetch('data/overrides.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
   $('loading').textContent = 'budowanie roku 1920…';
   await new Promise((r) => setTimeout(r, 30));
   const ground = makeTerrain(terrain);
-  plan = makePlan(sceneData, parcels);
+  plan = makePlan(sceneData, parcels, overrides);
   plan.ground = ground;
   $('intro').innerHTML = plan.intro;
   world = new World(RADIUS);

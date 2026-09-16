@@ -1,0 +1,15 @@
+services:
+  notes:
+    image: python:3.12-alpine
+    container_name: kolonia-admin
+    restart: unless-stopped
+    command: python /app/notes_server.py
+    volumes:
+      - ./tools/notes_server.py:/app/notes_server.py:ro
+      - ./admin:/data
+    networks:
+      - lakis-net
+
+networks:
+  lakis-net:
+    external: true

@@ -39,7 +39,7 @@ const MODERN_TYPES = new Set(['garage', 'warehouse', 'university', 'office', 'se
 const EXISTED_IDS = new Set([92358185, 92358725]);
 const NUMBERS_1920 = { 92356369: '9', 92358185: '10f', 92358184: '49', 92358725: '4', 93303779: '5', 93303780: '7' };
 
-export function makePlan(scene, parcels) {
+export function makePlan(scene, parcels, overrides = {}) {
   const byName = (n) => scene.streets.filter((s) => s.name === n);
   const polyXZ = (list) => list.flatMap((s) => s.pts.map(xz));
   const mick = polyXZ(byName('Adama Mickiewicza')), koch = polyXZ(byName('Jana Kochanowskiego'));
@@ -114,7 +114,8 @@ export function makePlan(scene, parcels) {
       if (b.area < 14 || b.area > 60) continue;
       const near = existedBig.some((h) => Math.hypot(h.c[0] - b.c[0], h.c[1] - b.c[1]) < 26);
       if (!near) continue;
-      buildings.push({ ...b, style: { kind: 'shed' } });
+      if (overrides[b.id]?.hide) continue;
+      buildings.push({ ...b, style: { kind: 'shed', ...(overrides[b.id] || {}) } });
       continue;
     }
     const st = b.addr?.street || ''; const no = numOf(b); const s = hash(b.id);
@@ -129,9 +130,10 @@ export function makePlan(scene, parcels) {
     else style = { kind: 'house', storeys: 3, roofKind: s < 0.5 ? 'mansard' : 'gable', pitch: 48, wall: ['wall_white', 'wall_cream', 'wall_sand'][Math.floor(s * 3)], brickBase: true, shutters: false, dormers: 2, roof: 'red' };
     if (NUMBERS_1920[b.id] !== undefined) style.number = NUMBERS_1920[b.id];
     else if (st !== 'Jana Kochanowskiego') style.number = '';
+    if (overrides[b.id]) { if (overrides[b.id].hide) continue; Object.assign(style, overrides[b.id]); }
     buildings.push({ ...b, style, home: b.id === 92356369 });
   }
-  if (keeper) buildings.push(keeper);
+  if (keeper) { if (overrides.bahnwaerter) Object.assign(keeper.style, overrides.bahnwaerter); buildings.push(keeper); }
 
   // ---------------- open ground: gardens, orchards, the sports ground
   const nx = ez, nz = -ex; // north-pointing normal of the Bärenweg

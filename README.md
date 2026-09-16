@@ -45,6 +45,14 @@ Coordinates are local metres around the Mickiewicza 43 centroid, `54.3825003 N 1
 
 Honest limits: the exact 1920 house numbers of the Bärenweg (renumbered in the mid-1920s) are not documented, so the corner houses carry plausible ones (9, 10f, 49, 4, 5, 7); window layouts, shutters and roof windows are generated, not counted from photographs; the mottoes and fish reliefs of the real façades are not modelled; the railway halt "Danzig-Reichskolonie", the Christuskirche and the Strießbach lie outside the 150 m and are only heard or mentioned.
 
+## The building panel
+
+**https://kolonia.lakis.pro/admin** — one generated building at a time in an orbit viewer (drag to rotate, wheel or pinch to zoom), with its facts (OSM id, today's address, LiDAR height, what stood there in 1920), the 1910 reference photographs, and three things you can do:
+
+- **edit the style record** (JSON) and *zastosuj* — storeys, roof kind (`gable`, `hip`, `mansard`, `flat`), pitch, wall (`brick_red`, `brick_yellow`, `wall_white`, `wall_cream`, `wall_ochre`, `wall_sand`, `wall_olive`, `wall_rose`, `wall_grey`, `wall_green`), `brickBase`, `shutters`, `dormers`, `roof` (`red`, `brown`, `orange`, `dark`, `slate`, `tar`), `shop` text, `number` on the plate — a preview only, until it is written into `public/data/overrides.json` (keyed by building id), which both the game and the panel merge over the generated styles;
+- **write instructions** and *zapisz notatkę* — stored by `tools/notes_server.py` (container `kolonia-admin`) in `admin/notes.json`, which is where the next refinement round starts;
+- **pobierz .glb** — the building as shown, exported with Three's `GLTFExporter` (binary glTF 2.0 with the baked textures), ready for Unity, Unreal, Godot or Blender.
+
 ## Layout
 
 | path | what |
