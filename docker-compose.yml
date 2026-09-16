@@ -3,7 +3,7 @@ services:
     image: python:3.12-alpine
     container_name: kolonia-admin
     restart: unless-stopped
-    user: "1000:1000"
+    user: "1001:1001"
     command: python /app/notes_server.py
     volumes:
       - ./tools/notes_server.py:/app/notes_server.py:ro
