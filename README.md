@@ -10,6 +10,8 @@ Live: **https://kolonia.lakis.pro** — phone (stick + drag to look, buttons to 
 | **Bärenweg at the railway** — the Bahnwärter's house (Bärenweg 6, Schulist), the raised barrier, the cross-buck; you arrive here from the shift | **Bärenweg 9** — the colony corner house where Potrafki lives: brick ground floor, plastered upper storey, green shutters, mansard roof with roof windows |
 | ![Posadowskyweg](media/03-posadowskyweg.jpg) | ![the plan](media/04-map.jpg) |
 | **Posadowskyweg** (today's Kochanowskiego, which kept its 1910 numbers) — the co-operative rows, sand roadway between granite kerbs, staked saplings, gas lamps | **M / mapa** — the 1920 plan with the German street names, the railway, the sports ground, you, and the next objective |
+| ![the market-square corner](media/06-postcard-corner.jpg) | ![the carriage archway](media/07-archway.jpg) |
+| **Bärenweg at the Posadowskyweg junction** — the two corner blocks of the postcard, seen from the Marktplatz | **Bärenweg 3** — the beer depot's shop sign, the round-arched carriage passage, the balcony and the wall dormer |
 
 ## The game
 
@@ -39,6 +41,7 @@ Controls — phone: left stick walks, drag anywhere else to look, **skok** jumps
 | plot boundaries | EGiB cadastral parcels via the GUGiK ULDK service (165 parcels) | picket fences, iron railings on brick dwarf walls, hedges and gates on the real property lines |
 | relief | GUGiK NMT (digital terrain model), 10 m grid over 500 m | the gentle fall from ~6.5 m ASL in the west to ~4 m by the railway; everything sits on it |
 | trees | canopy blobs from the GUGiK orthophoto, thinned; young staked street trees and the estate's orchards from the 1910 photographs and the 1908 survey | |
+| the two corner blocks at the junction | the postcard "Reichskolonie Dzg.-Langfuhr · Bärenweg" (J. Wasielewski's collection) | Bärenweg 3 and 10f are modelled from it: three plastered storeys over a tall shop floor, a round-arched carriage passage with voussoirs and a keystone, a gabled wall dormer (Zwerchhaus) with a round window, a row of hooded dormers in the mansard, a projecting corner bay and an iron balcony |
 | the look of the houses | the 1910 photographs of Posadowskyweg 82–86 and 99 (Paul Kadereit, *Moderne Bauformen*), the postcards, present-day details | brick ground floors and surrounds, light plaster, wooden shutters, mansard and gabled roofs with roof windows, picket fences, sand roadways, gas lamps |
 
 Coordinates are local metres around the Mickiewicza 43 centroid, `54.3825003 N 18.6262664 E` (`public/data/config.json`); EPSG:2180 ↔ WGS84 is in `tools/geo.py`. Street names on the signs and the map are the 1920 ones: Bärenweg (Mickiewicza), Posadowskyweg (Kochanowskiego), Marineweg (Klonowicza), Neptunweg (Sochaczewska).
@@ -61,7 +64,7 @@ Honest limits: the exact 1920 house numbers of the Bärenweg (renumbered in the 
 | `research/maps/` | the georeferenced 1920 and 1933 plans, overlays, the terrain sampler, `buildings1920.json` (automatic verdicts; the final verdicts are the rules in `src/world/plan1920.js`) |
 | `tools/build_scene.py`, `lod1_extract.py`, `fetch_parcels.py`, `veg_from_ortho.py`, `geo.py` | the data pipeline |
 | `src/world/plan1920.js` | **the plan of 1920**: which buildings, their styles, the streets, the gardens, orchards, pitch, railway and crossing, the people and the eight chapters |
-| `src/kit/tenement.js` | the building generator (rectangle decomposition, gable / hip / mansard roofs, brick bases, shutters, dormers, shop fronts, doors) |
+| `src/kit/tenement.js` | the building generator: rectangle decomposition (bent rows are sliced along the frontage, or a hero building carries its own massing in `style.rects`), gable / hip / mansard roofs, carriage archways cut through the wall, wall dormers, corner bays, balconies, brick bases, shutters, dormers, shop fronts, doors |
 | `src/kit/people.js` | the people and the horse cart |
 | `src/world/` | collision world (obstacles have heights, so fences can be vaulted), streets, plots, vegetation, `props1920.js` (gas lamps, telegraph poles, enamel signs, the Litfaßsäule, pumps, benches, garden strips, orchards, the sports ground, the railway, the level crossing) |
 | `src/core/` | player (walk, sprint, jump, touch), materials, Canvas2D textures, baker (merges everything per material and lifts it onto the terrain), minimap, `audio.js` (all sounds synthesised with the Web Audio API) |

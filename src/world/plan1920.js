@@ -37,7 +37,7 @@ const NOT_YET = new Set(['Dzielna', 'Mikołaja Reja']);
 const MODERN_TYPES = new Set(['garage', 'warehouse', 'university', 'office', 'service', 'kindergarten', 'industrial']);
 // present-day buildings that stood in 1920 (see the header); everything else built on the odd side of Bärenweg is later
 const EXISTED_IDS = new Set([92358185, 92358725]);
-const NUMBERS_1920 = { 92356369: '9', 92358185: '10f', 92358184: '49', 92358725: '4', 93303779: '5', 93303780: '7' };
+const NUMBERS_1920 = { 92356369: '9', 92358185: '10f', 92358184: '49', 92358725: '3', 93303779: '5', 93303780: '7' };
 
 export function makePlan(scene, parcels, overrides = {}) {
   const byName = (n) => scene.streets.filter((s) => s.name === n);
@@ -125,13 +125,19 @@ export function makePlan(scene, parcels, overrides = {}) {
     else if (st === 'Sebastiana Klonowicza') style = { kind: 'house', storeys: 2, roofKind: 'mansard', pitch: 52, wall: s < 0.5 ? 'wall_white' : 'wall_cream', brickBase: true, shutters: true, dormers: 1, roof: 'red' };
     else if (b.id === 92356369) style = { kind: 'house', storeys: 2, roofKind: 'mansard', pitch: 52, wall: 'wall_cream', brickBase: true, shutters: true, dormers: 2, roof: 'red' };
     else if (b.id === 92358184) style = { kind: 'house', storeys: 3, roofKind: 'mansard', pitch: 52, wall: 'wall_ochre', brickBase: true, shutters: false, dormers: 2, roof: 'red', shop: 'Bäckerei A. Alt' };
-    else if (b.id === 92358185) style = { kind: 'house', storeys: 3, roofKind: 'gable', pitch: 45, wall: 'wall_white', brickBase: true, shutters: false, dormers: 2, roof: 'red', shop: 'Fleischerei Hohmann' };
-    else if (b.id === 92358725) style = { kind: 'house', storeys: 3, roofKind: 'gable', pitch: 45, wall: 'wall_cream', brickBase: true, shutters: false, dormers: 3, roof: 'brown' };
+    // the two monumental blocks flanking the Bärenweg east of the Posadowskyweg junction,
+    // from the "Reichskolonie Dzg.-Langfuhr / Bärenweg" postcard: three plastered storeys over a
+    // tall shop floor, steep mansard roofs with a row of hooded dormers and a big gabled wall
+    // dormer, a round-arched carriage passage, a corner bay and an iron balcony
+    else if (b.id === 92358185) style = { kind: 'house', storeys: 3, storeyH: 3.35, roofKind: 'mansard', pitch: 54, wall: 'wall_sand', brickBase: false, shutters: false, dormers: 4, roof: 'red', shop: 'Fleischerei Hohmann', doorWall: 4, archway: true, archAt: 0.62, archW: 3.1,
+      rects: [[49.5, 22.5, 19, 11, 15.1], [37.8, 37.5, 23, 9.5, -74.7]], zwerch: { w: 5.0, at: -0.3 }, oriel: true, orielAt: [39.5, 14.2], chimneys: 4 };
+    else if (b.id === 92358725) style = { kind: 'house', storeys: 3, storeyH: 3.35, roofKind: 'mansard', pitch: 54, wall: 'wall_cream', brickBase: false, shutters: false, dormers: 5, roof: 'red', shop: 'Bergschlösschen-Bier · Niederlage', doorWall: 20, archway: true, archAt: 0.52, archW: 3.1,
+      rects: [[54.0, -8.6, 20.5, 11, 18.8], [50.5, -38.5, 44, 10.5, -69.2]], zwerch: { w: 5.2, at: 0.25 }, oriel: true, orielAt: [44.1, -6.3], balcony: true, chimneys: 5 };
     else style = { kind: 'house', storeys: 3, roofKind: s < 0.5 ? 'mansard' : 'gable', pitch: 48, wall: ['wall_white', 'wall_cream', 'wall_sand'][Math.floor(s * 3)], brickBase: true, shutters: false, dormers: 2, roof: 'red' };
     if (NUMBERS_1920[b.id] !== undefined) style.number = NUMBERS_1920[b.id];
     else if (st !== 'Jana Kochanowskiego') style.number = '';
     if (overrides[b.id]) { if (overrides[b.id].hide) continue; Object.assign(style, overrides[b.id]); }
-    buildings.push({ ...b, style, home: b.id === 92356369 });
+    buildings.push({ ...b, style, street1920: STREET_1920[st] || (EXISTED_IDS.has(b.id) ? 'Bärenweg' : null), home: b.id === 92356369 });
   }
   if (keeper) { if (overrides.bahnwaerter) Object.assign(keeper.style, overrides.bahnwaerter); buildings.push(keeper); }
 

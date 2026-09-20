@@ -1,5 +1,12 @@
 [
  {
+  "name": "00-postcard",
+  "x": -4.5,
+  "z": -16.1,
+  "yaw": -1.96,
+  "pitch": 0.06
+ },
+ {
   "name": "01-crossing-spawn",
   "x": 93,
   "z": 20.3,

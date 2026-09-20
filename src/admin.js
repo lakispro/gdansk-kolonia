@@ -45,7 +45,7 @@ async function load() {
   plan = makePlan(sceneData, parcels, overrides);
   streets = new Streets(plan.streets);
   const items = $('items');
-  const label = (b) => { const st = b.addr?.street; const s1920 = { 'Adama Mickiewicza': 'Bärenweg', 'Jana Kochanowskiego': 'Posadowskyweg', 'Sebastiana Klonowicza': 'Marineweg' }[st]; const no = b.style?.number !== undefined && b.style.number !== '' ? b.style.number : b.addr?.housenumber; return { title: b.name || (s1920 ? `${s1920} ${no || ''}`.trim() : (st ? `${st} ${no || ''}` : (b.style?.kind === 'shed' ? 'szopa / komórka' : 'budynek'))), today: st ? `dziś ${st} ${b.addr.housenumber || ''}` : '' }; };
+  const label = (b) => { const st = b.addr?.street; const s1920 = b.street1920 || { 'Adama Mickiewicza': 'Bärenweg', 'Jana Kochanowskiego': 'Posadowskyweg', 'Sebastiana Klonowicza': 'Marineweg', 'Sochaczewska': 'Neptunweg' }[st]; const no = b.style?.number !== undefined && b.style.number !== '' ? b.style.number : b.addr?.housenumber; return { title: b.name || (s1920 ? `${s1920} ${no || ''}`.trim() : (st ? `${st} ${no || ''}` : (b.style?.kind === 'shed' ? 'szopa / komórka' : 'budynek'))), today: st ? `dziś ${st} ${b.addr.housenumber || ''}` : (b.style?.shop ? b.style.shop : '') }; };
   const groups = [['Bärenweg', (b) => b.addr?.street === 'Adama Mickiewicza' || b.id === 'bahnwaerter' || [92358185, 92358725].includes(b.id)], ['Posadowskyweg', (b) => b.addr?.street === 'Jana Kochanowskiego'], ['Marineweg', (b) => b.addr?.street === 'Sebastiana Klonowicza'], ['Szopy i komórki', (b) => b.style?.kind === 'shed'], ['Inne', () => true]];
   const seen = new Set(); const rows = [];
   for (const [g, f] of groups) { const list = plan.buildings.filter((b) => !seen.has(b.id) && f(b)); if (!list.length) continue; rows.push({ grp: g }); for (const b of list.sort((a, c) => (parseInt(a.addr?.housenumber) || 999) - (parseInt(c.addr?.housenumber) || 999))) { seen.add(b.id); rows.push({ b, ...label(b) }); } }
@@ -81,7 +81,7 @@ function build(b, style, fresh = false) {
   g.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   const c = centroid(b.ring.map(xz));
   g.position.set(-c[0], 0, -c[1]);
-  scene.add(g); group = g;
+  scene.add(g); group = g; window.__house = h;
   // an arrow towards the street the door faces
   if (h && h.door) { const dir = new THREE.Vector3(h.door.nx, 0, h.door.nz); arrow = new THREE.ArrowHelper(dir, new THREE.Vector3(h.door.x - c[0], 0.3, h.door.z - c[1]), 5, 0xd9b45a, 1.2, 0.6); scene.add(arrow); }
   const size = Math.sqrt(b.area) * 1.6 + 12; const eaves = h ? h.eaves : 8;
@@ -147,4 +147,12 @@ $('bGlb').addEventListener('click', () => {
   const name = `${$('hTitle').textContent.replace(/[^\w\däöüß-]+/gi, '_').toLowerCase()}_${current.id}.glb`;
   exporter.parse(group, (res) => { const blob = new Blob([res], { type: 'model/gltf-binary' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); }, (e) => alert('eksport nie powiódł się: ' + e.message), { binary: true, onlyVisible: true });
 });
+window.__admin = {
+  scene, camera, controls, mats,
+  get current() { return current; },
+  /** azimuth/elevation in degrees, distance in metres, around the current target */
+  setCam(az, el, dist) { const t = controls.target; const a = az * Math.PI / 180, e = el * Math.PI / 180;
+    camera.position.set(t.x + Math.sin(a) * Math.cos(e) * dist, t.y + Math.sin(e) * dist, t.z + Math.cos(a) * Math.cos(e) * dist); controls.update(); },
+  lookAt(x, y, z, dist, az = 40, el = 12) { controls.target.set(x, y, z); this.setCam(az, el, dist); },
+};
 load().catch((e) => { $('hTitle').textContent = 'błąd: ' + e.message; console.error(e); });
