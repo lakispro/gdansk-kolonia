@@ -1,23 +1,27 @@
 {
  "92356369": {
-  "wall": "wall_putty",
+  "wall": "wall_cream",
   "roof": "tile",
   "window": "window",
   "door": "door_brown",
-  "brickBase": "brick_dark",
+  "brickBase": "rustic",
   "pitch": 46,
-  "gableK": "wall_putty",
+  "gableK": "wall_cream",
   "roofKind": "gable",
   "zwerch": {
    "w": 6.0,
    "at": 0.18,
-   "face": "wall_putty",
+   "face": "wall_cream",
    "h": 1.6,
    "apex": 3.2,
    "hip": false,
    "winRow": 2
   },
   "dormers": 2,
-  "chimneys": 2
+  "chimneys": 2,
+  "archway": true,
+  "archAt": 0.5,
+  "archW": 3.0,
+  "shopAt": 0.66
  }
 }
