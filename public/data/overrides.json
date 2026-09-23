@@ -23,14 +23,14 @@
     105.4
    ]
   ],
-  "pitch": 54,
+  "pitch": 52,
   "roofKind": "gable",
   "zwerch": false,
   "gableWins": 3,
-  "dormers": 3,
+  "dormers": 2,
   "chimneys": 2,
   "archway": true,
-  "archAt": 0.78,
+  "archAt": 0.86,
   "archW": 3.4,
   "doorAt": 0.25,
   "shop": "Bärenweg 9",
@@ -51,6 +51,8 @@
     "s": 1,
     "t": 0.62
    }
-  ]
+  ],
+  "shutters": false,
+  "number": "9"
  }
 }
