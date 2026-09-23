@@ -4,7 +4,7 @@
   "roof": "tile",
   "window": "window",
   "door": "door_brown",
-  "brickBase": "rustic",
+  "brickBase": false,
   "pitch": 46,
   "gableK": "wall_cream",
   "roofKind": "gable",
@@ -22,6 +22,8 @@
   "archway": true,
   "archAt": 0.5,
   "archW": 3.0,
-  "shopAt": 0.66
+  "shopAt": 0.66,
+  "gableWins": 2,
+  "oval": false
  }
 }
