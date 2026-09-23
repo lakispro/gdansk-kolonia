@@ -6,6 +6,18 @@
   "door": "door_brown",
   "brickBase": "brick_dark",
   "pitch": 46,
-  "gableK": "wall_putty"
+  "gableK": "wall_putty",
+  "roofKind": "gable",
+  "zwerch": {
+   "w": 6.0,
+   "at": 0.18,
+   "face": "wall_putty",
+   "h": 1.6,
+   "apex": 3.2,
+   "hip": false,
+   "winRow": 2
+  },
+  "dormers": 2,
+  "chimneys": 2
  }
 }
