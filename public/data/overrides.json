@@ -1,9 +1,27 @@
 {
-  "92356369": {
-    "wall": "wall_putty",
-    "roof": "tile",
-    "window": "window",
-    "door": "door_brown",
-    "brickBase": "brick_dark"
-  }
+ "92356369": {
+  "wall": "wall_putty",
+  "roof": "tile",
+  "window": "window",
+  "door": "door_brown",
+  "brickBase": "brick_dark",
+  "storeys": 3,
+  "storeyH": 3.55,
+  "rects": [
+   [
+    18.0,
+    7.5,
+    18.5,
+    9.8,
+    20.9
+   ],
+   [
+    22.5,
+    15.7,
+    13.5,
+    8.6,
+    105.4
+   ]
+  ]
+ }
 }
