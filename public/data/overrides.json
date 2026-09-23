@@ -3,6 +3,7 @@
     "wall": "wall_putty",
     "roof": "tile",
     "window": "window",
-    "door": "door_brown"
+    "door": "door_brown",
+    "brickBase": true
   }
 }
