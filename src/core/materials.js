@@ -6,7 +6,7 @@ import * as T from './textures.js';
  * through the Baker ends up as one mesh per key. */
 
 export const PLASTER_COLOURS = {
-  ochre: 0xc9a465, cream: 0xd9c9a4, grey: 0xa9a49a, olive: 0x9a9a70, rose: 0xc39a84, white: 0xd9d4c6, sand: 0xc7b48c, green: 0x8fa08a,
+  ochre: 0xc9a465, cream: 0xd9c9a4, putty: 0xa08a68, stone_grey: 0x8e8madness, grey: 0xa9a49a, olive: 0x9a9a70, rose: 0xc39a84, white: 0xd9d4c6, sand: 0xc7b48c, green: 0x8fa08a,
 };
 export const ROOF_COLOURS = { red: 0x8f3f2c, brown: 0x5a3d2c, dark: 0x3f3a36, orange: 0xa85a36, slate: 0x4a4d52 };
 
