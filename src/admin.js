@@ -150,6 +150,55 @@ $('bGlb').addEventListener('click', () => {
 window.__admin = {
   scene, camera, controls, mats,
   get current() { return current; },
+  /**
+   * Przebudowa bieżącego budynku z podanym stylem, bez przeładowania strony
+   * i bez `npm run build`.  To samo, co robi przycisk „Zastosuj" — wystawione
+   * na zewnątrz, żeby warsztat mógł próbować wariantów i renderować katalogi.
+   * Styl jest scalany z wyliczonym (jak nadpisania), chyba że `replace`.
+   */
+  restyle(style, replace = false) {
+    if (!current) throw new Error('nie wybrano budynku');
+    const base = JSON.parse(JSON.stringify(current.style || {}));
+    const s = replace ? (style || {}) : Object.assign(base, style || {});
+    const h = build(current, s);
+    $('style').value = JSON.stringify(s, null, 1);
+    return { storeys: h?.storeys, eaves: h?.eaves };
+  },
+  /** Powrót do stylu wyliczonego w plan1920.js — po obejrzeniu wariantów. */
+  reset() { return this.restyle({}, true) && this.restyle(JSON.parse(JSON.stringify(current.style || {})), true); },
+  /**
+   * Co warsztat wie o budynku bez patrzenia na piksele: styl po scaleniu,
+   * zmierzona bryła i proporcje.  Proporcje są niewrażliwe na kąt kamery,
+   * więc dają się porównać z archiwalnym zdjęciem.
+   */
+  info() {
+    if (!current) return null;
+    const h = window.__house || {};
+    const ring = (current.ring || []).map((p) => (Array.isArray(p) ? p : [p.x ?? p[0], p.z ?? p[1]]));
+    let w = 0, d = 0;
+    if (ring.length) {
+      const xs = ring.map((p) => p[0]), zs = ring.map((p) => p[1]);
+      w = Math.max(...xs) - Math.min(...xs); d = Math.max(...zs) - Math.min(...zs);
+    }
+    const eaves = h.eaves || 0;
+    const ridge = h.ridge || null;
+    let style = {};
+    try { style = JSON.parse($('style').value); } catch { style = current.style || {}; }
+    return {
+      id: String(current.id), area: current.area, footprint: { w: +w.toFixed(1), d: +d.toFixed(1) },
+      storeys: h.storeys ?? null, eaves: +eaves.toFixed(2),
+      kalenica: ridge ? +ridge.toFixed(2) : null,
+      roofKind: h.roofKind ?? null, pitch: h.pitch ?? null,
+      door: h.door ? { nx: +h.door.nx.toFixed(3), nz: +h.door.nz.toFixed(3) } : null,
+      style,
+      // proporcje do porównania ze zdjęciem — bez metrów, więc bez perspektywy
+      ratios: {
+        szerokosc_do_okapu: eaves ? +(w / eaves).toFixed(2) : null,
+        glebokosc_do_szerokosci: w ? +(d / w).toFixed(2) : null,
+        dach_do_elewacji: eaves && ridge ? +((ridge - eaves) / eaves).toFixed(2) : null,
+      },
+    };
+  },
   /** azimuth/elevation in degrees, distance in metres, around the current target */
   setCam(az, el, dist) { const t = controls.target; const a = az * Math.PI / 180, e = el * Math.PI / 180;
     camera.position.set(t.x + Math.sin(a) * Math.cos(e) * dist, t.y + Math.sin(e) * dist, t.z + Math.cos(a) * Math.cos(e) * dist); controls.update(); },

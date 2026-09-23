@@ -212,7 +212,10 @@ export function buildBuilding(b, ctx, st = {}) {
   if (st.oriel) cornerOriel(baker, ring, ctx, wallK, st.window || 'window', roofK, plinthH + STOREY + 0.1, plinthH + storeys * STOREY - 0.1, st.orielAt, st.orielCap);
   baker.base = null;
   ctx.world.addPolygon(ring);
-  return { ring, eaves, storeys, door, kind, rects, roofK, wallK, style: st, baseY };
+  // kalenica najwyższego z dachów — warsztat porównuje z niej proporcję dachu do elewacji
+  const ridge = roofRects.length ? Math.max(...roofRects.map((r) => r.ridgeY)) : eaves;
+  return { ring, eaves, ridge, roofKind, pitch: st.pitch || Math.round(Math.atan(tanP) * 180 / Math.PI),
+    storeys, door, kind, rects, roofK, wallK, style: st, baseY };
 }
 
 function chimney(baker, [x, z], ridgeY, hh, ang, key) {
