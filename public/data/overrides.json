@@ -4,6 +4,8 @@
     "roof": "tile",
     "window": "window",
     "door": "door_brown",
-    "brickBase": "brick_dark"
+    "brickBase": "brick_dark",
+    "roofKind": "gable",
+    "pitch": 60
   }
 }
