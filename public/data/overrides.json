@@ -1,9 +1,11 @@
 {
-  "92356369": {
-    "wall": "wall_putty",
-    "roof": "tile",
-    "window": "window",
-    "door": "door_brown",
-    "brickBase": "brick_dark"
-  }
+ "92356369": {
+  "wall": "wall_putty",
+  "roof": "tile",
+  "window": "window",
+  "door": "door_brown",
+  "brickBase": "brick_dark",
+  "pitch": 46,
+  "gableK": "wall_putty"
+ }
 }
