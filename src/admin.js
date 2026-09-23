@@ -31,17 +31,19 @@ scene.add(sun, new THREE.HemisphereLight(0xc9d2dc, 0x6b6250, 0.8), new THREE.Amb
 const mats = makeMaterials();
 const ground = new THREE.Mesh(new THREE.CircleGeometry(60, 64), mats.grass); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
 const grid = new THREE.GridHelper(60, 60, 0x776a52, 0x554a38); grid.position.y = 0.01; scene.add(grid);
-let group = null, current = null, plan = null, streets = null, arrow = null;
+let group = null, current = null, plan = null, streets = null, arrow = null, photos = null;
 
 function resize() { const w = canvas.clientWidth, h = canvas.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
 window.addEventListener('resize', resize);
 (function loop() { requestAnimationFrame(loop); controls.update(); renderer.render(scene, camera); })();
 
 async function load() {
-  const [sceneData, parcels, overrides] = await Promise.all([
+  const [sceneData, parcels, overrides, photoData] = await Promise.all([
     fetch('data/scene.json').then((r) => r.json()), fetch('data/parcels.json').then((r) => r.json()),
     fetch('data/overrides.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
+    fetch('data/photos.json').then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
+  photos = photoData;
   plan = makePlan(sceneData, parcels, overrides);
   streets = new Streets(plan.streets);
   const items = $('items');
@@ -108,13 +110,26 @@ function show(b, row) {
 
 function refs(b) {
   const el = $('refs'); const st = b.addr?.street; const list = [];
-  if (st === 'Jana Kochanowskiego' || st === 'Sebastiana Klonowicza' || b.id === 92356369) {
-    list.push(['ref/posadowskyweg_82-86_1910.jpg', 'Posadowskyweg 82–86 (dziś Kochanowskiego), fot. 1910, Moderne Bauformen — ganek drewniany, okiennice, szczyty ceglano-tynkowe'], ['ref/posadowskyweg_99_1910.jpg', 'Posadowskyweg od nr 99 w dół, fot. 1910 — dachy mansardowe, płoty sztachetowe, piaszczysta jezdnia']);
+  const esc = (t) => String(t || '').replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  const card = (ph, tag) => `<a class="ph" href="${ph.page}" target="_blank" rel="noopener"><img src="ref/fotopolska/${ph.id}.jpg" loading="lazy" alt="" /></a><div class="cap"><b>${esc(ph.year || 'b.d.')}</b> · ${esc(ph.objectName)}${tag ? ' <span class="tag">' + esc(tag) + '</span>' : ''}<br>${esc(ph.caption || ph.title)}${ph.author ? ' <i>(' + esc(ph.author) + ')</i>' : ''}</div>`;
+  if (photos) {
+    const mine = (photos.byBuilding[String(b.id)] || []).map((id) => photos.photos[String(id)]).filter(Boolean);
+    const seen = new Set(mine.map((p) => p.id));
+    // neighbouring fotopolska objects, nearest first (ENU metres in both)
+    const cx = b.c[0], cy = b.c[1];
+    const near = photos.objects.map((o) => ({ o, d: Math.hypot(o.e - cx, o.n - cy) })).filter((q) => q.d < 70 && !(q.o.osm || []).includes(b.id)).sort((p, q) => p.d - q.d);
+    const others = [];
+    for (const { o, d } of near) for (const id of o.photos) { const ph = photos.photos[String(id)]; if (ph && !seen.has(ph.id)) { seen.add(ph.id); others.push({ ph, d }); } }
+    const ord = (arr) => arr.sort((p, q) => (parseInt(p.year) || 9999) - (parseInt(q.year) || 9999));
+    if (mine.length) list.push(`<div class="grp2">ten budynek · fotopolska.eu</div>` + ord(mine).map((ph) => card(ph)).join(''));
+    if (others.length) list.push(`<div class="grp2">sąsiedztwo</div>` + others.slice(0, 8).map(({ ph, d }) => card(ph, `${Math.round(d)} m`)).join(''));
   }
-  if (st === 'Adama Mickiewicza' || [92358185, 92358725].includes(b.id)) list.push([null, 'Pocztówki „Reichskolonie Dzg.-Langfuhr” (róg Marine-/Posadowskyweg, Bärenweg): jarekwasielewski.pl/zwrzeszcza/2012/11/gruse-aus-reichskolonie-czyli-pocztowkowy-cymes/']);
-  if (b.id === 'bahnwaerter') list.push([null, 'Adreßbuch 1920: „Bärenweg 6 — Eisenbahnfiskus, E; Schulist, Bahnwärter”. Wygląd domu dróżnika: typowy pruski, ceglany, jednokondygnacyjny z dachem czterospadowym — bez zdjęcia.']);
-  list.push([null, `fotopolska.eu — dzisiejsze zdjęcia ulicy: https://fotopolska.eu/Gdansk/u${st === 'Jana Kochanowskiego' ? '104665,ul_Kochanowskiego_Jana' : '104928,ul_Mickiewicza_Adama'}.html`]);
-  el.innerHTML = list.map(([src, cap]) => (src ? `<img src="${src}" alt="" /><div class="cap">${cap}</div>` : `<div class="cap" style="margin-top:8px">${cap}</div>`)).join('');
+  if (st === 'Jana Kochanowskiego' || st === 'Sebastiana Klonowicza' || b.id === 92356369) {
+    list.push(`<div class="grp2">1910 · Moderne Bauformen</div><img src="ref/posadowskyweg_82-86_1910.jpg" alt="" /><div class="cap">Posadowskyweg 82–86 (dziś Kochanowskiego), fot. 1910 — ganek drewniany, okiennice, szczyty ceglano-tynkowe</div><img src="ref/posadowskyweg_99_1910.jpg" alt="" /><div class="cap">Posadowskyweg od nr 99 w dół, fot. 1910 — dachy mansardowe, płoty sztachetowe, piaszczysta jezdnia</div>`);
+  }
+  if (b.id === 'bahnwaerter') list.push(`<div class="cap">Adreßbuch 1920: „Bärenweg 6 — Eisenbahnfiskus, E; Schulist, Bahnwärter”. Dom dróżnika: typowy pruski, ceglany, parterowy z dachem czterospadowym — bez zdjęcia.</div>`);
+  if (!list.length) list.push(`<div class="cap">Brak zdjęć tego budynku na fotopolska.eu w promieniu 70 m.</div>`);
+  el.innerHTML = list.join('');
 }
 
 async function loadNotes(b) {
