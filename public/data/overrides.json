@@ -1,12 +1,12 @@
 {
  "92356369": {
-  "wall": "wall_putty",
+  "wall": "wall_sand",
   "roof": "tile",
   "window": "window_tall",
   "door": "door_brown",
   "brickBase": false,
   "storeys": 3,
-  "storeyH": 3.55,
+  "storeyH": 3.35,
   "rects": [
    [
     18.0,
@@ -23,7 +23,7 @@
     105.4
    ]
   ],
-  "pitch": 58,
+  "pitch": 54,
   "roofKind": "gable",
   "zwerch": false,
   "gableWins": 3,
@@ -38,6 +38,19 @@
   "oval": {
    "t": 0.36,
    "s": 2
-  }
+  },
+  "gableK": "wall_sand",
+  "oriel": true,
+  "orielAt": [
+   25.5,
+   10.0
+  ],
+  "orielCap": "mansard",
+  "balconies": [
+   {
+    "s": 1,
+    "t": 0.62
+   }
+  ]
  }
 }
