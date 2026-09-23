@@ -21,6 +21,8 @@ export function makeMaterials() {
   for (const [k, hex] of Object.entries(ROOF_COLOURS)) m['roof_' + k] = lam({ map: T.roofTile(hex, k !== 'slate' && k !== 'dark'), side: THREE.DoubleSide });
   m.roof_tar = lam({ map: T.tarPaper(), side: THREE.DoubleSide });
   m.plinth = lam({ color: 0x5f5a52 });
+  m.fachwerk = lam({ map: T.fachwerk() });
+  m.tilehung = lam({ map: T.roofTile(0x6a3d2a, false), side: THREE.DoubleSide });   // Biberschwanz tile-hanging on gables and bays
   m.passage = lam({ color: 0x2a241d, side: THREE.DoubleSide });   // the dark barrel vault of a carriage archway
   m.trim_white = lam({ color: 0xe9e4d8 });
   m.trim_stone = lam({ color: 0xc9c2b2 });

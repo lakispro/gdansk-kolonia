@@ -123,14 +123,23 @@ export function makePlan(scene, parcels, overrides = {}) {
     if (st === 'Jana Kochanowskiego' && no >= 79) style = { kind: 'house', storeys: 2, roofKind: 'gable', pitch: 48, wall: s < 0.5 ? 'wall_white' : 'wall_cream', brickBase: true, shutters: true, dormers: 0, roof: 'red' };
     else if (st === 'Jana Kochanowskiego') style = { kind: 'house', storeys: 2, roofKind: s < 0.55 ? 'mansard' : 'gable', pitch: 52, wall: ['wall_white', 'wall_cream', 'wall_ochre', 'wall_sand'][Math.floor(s * 4)], brickBase: s > 0.3, shutters: true, dormers: Math.max(1, Math.floor(Math.sqrt(b.area) / 6)), roof: s < 0.75 ? 'red' : 'brown', shop: b.id === 92358118 ? 'Meierei O. Schwarz' : undefined };
     else if (st === 'Sebastiana Klonowicza') style = { kind: 'house', storeys: 2, roofKind: 'mansard', pitch: 52, wall: s < 0.5 ? 'wall_white' : 'wall_cream', brickBase: true, shutters: true, dormers: 1, roof: 'red' };
-    else if (b.id === 92356369) style = { kind: 'house', storeys: 2, roofKind: 'mansard', pitch: 52, wall: 'wall_cream', brickBase: true, shutters: true, dormers: 2, roof: 'red' };
+    // Bärenweg 9 (today's Mickiewicza 45), the corner house at the junction, still standing: three
+    // plastered storeys, a big half-timbered gable with three windows and a half-hip, a tile-hung
+    // corner bay under its own little mansard, two iron balconies at the west end, an oval window,
+    // a stone portal on the Bärenweg front and the saddler's shop (Schäfer, Sattler, Adreßbuch 1920)
+    else if (b.id === 92356369) style = { kind: 'house', storeys: 3, storeyH: 3.15, roofKind: 'mansard', pitch: 52, wall: 'wall_cream', gableK: 'tilehung', brickBase: false, shutters: false, dormers: 1, roof: 'red', chimneys: 3,
+      rects: [[18.0, 7.5, 17.6, 9.2, 20.9], [22.8, 14.5, 11, 8, 105.4]], doorWall: 7, doorAt: 0.42, shop: 'Sattlerei Schäfer', shopAt: 0.82,
+      zwerch: { w: 7.2, at: 0.2, face: 'fachwerk', h: 2.0, apex: 2.6, hip: true, winRow: 3 }, oriel: true, orielAt: [27.9, 6.3], orielCap: 'mansard', balconies: [{ s: 1, t: 0.16 }, { s: 2, t: 0.16 }], oval: { t: 0.6, s: 1 } };
     else if (b.id === 92358184) style = { kind: 'house', storeys: 3, roofKind: 'mansard', pitch: 52, wall: 'wall_ochre', brickBase: true, shutters: false, dormers: 2, roof: 'red', shop: 'Bäckerei A. Alt' };
     // the two monumental blocks flanking the Bärenweg east of the Posadowskyweg junction,
     // from the "Reichskolonie Dzg.-Langfuhr / Bärenweg" postcard: three plastered storeys over a
     // tall shop floor, steep mansard roofs with a row of hooded dormers and a big gabled wall
     // dormer, a round-arched carriage passage, a corner bay and an iron balcony
-    else if (b.id === 92358185) style = { kind: 'house', storeys: 3, storeyH: 3.35, roofKind: 'mansard', pitch: 54, wall: 'wall_sand', brickBase: false, shutters: false, dormers: 4, roof: 'red', shop: 'Fleischerei Hohmann', doorWall: 4, archway: true, archAt: 0.62, archW: 3.1,
-      rects: [[49.5, 22.5, 19, 11, 15.1], [37.8, 37.5, 23, 9.5, -74.7]], zwerch: { w: 5.0, at: -0.3 }, oriel: true, orielAt: [39.5, 14.2], chimneys: 4 };
+    // Bärenweg 10f (today's Mickiewicza 47), the block across the Posadowskyweg entrance: a clinker
+    // ground floor with arched openings under plaster, two storeys and a tall gambrel whose tile-hung
+    // gable faces the Bärenweg (Street View), the butcher Hohmann at the corner (Adreßbuch 1920)
+    else if (b.id === 92358185) style = { kind: 'house', storeys: 2, storeyH: 3.4, roofKind: 'mansard', pitch: 54, wall: 'wall_cream', gableK: 'tilehung', gableWins: 3, brickBase: true, shutters: false, dormers: 3, roof: 'red', chimneys: 3,
+      rects: [[38.5, 33, 36, 9.5, -74.7], [53, 23.5, 14, 10.5, 15.1]], doorWall: 4, doorAt: 0.45, shop: 'Fleischerei Hohmann', shopAt: 0.14, archway: true, archAt: 0.74, archW: 2.9, oriel: false };
     else if (b.id === 92358725) style = { kind: 'house', storeys: 3, storeyH: 3.35, roofKind: 'mansard', pitch: 54, wall: 'wall_cream', brickBase: false, shutters: false, dormers: 5, roof: 'red', shop: 'Bergschlösschen-Bier · Niederlage', doorWall: 20, archway: true, archAt: 0.52, archW: 3.1,
       rects: [[54.0, -8.6, 20.5, 11, 18.8], [50.5, -38.5, 44, 10.5, -69.2]], zwerch: { w: 5.2, at: 0.25 }, oriel: true, orielAt: [44.1, -6.3], balcony: true, chimneys: 5 };
     else style = { kind: 'house', storeys: 3, roofKind: s < 0.5 ? 'mansard' : 'gable', pitch: 48, wall: ['wall_white', 'wall_cream', 'wall_sand'][Math.floor(s * 3)], brickBase: true, shutters: false, dormers: 2, roof: 'red' };

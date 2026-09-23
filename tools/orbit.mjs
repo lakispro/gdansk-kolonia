@@ -5,7 +5,8 @@ const errs=[]; p.on('pageerror',e=>errs.push(e.message));
 await p.goto('http://127.0.0.1:5191/admin.html',{waitUntil:'load'});
 await p.waitForSelector('#items .item',{timeout:120000});
 const clip = { x:280, y:48, width:878, height:850 };
-for (const [id,tag] of [['92358725','ne'],['92358185','se']]) {
+const pairs = process.argv.length > 2 ? process.argv.slice(2).map((a) => a.split(':')) : [['92358725','ne'],['92358185','se']];
+for (const [id,tag] of pairs) {
   await p.click(`#items .item[data-id="${id}"]`); await p.waitForTimeout(1400);
   for (const az of [20,110,200,290]) {
     await p.evaluate(a=>window.__admin.setCam(a,18,78), az); await p.waitForTimeout(450);

@@ -153,7 +153,9 @@ export function buildBuilding(b, ctx, st = {}) {
   }
   if (arch && arch.built) archPassage(baker, ring[doorWall], ring[(doorWall + 1) % ring.length], arch, isBrick);
   // the colony houses: brick ground floor under plastered upper storeys (Heimatstil, 1908-1912)
-  if (st.brickBase && !isBrick) { const pb = offsetPoly(ring, 0.02); for (let i = 0; i < pb.length; i++) { const a = pb[i], q = pb[(i + 1) % pb.length]; baker.add(wallQuad(a[0], a[1], q[0], q[1], plinthH - 0.05, plinthH + STOREY - 0.15, 2, true), null, 'brick_red'); } }
+  if (st.brickBase && !isBrick) { const pb = offsetPoly(ring, 0.02); for (let i = 0; i < pb.length; i++) { const a = pb[i], q = pb[(i + 1) % pb.length];
+    if (arch && arch.built && i === doorWall) { const keep = arch.built; archWall(baker, a, q, plinthH - 0.05, plinthH + STOREY - 0.15, 'brick_red', arch); arch.built = keep; continue; }
+    baker.add(wallQuad(a[0], a[1], q[0], q[1], plinthH - 0.05, plinthH + STOREY - 0.15, 2, true), null, 'brick_red'); } }
   // plinth
   const pl = offsetPoly(ring, 0.03);
   for (let i = 0; i < pl.length; i++) { const a = pl[i], q = pl[(i + 1) % pl.length]; baker.add(wallQuad(a[0], a[1], q[0], q[1], -1.0, plinthH, 2, true), null, isShed ? 'plinth' : kind === 'tenement' ? 'rustic' : 'plinth'); }
@@ -190,7 +192,7 @@ export function buildBuilding(b, ctx, st = {}) {
     for (let k = 0; k < rects.length; k++) {
       const r = rects[k];
       const rk = roofKind === 'hip' && k === 0 ? 'hip' : roofKind === 'mansard' && k === 0 ? 'mansard' : (roofKind === 'shed' ? 'shed' : 'gable');
-      const rr = roofOnRect(baker, r, eaves, tanP, rk, roofK, wallK, b, isShed, (x, z) => pointInPoly(x, z, ring));
+      const rr = roofOnRect(baker, r, eaves, tanP, rk, roofK, wallK, b, isShed, (x, z) => pointInPoly(x, z, ring), st.gableK || wallK, st.gableWins || 0);
       roofRects.push(rr);
       if (k === 0 && chimneys) {
         for (let c = 0; c < chimneys; c++) { const u = (c + 1) / (chimneys + 1) * r.w - r.w / 2 + (hash(seed * 31 + c) - 0.5) * 1.5; const cx = r.cx + u * Math.cos(r.ang), cz = r.cz + u * Math.sin(r.ang); chimney(baker, [cx, cz], rr.ridgeY, kind === 'tenement' ? 2.0 : 1.4, r.ang, 'chimney'); }
@@ -205,7 +207,7 @@ export function buildBuilding(b, ctx, st = {}) {
 
   // ---------------- facade
   const door = facade(baker, ring, eaves, storeys, b, ctx, wallK, kind, roofRects, plinthH, STOREY, st, seed, doorWall, arch);
-  if (st.oriel) cornerOriel(baker, ring, ctx, wallK, st.window || 'window', roofK, plinthH + STOREY + 0.1, plinthH + storeys * STOREY - 0.1, st.orielAt);
+  if (st.oriel) cornerOriel(baker, ring, ctx, wallK, st.window || 'window', roofK, plinthH + STOREY + 0.1, plinthH + storeys * STOREY - 0.1, st.orielAt, st.orielCap);
   baker.base = null;
   ctx.world.addPolygon(ring);
   return { ring, eaves, storeys, door, kind, rects, roofK, wallK, style: st, baseY };
@@ -298,14 +300,19 @@ function zwerchhaus(baker, r, rr, wallK, roofK, ctx, o = {}) {
   { const p1 = [r.cx - sin * r.h, r.cz + cos * r.h], p2 = [r.cx + sin * r.h, r.cz - cos * r.h];
     side = ctx.streetDist(p1[0], p1[1]).d < ctx.streetDist(p2[0], p2[1]).d ? 1 : -1; }
   const zw = Math.min(o.w || 4.8, r.w * 0.55), zh = o.h ?? 1.9, apex = o.apex ?? 1.5, dep = 1.9;
+  const faceK = o.face || wallK; const nwin = o.winRow ?? 2; const hip = !!o.hip;
   const u = (o.at ?? 0) * r.w / 2;
-  const outer = r.h / 2 + 0.04;
+  const outer = r.h / 2 + 0.1;
   const at = (uu, vv, yy) => [r.cx + uu * cos - side * vv * sin, yy, r.cz + uu * sin + side * vv * cos];
-  const yTop = rr.eaveY + zh, yBase = rr.eaveY - 1.4;
-  { const g = new THREE.BoxGeometry(zw, yTop - yBase, dep); const p = at(u, outer - dep / 2, (yBase + yTop) / 2); M.makeRotationY(-r.ang).setPosition(p[0], p[1], p[2]); baker.add(g, M.clone(), wallK); }
-  // the gable face
-  const tri = [at(u - zw / 2, outer, yTop - 0.02), at(u + zw / 2, outer, yTop - 0.02), at(u, outer, yTop + apex)];
-  baker.add(faceGeom(side > 0 ? tri : tri.slice().reverse(), 2), null, wallK);
+  const yTop = rr.eaveY + zh, yBase = rr.eaveY - 0.3;
+  { const g = new THREE.BoxGeometry(zw, yTop - yBase, dep); const p = at(u, outer - dep / 2, (yBase + yTop) / 2); M.makeRotationY(-r.ang).setPosition(p[0], p[1], p[2]); baker.add(g, M.clone(), faceK); }
+  // the gable face: a triangle, or a trapezoid under a small hip (Krüppelwalm)
+  const hipY = hip ? yTop + apex * 0.68 : yTop + apex, hipHalf = hip ? zw * 0.16 : 0;
+  const tri = hip
+    ? [at(u - zw / 2, outer, yTop - 0.02), at(u + zw / 2, outer, yTop - 0.02), at(u + hipHalf, outer, hipY), at(u - hipHalf, outer, hipY)]
+    : [at(u - zw / 2, outer, yTop - 0.02), at(u + zw / 2, outer, yTop - 0.02), at(u, outer, yTop + apex)];
+  baker.add(faceGeom(side > 0 ? tri : tri.slice().reverse(), 2), null, faceK);
+  if (hip) { const hf = [at(u - hipHalf, outer + 0.3, hipY), at(u + hipHalf, outer + 0.3, hipY), at(u, outer - 1.2, yTop + apex + 0.06)]; baker.add(faceGeom(side > 0 ? hf : hf.slice().reverse(), 2), null, roofK); }
   // its little roof
   for (const e of [-1, 1]) {
     const f = [at(u + e * (zw / 2 + 0.28), outer + 0.28, yTop - 0.06), at(u + e * (zw / 2 + 0.28), outer - dep - 0.9, yTop - 0.06), at(u, outer - dep - 0.9, yTop + apex + 0.06), at(u, outer + 0.28, yTop + apex + 0.06)];
@@ -317,10 +324,11 @@ function zwerchhaus(baker, r, rr, wallK, roofK, ctx, o = {}) {
   }
   // cornice under the gable and two windows
   { const g = new THREE.BoxGeometry(zw + 0.5, 0.2, 0.3); const p = at(u, outer + 0.06, yTop - 0.1); M.makeRotationY(-r.ang).setPosition(p[0], p[1], p[2]); baker.add(g, M.clone(), 'trim_stone'); }
-  for (const e of [-1, 1]) {
-    const wg = new THREE.PlaneGeometry(1.0, 1.5); const p = at(u + e * zw * 0.22, outer + 0.03, rr.eaveY + 0.15);
+  for (let k = 0; k < nwin; k++) {
+    const e = nwin === 1 ? 0 : (k / (nwin - 1) - 0.5) * 2 * (nwin === 2 ? 0.22 : 0.3);
+    const wg = new THREE.PlaneGeometry(1.0, 1.5); const p = at(u + e * zw, outer + 0.03, rr.eaveY + 0.15);
     M.makeRotationY(-r.ang + (side > 0 ? 0 : Math.PI)).setPosition(p[0], p[1], p[2]); baker.add(wg, M.clone(), 'window');
-    const sl = new THREE.BoxGeometry(1.24, 0.09, 0.18); const q2 = at(u + e * zw * 0.22, outer + 0.09, rr.eaveY - 0.63); M.makeRotationY(-r.ang).setPosition(q2[0], q2[1], q2[2]); baker.add(sl, M.clone(), 'trim_stone');
+    const sl = new THREE.BoxGeometry(1.24, 0.09, 0.18); const q2 = at(u + e * zw, outer + 0.09, rr.eaveY - 0.63); M.makeRotationY(-r.ang).setPosition(q2[0], q2[1], q2[2]); baker.add(sl, M.clone(), 'trim_stone');
   }
   // a small round window in the gable
   { const g = new THREE.CircleGeometry(0.28, 14); const p = at(u, outer + 0.04, yTop + apex * 0.45);
@@ -329,7 +337,7 @@ function zwerchhaus(baker, r, rr, wallK, roofK, ctx, o = {}) {
 }
 
 /** a polygonal corner bay (Wykusz) over the shop storey, capped with a small pyramid roof */
-function cornerOriel(baker, ring, ctx, wallK, winK, roofK, y0, y1, aimAt) {
+function cornerOriel(baker, ring, ctx, wallK, winK, roofK, y0, y1, aimAt, cap = 'pyramid') {
   const M = new THREE.Matrix4(); const n = ring.length;
   let best = -1, bd = Infinity;
   for (let i = 0; i < n; i++) { const d = aimAt ? Math.hypot(ring[i][0] - aimAt[0], ring[i][1] - aimAt[1]) : ctx.streetDist(ring[i][0], ring[i][1]).d; if (d < bd) { bd = d; best = i; } }
@@ -352,7 +360,12 @@ function cornerOriel(baker, ring, ctx, wallK, winK, roofK, y0, y1, aimAt) {
   { const g = new THREE.BoxGeometry(w + 0.3, 0.26, d + 0.3); M.makeRotationY(rot).setPosition(cx, y0 - 0.1, cz); baker.add(g, M.clone(), 'trim_stone');
     const c2 = new THREE.ConeGeometry(0.34, 0.8, 4); M.makeRotationY(rot + Math.PI / 4).setPosition(cx + mx * 0.1, y0 - 0.62, cz + mz * 0.1); baker.add(c2, M.clone(), 'trim_stone'); }
   { const g = new THREE.BoxGeometry(w + 0.36, 0.18, d + 0.36); M.makeRotationY(rot).setPosition(cx, y1 + 0.06, cz); baker.add(g, M.clone(), 'trim_stone');
-    const cap = new THREE.ConeGeometry(Math.max(w, d) * 0.78, 0.9, 4); M.makeRotationY(rot + Math.PI / 4).setPosition(cx, y1 + 0.55, cz); baker.add(cap, M.clone(), roofK); }
+    if (cap === 'mansard') {
+      // a tile-hung attic storey on the bay with its own little window, under a small pyramid
+      const hb = 1.7; const box = new THREE.BoxGeometry(w + 0.2, hb, d + 0.2); M.makeRotationY(rot).setPosition(cx, y1 + 0.15 + hb / 2, cz); baker.add(box, M.clone(), 'tilehung');
+      const wg = new THREE.PlaneGeometry(0.8, 0.9); M.makeRotationY(rot).setPosition(cx + mx * (d / 2 + 0.13), y1 + 0.15 + hb / 2, cz + mz * (d / 2 + 0.13)); baker.add(wg, M.clone(), 'window_small');
+      const top = new THREE.ConeGeometry(Math.max(w, d) * 0.74, 0.7, 4); M.makeRotationY(rot + Math.PI / 4).setPosition(cx, y1 + 0.15 + hb + 0.3, cz); baker.add(top, M.clone(), roofK);
+    } else { const c3 = new THREE.ConeGeometry(Math.max(w, d) * 0.78, 0.9, 4); M.makeRotationY(rot + Math.PI / 4).setPosition(cx, y1 + 0.55, cz); baker.add(c3, M.clone(), roofK); } }
 }
 
 function dormers(baker, r, rr, n, roofK, wallK, ctx) {
@@ -384,7 +397,7 @@ function dormers(baker, r, rr, n, roofK, wallK, ctx) {
 }
 
 /** builds a roof over an oriented rectangle. returns {ridgeY, eaveY, r} */
-function roofOnRect(baker, r, eaves, tanP, kind, roofK, wallK, b, isShed, insideRing = null) {
+function roofOnRect(baker, r, eaves, tanP, kind, roofK, wallK, b, isShed, insideRing = null, gableK = wallK, gableWins = 0) {
   /** a gable end that falls inside the footprint belongs to a wing buried in another roof: no pediment */
   const buried = (e) => { if (!insideRing) return false; const c2 = Math.cos(r.ang), s2 = Math.sin(r.ang); const u = e * (r.w / 2 + 0.9); return insideRing(r.cx + u * c2, r.cz + u * s2); };
   const L = r.w / 2 + GABLE_OVER, W = r.h / 2 + OVERHANG;
@@ -413,7 +426,13 @@ function roofOnRect(baker, r, eaves, tanP, kind, roofK, wallK, b, isShed, inside
       const u = e * r.w / 2; const bkw = bk * (r.h / 2) / W;
       const pent = [P(u, -r.h / 2, eaves - 0.02), P(u, r.h / 2, eaves - 0.02), P(u, bkw, breakY - 0.02), P(u, 0, ridgeM - 0.02), P(u, -bkw, breakY - 0.02)];
       if (e < 0) pent.reverse();
-      baker.add(faceGeom(pent, 2), null, wallK);
+      baker.add(faceGeom(pent, 2), null, gableK);
+      // a row of windows in the gable's lower, vertical part
+      for (let k = 0; k < gableWins; k++) {
+        const v = (k - (gableWins - 1) / 2) * Math.min(2.3, r.h / (gableWins + 0.5)); const p = P(u + e * 0.04, v, eaves + 1.25);
+        const wg = new THREE.PlaneGeometry(1.0, 1.45); M.makeRotationY(-r.ang + (e > 0 ? Math.PI / 2 : -Math.PI / 2)).setPosition(p[0], p[1], p[2]); baker.add(wg, M.clone(), 'window');
+        const sl = new THREE.BoxGeometry(0.18, 0.09, 1.24); const q2 = P(u + e * 0.1, v, eaves + 0.48); M.makeRotationY(-r.ang).setPosition(q2[0], q2[1], q2[2]); baker.add(sl, M.clone(), 'trim_stone');
+      }
       // bargeboards
       const uB = e * (L - 0.06);
       for (const [v0, y0, v1, y1] of [[W, eaveY, bk, breakY], [-W, eaveY, -bk, breakY], [bk, breakY, 0, ridgeM], [-bk, breakY, 0, ridgeM]]) {
@@ -437,7 +456,7 @@ function roofOnRect(baker, r, eaves, tanP, kind, roofK, wallK, b, isShed, inside
         ? [P(u, -r.h / 2, eaves - 0.02), P(u, r.h / 2, eaves - 0.02), P(u, 0, eaves + (r.h / 2) * tanP)]
         : [P(u, r.h / 2, eaves - 0.02), P(u, -r.h / 2, eaves - 0.02), P(u, -r.h / 2, eaves + r.h * tanP)];
       if (e < 0) tri.reverse();
-      baker.add(faceGeom(tri, 2), null, wallK);
+      baker.add(faceGeom(tri, 2), null, gableK);
       const uB = e * (L - 0.06);
       const rakes = kind === 'gable' ? [[W, eaveY, 0, ridgeY], [-W, eaveY, 0, ridgeY]] : [[W, eaveY, -r.h / 2, eaveY + (r.h + OVERHANG) * tanP]];
       for (const [v0, y0, v1, y1] of rakes) {
@@ -524,7 +543,7 @@ function facade(baker, ring, eaves, storeys, b, ctx, wallK, kind, roofRects, pli
       door = { x: p[0], z: p[2], nx: w.nx, nz: w.nz, wall: i, t: doorT };
       // a shop at the corner end of the ground floor
       if (st.shop && w.len > 8) {
-        shopT = doorT < 0.5 ? 0.68 : 0.25;
+        shopT = st.shopAt ?? (doorT < 0.5 ? 0.68 : 0.25);
         baker.add(patch(shopT, plinthH + 1.45, 3.2, 2.5, 0.06), null, 'shop');
         const fp = along(shopT, plinthH + 2.95, 0.12); const fg = new THREE.BoxGeometry(3.7, 0.55, 0.14); M.makeRotationY(ang).setPosition(fp[0], fp[1], fp[2]); baker.add(fg, M.clone(), 'trim_brown');
         if (ctx.sign) ctx.sign(st.shop, fp[0] + w.nx * 0.09, fp[1], fp[2] + w.nz * 0.09, ang, 3.5, 0.5);
@@ -559,15 +578,24 @@ function facade(baker, ring, eaves, storeys, b, ctx, wallK, kind, roofRects, pli
           for (const e of [-1, 1]) { const q4 = along(t + e * 1.0 / w.len, y0 - 0.35, 0.3); const g4 = new THREE.ConeGeometry(0.22, 0.6, 4); M.makeRotationY(ang + Math.PI / 4).setPosition(q4[0], q4[1], q4[2]); baker.add(g4, M.clone(), 'trim_stone'); }
         }
       }
-      // an iron balcony on the middle storey of the market-square blocks
-      if (st.balcony && isDoorWall && s === 1 && storeys >= 3 && w.len > 10) {
-        const t = st.balconyAt ?? 0.32, yB = plinthH + s * STOREY + 0.6;
+      // iron balconies: one on the middle storey, or a list of { s, t }
+      const balc = st.balconies ? st.balconies.filter((q) => q.s === s) : (st.balcony && s === 1 && storeys >= 3 ? [{ s, t: st.balconyAt ?? 0.32 }] : []);
+      for (const bq of (isDoorWall && w.len > 10 ? balc : [])) {
+        const t = bq.t, yB = plinthH + s * STOREY + 0.6;
         const sp = along(t, yB, 0.66); const sg = new THREE.BoxGeometry(2.8, 0.16, 1.3); M.makeRotationY(ang).setPosition(sp[0], sp[1], sp[2]); baker.add(sg, M.clone(), 'trim_stone');
         const rp = along(t, yB + 0.56, 1.26); const rg = new THREE.PlaneGeometry(2.8, 1.0); { const uv2 = rg.attributes.uv; for (let q2 = 0; q2 < uv2.count; q2++) uv2.setXY(q2, uv2.getX(q2) * 2.8, uv2.getY(q2)); } M.makeRotationY(ang).setPosition(rp[0], rp[1], rp[2]); baker.add(rg, M.clone(), 'railing');
         for (const e of [-1, 1]) { const q3 = along(t + e * 1.38 / w.len, yB + 0.56, 0.66); const g3 = new THREE.PlaneGeometry(1.25, 1.0); M.makeRotationY(ang + Math.PI / 2).setPosition(q3[0], q3[1], q3[2]); baker.add(g3, M.clone(), 'railing'); }
         for (const e of [-1, 1]) { const q4 = along(t + e * 1.05 / w.len, yB - 0.42, 0.34); const g4 = new THREE.ConeGeometry(0.24, 0.66, 4); M.makeRotationY(ang + Math.PI / 4).setPosition(q4[0], q4[1], q4[2]); baker.add(g4, M.clone(), 'trim_stone'); }
       }
     }
+  }
+  // an oval window (Ochsenauge) in a stone frame on the street front
+  if (st.oval && doorWall >= 0 && !isShed) {
+    const w = walls[doorWall]; const dxw = w.q[0] - w.a[0], dzw = w.q[1] - w.a[1]; const ang = Math.atan2(dzw, -dxw);
+    const t = st.oval.t ?? 0.5, y = plinthH + (st.oval.s ?? 1) * STOREY + 1.9;
+    const p = [w.a[0] + dxw * t + w.nx * 0.03, y, w.a[1] + dzw * t + w.nz * 0.03];
+    const g = new THREE.CircleGeometry(0.5, 20); g.scale(1, 0.68, 1); M.makeRotationY(ang).setPosition(p[0], p[1], p[2]); baker.add(g, M.clone(), 'glass_dark');
+    const fr = new THREE.TorusGeometry(0.52, 0.08, 6, 24); fr.scale(1, 0.7, 1); M.makeRotationY(ang).setPosition(p[0] + w.nx * 0.03, p[1], p[2] + w.nz * 0.03); baker.add(fr, M.clone(), 'trim_stone');
   }
   // attic window in the street gable
   if (roofRects.length && !isShed && roofRects[0] && !roofRects[0].hip) {

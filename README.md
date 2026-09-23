@@ -10,8 +10,10 @@ Live: **https://kolonia.lakis.pro** — phone (stick + drag to look, buttons to 
 | **Bärenweg at the railway** — the Bahnwärter's house (Bärenweg 6, Schulist), the raised barrier, the cross-buck; you arrive here from the shift | **Bärenweg 9** — the colony corner house where Potrafki lives: brick ground floor, plastered upper storey, green shutters, mansard roof with roof windows |
 | ![Posadowskyweg](media/03-posadowskyweg.jpg) | ![the plan](media/04-map.jpg) |
 | **Posadowskyweg** (today's Kochanowskiego, which kept its 1910 numbers) — the co-operative rows, sand roadway between granite kerbs, staked saplings, gas lamps | **M / mapa** — the 1920 plan with the German street names, the railway, the sports ground, you, and the next objective |
-| ![the market-square corner](media/06-postcard-corner.jpg) | ![the carriage archway](media/07-archway.jpg) |
-| **Bärenweg at the Posadowskyweg junction** — the two corner blocks of the postcard, seen from the Marktplatz | **Bärenweg 3** — the beer depot's shop sign, the round-arched carriage passage, the balcony and the wall dormer |
+| ![Bärenweg 9 from the junction](media/08-baerenweg9-corner.jpg) | ![the carriage archway](media/07-archway.jpg) |
+| **Bärenweg 9** — the home, as it still stands at the Mickiewicza/Kochanowskiego corner: half-timbered gable, corner bay, balconies, the saddler's shop | **Bärenweg 3** — the beer depot's shop sign, the round-arched carriage passage, the balcony and the wall dormer |
+| ![the market-square corner](media/06-postcard-corner.jpg) | |
+| **Bärenweg at the Posadowskyweg junction** — the corner blocks of the postcard, seen from the Marktplatz | |
 
 ## The game
 
@@ -41,6 +43,7 @@ Controls — phone: left stick walks, drag anywhere else to look, **skok** jumps
 | plot boundaries | EGiB cadastral parcels via the GUGiK ULDK service (165 parcels) | picket fences, iron railings on brick dwarf walls, hedges and gates on the real property lines |
 | relief | GUGiK NMT (digital terrain model), 10 m grid over 500 m | the gentle fall from ~6.5 m ASL in the west to ~4 m by the railway; everything sits on it |
 | trees | canopy blobs from the GUGiK orthophoto, thinned; young staked street trees and the estate's orchards from the 1910 photographs and the 1908 survey | |
+| the corner house Bärenweg 9 (Mickiewicza 45) and Bärenweg 10f (Mickiewicza 47), both still standing | Google Street View of the Mickiewicza/Kochanowskiego corner | no. 9: three plastered storeys, a half-timbered gable with three windows under a half-hip, a tile-hung corner bay with its own attic, two iron balconies, an oval window, the stone portal and the saddler Schäfer's shop; no. 10f: a clinker ground floor with the archway and the butcher's shop under plaster, and a tall gambrel whose tile-hung gable with three windows faces the Bärenweg |
 | the two corner blocks at the junction | the postcard "Reichskolonie Dzg.-Langfuhr · Bärenweg" (J. Wasielewski's collection) | Bärenweg 3 and 10f are modelled from it: three plastered storeys over a tall shop floor, a round-arched carriage passage with voussoirs and a keystone, a gabled wall dormer (Zwerchhaus) with a round window, a row of hooded dormers in the mansard, a projecting corner bay and an iron balcony |
 | the look of the houses | the 1910 photographs of Posadowskyweg 82–86 and 99 (Paul Kadereit, *Moderne Bauformen*), the postcards, present-day details | brick ground floors and surrounds, light plaster, wooden shutters, mansard and gabled roofs with roof windows, picket fences, sand roadways, gas lamps |
 

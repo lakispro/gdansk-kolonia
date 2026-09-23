@@ -316,6 +316,20 @@ export function skyTex() {
   x.fillStyle = hz; x.fillRect(sx - 180, sy - 180, 360, 360);
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = THREE.RepeatWrapping; return t;
 }
+/** half-timbering (Fachwerk): dark oak posts, rails and braces over cream plaster panels. 1 tile = 2 m */
+export function fachwerk(plasterHex = 0xe0d3b4, beamHex = 0x3a2a1c) {
+  const S = 512, c = canvas(S, S), x = c.getContext('2d'); const px = S / 2;
+  x.fillStyle = shade(plasterHex, 1); x.fillRect(0, 0, S, S); noise(x, S, S, 0.07, 3000);
+  const beam = (bx, by, bw, bh) => { x.fillStyle = shade(beamHex, 0.9 + rnd() * 0.2); x.fillRect(bx, by, bw, bh); x.fillStyle = 'rgba(0,0,0,.25)'; x.fillRect(bx, by + bh - 3, bw, 3); };
+  const t = 0.14 * px;
+  for (let u = 0; u < S; u += 0.9 * px) beam(u, 0, t, S);                    // posts
+  beam(0, S / 2 - t / 2, S, t);                                               // mid rail
+  beam(0, 0, S, t * 0.7); beam(0, S - t * 0.7, S, t * 0.7);                   // sill / plate
+  for (let u = 0; u < S; u += 1.8 * px) {                                     // a brace in every other panel
+    x.save(); x.translate(u + 0.9 * px / 2, S * 0.75); x.rotate(0.62); x.fillStyle = shade(beamHex, 1); x.fillRect(-S * 0.22, -t * 0.4, S * 0.44, t * 0.8); x.restore();
+  }
+  return tex(c, 1, 8);
+}
 /** vertical-bar railing (cemetery / front garden), alpha-tested. tile = 1 m x fence height */
 export function railingTex() {
   const W = 256, H = 256, c = canvas(W, H), x = c.getContext('2d');
