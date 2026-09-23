@@ -2,9 +2,9 @@
  "92356369": {
   "wall": "wall_putty",
   "roof": "tile",
-  "window": "window",
+  "window": "window_tall",
   "door": "door_brown",
-  "brickBase": "brick_dark",
+  "brickBase": false,
   "storeys": 3,
   "storeyH": 3.55,
   "rects": [
@@ -28,6 +28,16 @@
   "zwerch": false,
   "gableWins": 3,
   "dormers": 3,
-  "chimneys": 2
+  "chimneys": 2,
+  "archway": true,
+  "archAt": 0.78,
+  "archW": 3.4,
+  "doorAt": 0.25,
+  "shop": "Bärenweg 9",
+  "shopAt": 0.5,
+  "oval": {
+   "t": 0.36,
+   "s": 2
+  }
  }
 }
