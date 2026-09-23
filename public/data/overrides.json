@@ -4,6 +4,6 @@
     "roof": "tile",
     "window": "window",
     "door": "door_brown",
-    "brickBase": true
+    "brickBase": "brick_dark"
   }
 }

@@ -153,9 +153,11 @@ export function buildBuilding(b, ctx, st = {}) {
   }
   if (arch && arch.built) archPassage(baker, ring[doorWall], ring[(doorWall + 1) % ring.length], arch, isBrick);
   // the colony houses: brick ground floor under plastered upper storeys (Heimatstil, 1908-1912)
+  // brickBase may name the brick to use (e.g. 'brick_dark' for a clinker ground floor)
+  const baseK = typeof st.brickBase === 'string' ? st.brickBase : 'brick_red';
   if (st.brickBase && !isBrick) { const pb = offsetPoly(ring, 0.02); for (let i = 0; i < pb.length; i++) { const a = pb[i], q = pb[(i + 1) % pb.length];
-    if (arch && arch.built && i === doorWall) { const keep = arch.built; archWall(baker, a, q, plinthH - 0.05, plinthH + STOREY - 0.15, 'brick_red', arch); arch.built = keep; continue; }
-    baker.add(wallQuad(a[0], a[1], q[0], q[1], plinthH - 0.05, plinthH + STOREY - 0.15, 2, true), null, 'brick_red'); } }
+    if (arch && arch.built && i === doorWall) { const keep = arch.built; archWall(baker, a, q, plinthH - 0.05, plinthH + STOREY - 0.15, baseK, arch); arch.built = keep; continue; }
+    baker.add(wallQuad(a[0], a[1], q[0], q[1], plinthH - 0.05, plinthH + STOREY - 0.15, 2, true), null, baseK); } }
   // plinth
   const pl = offsetPoly(ring, 0.03);
   for (let i = 0; i < pl.length; i++) { const a = pl[i], q = pl[(i + 1) % pl.length]; baker.add(wallQuad(a[0], a[1], q[0], q[1], -1.0, plinthH, 2, true), null, isShed ? 'plinth' : kind === 'tenement' ? 'rustic' : 'plinth'); }
