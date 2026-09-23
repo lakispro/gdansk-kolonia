@@ -22,6 +22,12 @@
     8.6,
     105.4
    ]
-  ]
+  ],
+  "pitch": 58,
+  "roofKind": "gable",
+  "zwerch": false,
+  "gableWins": 3,
+  "dormers": 3,
+  "chimneys": 2
  }
 }
