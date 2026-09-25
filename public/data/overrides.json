@@ -27,8 +27,8 @@
   "roofKind": "hip",
   "zwerch": {
    "w": 7.0,
-   "h": 2.2,
-   "apex": 3.2,
+   "h": 2.0,
+   "apex": 2.6,
    "winRow": 3,
    "sciana": 7,
    "x": 8.8
@@ -84,28 +84,20 @@
       "luk": 1.2
      },
      {
-      "typ": "okno",
-      "x": 12.4,
-      "w": 1.2,
-      "h": 1.8,
-      "dol": 1.0,
-      "mat": "window_tall"
+      "typ": "witryna",
+      "x": 13.0,
+      "w": 2.6,
+      "h": 2.2,
+      "dol": 0.3,
+      "luk": 0.95
      },
      {
-      "typ": "okno",
-      "x": 14.3,
-      "w": 1.2,
-      "h": 1.8,
-      "dol": 1.0,
-      "mat": "window_tall"
-     },
-     {
-      "typ": "okno",
-      "x": 15.7,
-      "w": 1.2,
-      "h": 1.8,
-      "dol": 1.0,
-      "mat": "window_tall"
+      "typ": "witryna",
+      "x": 15.8,
+      "w": 2.4,
+      "h": 2.2,
+      "dol": 0.3,
+      "luk": 0.9
      }
     ],
     "1": [
