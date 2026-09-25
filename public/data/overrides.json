@@ -1,7 +1,7 @@
 {
  "92356369": {
-  "wall": "wall_grey",
-  "roof": "tile",
+  "wall": "wall_cream",
+  "roof": "red",
   "window": "window_tall",
   "door": "door_brown",
   "brickBase": false,
@@ -41,7 +41,7 @@
   "doorAt": 0.25,
   "shop": "Bärenweg 9",
   "shopAt": 0.5,
-  "gableK": "wall_grey",
+  "gableK": "wall_cream",
   "oriel": true,
   "orielAt": [
    25.5,
@@ -265,6 +265,11 @@
      }
     ]
    }
-  }
+  },
+  "kondygnacje": [
+   4.0,
+   3.15,
+   2.95
+  ]
  }
 }
