@@ -50,6 +50,7 @@
   "orielCap": "mansard",
   "balconies": [],
   "shutters": false,
-  "number": "9"
+  "number": "9",
+  "oval": false
  }
 }
