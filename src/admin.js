@@ -292,6 +292,48 @@ window.__admin = {
       dist: d, ty: Math.abs(t.y - eaves * 0.5) < 0.01 ? 0 : t.y, fov: camera.fov };
   },
   onCam: null,
+  /**
+   * Zdjęcie kadru prosto z bufora WebGL, w zadanej rozdzielczości, niezależnie od
+   * rozmiaru okna.  `crop` przycina do obrysu budynku (rzut pudełka budynku na
+   * ekran + margines) — wtedy w porównaniu ze zdjęciem budynek wypełnia kadr, a nie
+   * jedną trzecią.  `aspect` wymusza proporcje kadru (np. zdjęcia, do nakładki).
+   * Zwraca data-URL JPEG.
+   */
+  snapshot({ w = 1600, crop = true, aspect = null, margin = 0.05, q = 0.9 } = {}) {
+    const cw = Math.round(w), ch = Math.round(aspect ? w / aspect : w * canvas.clientHeight / Math.max(1, canvas.clientWidth));
+    const pr = renderer.getPixelRatio(); const hideArrow = arrow && arrow.visible;
+    if (hideArrow) arrow.visible = false;
+    renderer.setPixelRatio(1); renderer.setSize(cw, ch, false);
+    camera.aspect = cw / ch; camera.updateProjectionMatrix();
+    renderer.render(scene, camera);
+    let sx = 0, sy = 0, sw = cw, sh = ch;
+    if (crop && group) {
+      // rzut wszystkich wierzchołków budynku (pudełko osiowe obróconego budynku jest za luźne);
+      // to, co pod gruntem (fundament od -1 m), nie liczy się do kadru
+      const v = new THREE.Vector3(); group.updateMatrixWorld(true);
+      let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      group.traverse((o) => {
+        if (!o.isMesh || !o.geometry?.attributes?.position) return;
+        const pos = o.geometry.attributes.position; const step = Math.max(1, Math.floor(pos.count / 20000));
+        for (let i = 0; i < pos.count; i += step) {
+          v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld); if (v.y < -0.05) continue;
+          v.project(camera); if (v.z > 1) continue;
+          const px = (v.x + 1) / 2 * cw, py = (1 - v.y) / 2 * ch;
+          x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py);
+        }
+      });
+      const m = margin * Math.max(x1 - x0, y1 - y0);
+      sx = Math.max(0, Math.floor(x0 - m)); sy = Math.max(0, Math.floor(y0 - m));
+      sw = Math.min(cw, Math.ceil(x1 + m)) - sx; sh = Math.min(ch, Math.ceil(y1 + m)) - sy;
+      if (sw < 16 || sh < 16) { sx = 0; sy = 0; sw = cw; sh = ch; }
+    }
+    const c2 = document.createElement('canvas'); c2.width = sw; c2.height = sh;
+    c2.getContext('2d').drawImage(renderer.domElement, sx, sy, sw, sh, 0, 0, sw, sh);
+    const url = c2.toDataURL('image/jpeg', q);
+    if (hideArrow) arrow.visible = true;
+    renderer.setPixelRatio(pr); resize(); renderer.render(scene, camera);
+    return url;
+  },
   /** numery ścian drzewa na budynku (czerwony = ulica, szary = ślepa) */
   walls(on = true) {
     wallLabels = !!on;

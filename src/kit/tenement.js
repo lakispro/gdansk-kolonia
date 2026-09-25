@@ -209,6 +209,7 @@ export function buildBuilding(b, ctx, st = {}) {
 
   // ---------------- roofs
   const roofRects = [];
+  const occupied = [];   // co poza klockami zajmuje ścianę (szczyt) — do listy kolizji
   const chimneys = st.chimneys ?? (isShed ? 0 : kind === 'tenement' ? 2 + Math.floor(seed * 2) : 1);
   if (roofKind === 'flat') {
     const cap = offsetPoly(ring, 0.2);
@@ -229,8 +230,10 @@ export function buildBuilding(b, ctx, st = {}) {
       if (nd && (rk === 'gable' || rk === 'mansard')) dormers(baker, r, rr, nd, roofK, wallK, ctx);
       // a big gabled wall dormer (Zwerchhaus) over the street front, as on the market-square blocks
       const zw = r.o ? o.zwerch : (k === 0 && st.zwerch);
-      if (zw) zwerchhaus(baker, r, rr, wallK, roofK, ctx, typeof zw === 'object' ? zw : {});
-      r.dach = rk; r.spadek = Math.atan(tanK) * 180 / Math.PI; r.lukarny = (rk === 'gable' || rk === 'mansard') ? nd : 0; r.kominy = nc; r.zwerch = zw || undefined;
+      const zwAt = zw ? zwerchhaus(baker, r, rr, wallK, roofK, ctx, typeof zw === 'object' ? zw : {}, { frames, eaves }) : null;
+      if (zwAt) occupied.push({ ...zwAt, co: 'szczyt (zwerch)' });
+      r.dach = rk; r.spadek = Math.atan(tanK) * 180 / Math.PI; r.lukarny = (rk === 'gable' || rk === 'mansard') ? nd : 0; r.kominy = nc; r.zwerch = zw ? { ...(typeof zw === 'object' ? zw : {}), ...(zwAt ? { sciana: zwAt.sciana, x: Math.round(zwAt.x * 100) / 100 } : {}) } : undefined;
+      if (r.zwerch && zwAt) delete r.zwerch.at;   // w drzewie tylko `x` — jednoznaczne, w metrach od lewego narożnika
     }
   }
 
@@ -244,6 +247,7 @@ export function buildBuilding(b, ctx, st = {}) {
   // kalenica najwyższego z dachów — warsztat porównuje z niej proporcję dachu do elewacji
   const ridge = roofRects.length ? Math.max(...roofRects.map((r) => r.ridgeY)) : eaves;
   const drzewo = exportTree({ plinthH, heights, eaves, rects, roofKind, elewacje, B });
+  drzewo.kolizje = findCollisions({ elewacje, floorY, storeys, eaves, occupied });
   return { ring, eaves, ridge, roofKind, pitch: st.pitch || Math.round(Math.atan(tanP) * 180 / Math.PI),
     storeys, door, kind, rects, roofK, wallK, style: st, baseY, drzewo };
 }
@@ -329,17 +333,34 @@ function archPassage(baker, a, q, arch, isBrick) {
 }
 
 /** a gabled wall dormer rising through the eaves over the street front (Zwerchhaus) */
-function zwerchhaus(baker, r, rr, wallK, roofK, ctx, o = {}) {
+/** Szczyt stoi w licu ściany, która niesie tę stronę bryły — nie na prostokącie bryły,
+ *  który z obrysem zgadza się tylko z grubsza (inaczej skrzynka wisi przed ścianą
+ *  i zasłania okna ostatniej kondygnacji).  Spód na okapie, okna szczytu nad okapem.
+ *  Położenie: `x` w metrach od lewego narożnika ściany `sciana` (jak klocki),
+ *  albo dawne `at` (-1..1 wzdłuż bryły).  Zwraca, gdzie stanął — do drzewa i kolizji. */
+function zwerchhaus(baker, r, rr, wallK, roofK, ctx, o = {}, L = null) {
   const M = new THREE.Matrix4(); const cos = Math.cos(r.ang), sin = Math.sin(r.ang);
   let side = 1;
-  { const p1 = [r.cx - sin * r.h, r.cz + cos * r.h], p2 = [r.cx + sin * r.h, r.cz - cos * r.h];
+  if (L && o.sciana !== undefined && L.frames[o.sciana]) { const F = L.frames[o.sciana]; side = (F.nx * -sin + F.nz * cos) >= 0 ? 1 : -1; }
+  else { const p1 = [r.cx - sin * r.h, r.cz + cos * r.h], p2 = [r.cx + sin * r.h, r.cz - cos * r.h];
     side = ctx.streetDist(p1[0], p1[1]).d < ctx.streetDist(p2[0], p2[1]).d ? 1 : -1; }
+  const nsx = -side * sin, nsz = side * cos;
+  // the wall that carries this side of the volume: facing the same way, its middle along the volume
+  let W = L && o.sciana !== undefined ? L.frames[o.sciana] || null : null;
+  if (L && !W) { let best = -Infinity;
+    for (const F of L.frames) { if (F.len < 2) continue; if (F.nx * nsx + F.nz * nsz < 0.9) continue;
+      const du = (F.mx - r.cx) * cos + (F.mz - r.cz) * sin; if (Math.abs(du) > r.w / 2 + 1) continue;
+      if (F.len > best) { best = F.len; W = F; } } }
   const zw = Math.min(o.w || 4.8, r.w * 0.55), zh = o.h ?? 1.9, apex = o.apex ?? 1.5, dep = 1.9;
   const faceK = o.face || wallK; const nwin = o.winRow ?? 2; const hip = !!o.hip;
-  const u = (o.at ?? 0) * r.w / 2;
-  const outer = r.h / 2 + 0.1;
+  let u = (o.at ?? 0) * r.w / 2;
+  if (W && o.x !== undefined) { const p = W.along(W.T(o.x), 0, 0); u = (p[0] - r.cx) * cos + (p[2] - r.cz) * sin; }
+  const outer = W ? (W.mx - r.cx) * nsx + (W.mz - r.cz) * nsz + 0.03 : r.h / 2 + 0.1;
   const at = (uu, vv, yy) => [r.cx + uu * cos - side * vv * sin, yy, r.cz + uu * sin + side * vv * cos];
-  const yTop = rr.eaveY + zh, yBase = rr.eaveY - 0.3;
+  // windows of the gable sit wholly above the eaves, clear of the main roof's overhang
+  const eav = L ? L.eaves : rr.eaveY + 0.5, sill = W ? eav + 0.35 : rr.eaveY - 0.6;
+  const yBase = W ? eav - 0.05 : rr.eaveY - 0.3;
+  const yTop = W ? Math.max(rr.eaveY + zh, sill + 1.5 + 0.35) : rr.eaveY + zh;
   { const g = new THREE.BoxGeometry(zw, yTop - yBase, dep); const p = at(u, outer - dep / 2, (yBase + yTop) / 2); M.makeRotationY(-r.ang).setPosition(p[0], p[1], p[2]); baker.add(g, M.clone(), faceK); }
   // the gable face: a triangle, or a trapezoid under a small hip (Krüppelwalm)
   const hipY = hip ? yTop + apex * 0.68 : yTop + apex, hipHalf = hip ? zw * 0.16 : 0;
@@ -361,14 +382,18 @@ function zwerchhaus(baker, r, rr, wallK, roofK, ctx, o = {}) {
   { const g = new THREE.BoxGeometry(zw + 0.5, 0.2, 0.3); const p = at(u, outer + 0.06, yTop - 0.1); M.makeRotationY(-r.ang).setPosition(p[0], p[1], p[2]); baker.add(g, M.clone(), 'trim_stone'); }
   for (let k = 0; k < nwin; k++) {
     const e = nwin === 1 ? 0 : (k / (nwin - 1) - 0.5) * 2 * (nwin === 2 ? 0.22 : 0.3);
-    const wg = new THREE.PlaneGeometry(1.0, 1.5); const p = at(u + e * zw, outer + 0.03, rr.eaveY + 0.15);
+    const wg = new THREE.PlaneGeometry(1.0, 1.5); const p = at(u + e * zw, outer + 0.03, sill + 0.75);
     M.makeRotationY(-r.ang + (side > 0 ? 0 : Math.PI)).setPosition(p[0], p[1], p[2]); baker.add(wg, M.clone(), 'window');
-    const sl = new THREE.BoxGeometry(1.24, 0.09, 0.18); const q2 = at(u + e * zw, outer + 0.09, rr.eaveY - 0.63); M.makeRotationY(-r.ang).setPosition(q2[0], q2[1], q2[2]); baker.add(sl, M.clone(), 'trim_stone');
+    const sl = new THREE.BoxGeometry(1.24, 0.09, 0.18); const q2 = at(u + e * zw, outer + 0.09, sill - 0.03); M.makeRotationY(-r.ang).setPosition(q2[0], q2[1], q2[2]); baker.add(sl, M.clone(), 'trim_stone');
   }
   // a small round window in the gable
   { const g = new THREE.CircleGeometry(0.28, 14); const p = at(u, outer + 0.04, yTop + apex * 0.45);
     M.makeRotationY(-r.ang + (side > 0 ? 0 : Math.PI)).setPosition(p[0], p[1], p[2]); baker.add(g, M.clone(), 'glass_dark');
     const ring2 = new THREE.TorusGeometry(0.33, 0.06, 6, 16); M.makeRotationY(-r.ang).setPosition(p[0], p[1], p[2] + 0); baker.add(ring2, M.clone(), 'trim_stone'); }
+  if (!W) return null;
+  // where it landed, in the wall's own terms
+  const c = at(u, 0, 0); const t = ((c[0] - W.a[0]) * (W.q[0] - W.a[0]) + (c[2] - W.a[1]) * (W.q[1] - W.a[1])) / (W.len * W.len);
+  return { sciana: W.i, x: W.X(t), w: zw, dol: yBase, gora: yTop + apex };
 }
 
 /** a polygonal corner bay (Wykusz) over the shop storey, capped with a small pyramid roof */
@@ -629,6 +654,41 @@ function atticWindows(baker, ring, ctx, roofRects, eaves, isShed) {
       baker.add(g, null, 'window_small');
     }
   }
+}
+
+/** Klocki, które na siebie wchodzą albo wychodzą poza swoje miejsce: poza ścianę, pod okap,
+ *  na gzyms kondygnacji, na inny klocek, pod szczyt, w bramę.  Liczby zamiast wypatrywania
+ *  tego na renderze — agent dostaje tę listę w `stan`. */
+function findCollisions({ elewacje, floorY, storeys, eaves, occupied }) {
+  const out = []; const f2 = (v) => (Math.round(v * 100) / 100).toFixed(2);
+  const OPEN = { okno: 1, drzwi: 1, witryna: 1, owal: 1 };
+  for (const E of elewacje) {
+    if (E.slepa) continue;
+    const boxes = [];
+    E.pietra.forEach((list, s) => {
+      for (const el of list || []) {
+        if (el.typ === 'brama') { boxes.push({ el, s, x0: el.x - el.w / 2, x1: el.x + el.w / 2, y0: 0, y1: el.h }); continue; }
+        const w = el.w ?? (el.typ === 'balkon' ? 2.8 : el.typ === 'owal' ? 1.0 : 1), h = el.h ?? (el.typ === 'owal' ? 0.68 : el.typ === 'balkon' ? 1.1 : 1.5);
+        const y0 = floorY(s) + (el.dol ?? 0), y1 = y0 + h;
+        const b = { el, s, x0: el.x - w / 2, x1: el.x + w / 2, y0, y1 }; boxes.push(b);
+        const name = `ściana ${E.sciana}, kondygnacja ${s}, ${el.typ} x=${f2(el.x)}`;
+        if (b.x0 < 0.2 || b.x1 > E.dl - 0.2) out.push(`${name}: wychodzi poza ścianę (${f2(b.x0)}–${f2(b.x1)} m przy długości ${f2(E.dl)} m)`);
+        if (!OPEN[el.typ]) continue;
+        if (y1 > eaves - 0.38) out.push(`${name}: góra ${f2(y1)} m wchodzi pod okap/gzyms koronujący (dostępne do ${f2(eaves - 0.38)} m)`);
+        else if (s < storeys - 1 && y1 > floorY(s + 1) - 0.08) out.push(`${name}: góra ${f2(y1)} m wchodzi na gzyms kondygnacji ${s + 1} (${f2(floorY(s + 1) - 0.05)} m)`);
+        if (el.typ === 'okno' && y0 < floorY(s) - 0.01) out.push(`${name}: dół ${f2(y0)} m poniżej podłogi kondygnacji (${f2(floorY(s))} m)`);
+        for (const z of occupied) if (z.sciana === E.sciana && b.x1 > z.x - z.w / 2 + 0.05 && b.x0 < z.x + z.w / 2 - 0.05 && y1 > z.dol + 0.05)
+          out.push(`${name}: wchodzi pod ${z.co} (spód ${f2(z.dol)} m, x ${f2(z.x - z.w / 2)}–${f2(z.x + z.w / 2)})`);
+      }
+    });
+    for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
+      const a = boxes[i], b = boxes[j];
+      if (a.el.typ === 'balkon' || b.el.typ === 'balkon') continue;
+      if (a.x1 - 0.05 > b.x0 && b.x1 - 0.05 > a.x0 && a.y1 - 0.05 > b.y0 && b.y1 - 0.05 > a.y0)
+        out.push(`ściana ${E.sciana}: ${a.el.typ} x=${f2(a.el.x)} (kond. ${a.s}) nachodzi na ${b.el.typ} x=${f2(b.el.x)} (kond. ${b.s})`);
+    }
+  }
+  return out;
 }
 
 /** drzewo do pokazania ludziom i agentowi: liczby do centymetra, pola równe domyślnym pominięte */
