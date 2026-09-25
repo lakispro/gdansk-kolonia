@@ -669,7 +669,9 @@ function findCollisions({ elewacje, floorY, storeys, eaves, occupied }) {
       for (const el of list || []) {
         if (el.typ === 'brama') { boxes.push({ el, s, x0: el.x - el.w / 2, x1: el.x + el.w / 2, y0: 0, y1: el.h }); continue; }
         const w = el.w ?? (el.typ === 'balkon' ? 2.8 : el.typ === 'owal' ? 1.0 : 1), h = el.h ?? (el.typ === 'owal' ? 0.68 : el.typ === 'balkon' ? 1.1 : 1.5);
-        const y0 = floorY(s) + (el.dol ?? 0), y1 = y0 + h;
+        // łukowe zamknięcie otworu (`luk`) podnosi jego górę o strzałkę łuku
+        const rise = el.luk ? (el.luk === true ? w / 2 : Number(el.luk)) : 0;
+        const y0 = floorY(s) + (el.dol ?? 0), y1 = y0 + h + rise;
         const b = { el, s, x0: el.x - w / 2, x1: el.x + w / 2, y0, y1 }; boxes.push(b);
         const name = `ściana ${E.sciana}, kondygnacja ${s}, ${el.typ} x=${f2(el.x)}`;
         if (b.x0 < 0.2 || b.x1 > E.dl - 0.2) out.push(`${name}: wychodzi poza ścianę (${f2(b.x0)}–${f2(b.x1)} m przy długości ${f2(E.dl)} m)`);

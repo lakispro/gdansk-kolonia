@@ -30,12 +30,23 @@ export function wallFrame(ring, i) {
 const M = new THREE.Matrix4();
 const boxAt = (baker, W, p, w, h, d, key) => { M.makeRotationY(W.ang).setPosition(p[0], p[1], p[2]); baker.add(new THREE.BoxGeometry(w, h, d), M.clone(), key); };
 
+/** półkoliste zamknięcie otworu (arkada): pole łuku w materiale otworu i kamienna archiwolta.
+ *  Włącza je pole `luk` klocka (true = półkole o promieniu w/2, liczba = strzałka w metrach). */
+function lukNad(baker, W, el, top, key) {
+  const t = W.T(el.x), w = el.w, r = w / 2, rise = el.luk === true ? r : Number(el.luk);
+  const seg = new THREE.CircleGeometry(r, 22, 0, Math.PI); seg.scale(1, rise / r, 1);
+  const p = W.along(t, top, 0.025); M.makeRotationY(W.ang).setPosition(p[0], p[1], p[2]); baker.add(seg, M.clone(), key);
+  const arc = new THREE.TorusGeometry(r + 0.03, 0.11, 6, 26, Math.PI); arc.scale(1, rise / r, 1);
+  const q = W.along(t, top, 0.06); M.makeRotationY(W.ang).setPosition(q[0], q[1], q[2]); baker.add(arc, M.clone(), 'trim_stone');
+}
+
 /** okno: szyba, okiennice, nadproże, parapet, opaska */
 function okno(baker, W, el, B, floor) {
   const t = W.T(el.x), w = el.w, h = el.h, y = floor + el.dol + h / 2;
   baker.add(W.patch(t, y, w, h, 0.025), null, el.mat || B.winK);
   if (el.okiennice) for (const e of [-1, 1]) boxAt(baker, W, W.along(t + e * (w / 2 + 0.3) / W.len, y, 0.05), 0.5, h - 0.05, 0.05, el.okiennice === true ? 'trim_green' : el.okiennice);
-  if (el.nadproze !== false) boxAt(baker, W, W.along(t, y + h / 2 + 0.12, 0.05), w + 0.36, 0.26, 0.09, B.isBrick ? 'brick_dark' : 'trim_stone');
+  if (el.luk) lukNad(baker, W, el, y + h / 2, el.mat || B.winK);
+  else if (el.nadproze !== false) boxAt(baker, W, W.along(t, y + h / 2 + 0.12, 0.05), w + 0.36, 0.26, 0.09, B.isBrick ? 'brick_dark' : 'trim_stone');
   if (el.parapet !== false) boxAt(baker, W, W.along(t, y - h / 2 - 0.04, 0.08), w + 0.24, 0.09, 0.18, 'trim_stone');
   if (el.obramienie ?? B.frame) boxAt(baker, W, W.along(t, y, 0.03), w + 0.3, h + 0.2, 0.05, 'trim_stone');
 }
@@ -46,6 +57,7 @@ function drzwi(baker, W, el, B, floor) {
   const frame = el.obramienie ?? !B.isShed;
   baker.add(W.patch(t, y, w, h, frame ? 0.075 : 0.03), null, el.mat || (B.isShed ? 'plank_door' : B.isBrick ? 'door' : 'door_brown'));
   if (frame) boxAt(baker, W, W.along(t, y, 0.0), w + 0.5, h + 0.3, 0.12, B.isBrick ? 'brick_dark' : 'trim_stone');
+  if (el.luk) lukNad(baker, W, el, bottom + h, el.mat || (B.isBrick ? 'door' : 'door_brown'));
   const n = el.schody ?? (B.isShed ? 0 : B.kind === 'tenement' ? 3 : 2);
   for (let s = 0; s < n; s++) { const p = W.along(t, bottom - s * 0.16 + 0.08, 0.3 + s * 0.3); p[1] = Math.max(0.08, p[1]); boxAt(baker, W, p, w + 0.6, 0.16, 0.6, 'trim_stone'); }
   const no = el.numer === true ? B.numberAt : el.numer;
@@ -58,7 +70,9 @@ function drzwi(baker, W, el, B, floor) {
 function witryna(baker, W, el, B, floor) {
   const t = W.T(el.x), w = el.w, h = el.h, bottom = floor + el.dol;
   baker.add(W.patch(t, bottom + h / 2, w, h, 0.06), null, el.mat || 'shop');
-  const fp = W.along(t, bottom + h + 0.25, 0.12); boxAt(baker, W, fp, w + 0.5, 0.55, 0.14, 'trim_brown');
+  if (el.luk) lukNad(baker, W, el, bottom + h, el.mat || 'shop');
+  const fp = W.along(t, bottom + h + (el.luk ? (el.luk === true ? w / 2 : Number(el.luk)) + 0.3 : 0.25), 0.12);
+  if (!el.luk || el.szyld) boxAt(baker, W, fp, w + 0.5, 0.55, 0.14, 'trim_brown');
   if (el.szyld && B.ctx.sign) B.ctx.sign(el.szyld, fp[0] + W.nx * 0.09, fp[1], fp[2] + W.nz * 0.09, W.ang, w + 0.3, 0.5);
   const sp = W.along(t, 0, 0.02); sp[1] = floor + 0.1; boxAt(baker, W, sp, w + 0.2, 0.2, 0.3, 'trim_stone');
 }
