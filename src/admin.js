@@ -17,6 +17,10 @@ import { makePlan } from './world/plan1920.js';
  * ------------------------------------------------------------------ */
 
 const $ = (id) => document.getElementById(id);
+// embed=1: sama scena do osadzenia (obrotnica warsztatu) — bez panelu, bez przesuwania celu,
+// żeby każdy kąt dał się odtworzyć w rendererze samym (az, el, dist, ty, fov)
+const EMBED = new URLSearchParams(location.search).get('embed') === '1';
+if (EMBED) document.body.classList.add('embed');
 const canvas = $('view');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -25,13 +29,15 @@ renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.A
 const scene = new THREE.Scene(); scene.background = new THREE.Color(0xbfb9ab);
 const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 500);
 const controls = new OrbitControls(camera, canvas); controls.enableDamping = true; controls.maxPolarAngle = Math.PI / 2 - 0.02;
+if (EMBED) controls.enablePan = false;
+controls.addEventListener('change', () => { if (window.__admin?.onCam) window.__admin.onCam(window.__admin.camState()); });
 const sun = new THREE.DirectionalLight(0xffe2bc, 2.0); sun.position.set(-30, 40, 25); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0005;
 const sc = sun.shadow.camera; sc.left = sc.bottom = -40; sc.right = sc.top = 40; sc.near = 1; sc.far = 150;
 scene.add(sun, new THREE.HemisphereLight(0xc9d2dc, 0x6b6250, 0.8), new THREE.AmbientLight(0xffffff, 0.15));
 const mats = makeMaterials();
 const ground = new THREE.Mesh(new THREE.CircleGeometry(60, 64), mats.grass); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
 const grid = new THREE.GridHelper(60, 60, 0x776a52, 0x554a38); grid.position.y = 0.01; scene.add(grid);
-let group = null, current = null, plan = null, streets = null, arrow = null, photos = null;
+let group = null, current = null, plan = null, streets = null, arrow = null, photos = null, rowsAll = [];
 
 function resize() { const w = canvas.clientWidth, h = canvas.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
 window.addEventListener('resize', resize);
@@ -61,6 +67,7 @@ async function load() {
       d.addEventListener('click', () => show(r.b, r)); items.appendChild(d);
     }
   };
+  rowsAll = rows;
   $('q').addEventListener('input', (e) => render(e.target.value));
   render();
   const want = new URLSearchParams(location.search).get('id');
@@ -259,6 +266,32 @@ window.__admin = {
       },
     };
   },
+  /** wybór budynku po id — dla osadzonej obrotnicy */
+  select(id) {
+    const r = rowsAll.find((q) => q.b && String(q.b.id) === String(id));
+    if (!r) return false;
+    if (!current || String(current.id) !== String(id)) show(r.b, r);
+    return true;
+  },
+  /** azymut drzwi — „na wprost drzwi" w obrotnicy */
+  get doorAz() { const h = window.__house; return h && h.door ? Math.atan2(h.door.nx, h.door.nz) * 180 / Math.PI : 0; },
+  /** kamera tak, jak ustawia ją renderer warsztatu (`aim` w renderer/server.mjs):
+   *  cel nad środkiem budynku na `ty` (0 = pół okapu), dystans 0 = automatyczny */
+  aimCam(o) {
+    const h = window.__house; const eaves = h ? h.eaves : 8;
+    const auto = Math.sqrt((current && current.area) || 120) * 2.0 + 16;
+    camera.fov = o.fov || 45; camera.updateProjectionMatrix();
+    controls.target.set(0, o.ty ? o.ty : eaves * 0.5, 0);
+    this.setCam(o.az || 0, o.el ?? 9, o.dist || auto);
+  },
+  /** odwrotność `aimCam`: kamera z obracania myszą/palcem jako liczby */
+  camState() {
+    const t = controls.target, v = camera.position.clone().sub(t); const d = v.length() || 1;
+    const h = window.__house; const eaves = h ? h.eaves : 8;
+    return { az: Math.atan2(v.x, v.z) * 180 / Math.PI, el: Math.asin(Math.max(-1, Math.min(1, v.y / d))) * 180 / Math.PI,
+      dist: d, ty: Math.abs(t.y - eaves * 0.5) < 0.01 ? 0 : t.y, fov: camera.fov };
+  },
+  onCam: null,
   /** numery ścian drzewa na budynku (czerwony = ulica, szary = ślepa) */
   walls(on = true) {
     wallLabels = !!on;
@@ -268,7 +301,9 @@ window.__admin = {
   },
   /** azimuth/elevation in degrees, distance in metres, around the current target */
   setCam(az, el, dist) { const t = controls.target; const a = az * Math.PI / 180, e = el * Math.PI / 180;
-    camera.position.set(t.x + Math.sin(a) * Math.cos(e) * dist, t.y + Math.sin(e) * dist, t.z + Math.cos(a) * Math.cos(e) * dist); controls.update(); },
+    camera.position.set(t.x + Math.sin(a) * Math.cos(e) * dist, t.y + Math.sin(e) * dist, t.z + Math.cos(a) * Math.cos(e) * dist);
+    // bez tłumienia na jedną klatkę: gasi rozpęd po obracaniu palcem, który inaczej odkręciłby kamerę
+    const damp = controls.enableDamping; controls.enableDamping = false; controls.update(); controls.enableDamping = damp; },
   lookAt(x, y, z, dist, az = 40, el = 12) { controls.target.set(x, y, z); this.setCam(az, el, dist); },
 };
 load().catch((e) => { $('hTitle').textContent = 'błąd: ' + e.message; console.error(e); });
