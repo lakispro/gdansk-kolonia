@@ -61,11 +61,12 @@
   <main id="stage">
     <canvas id="view"></canvas>
     <div id="hud"><b id="hTitle">wybierz budynek z listy</b><span id="hSub"></span></div>
-    <div id="tools"><button class="btn alt" id="bReset" disabled>reset stylu</button><button class="btn" id="bGlb" disabled>pobierz .glb</button></div>
+    <div id="tools"><button class="btn alt" id="bWalls">numery ścian</button><button class="btn alt" id="bReset" disabled>reset stylu</button><button class="btn" id="bGlb" disabled>pobierz .glb</button></div>
   </main>
   <aside id="side">
     <div><h2>Fakty</h2><div id="facts">—</div></div>
     <div><h2>Styl (JSON) — zmień i zastosuj</h2><textarea id="style"></textarea><div class="row" style="margin-top:6px"><button class="btn" id="bApply" disabled>zastosuj</button><span class="msg" id="styleMsg"></span></div></div>
+    <div><h2>Drzewo — bryły i klocki elewacji</h2><textarea id="tree" readonly></textarea><div class="row" style="margin-top:6px"><button class="btn" id="bTree" disabled>przenieś do stylu</button><span class="msg">x = metry od lewego narożnika ściany, patrząc z zewnątrz</span></div></div>
     <div><h2>Instrukcje dla Claude'a</h2><textarea id="note" placeholder="np. „dach ma być bardziej stromy, ganek drewniany z łukami jak na zdjęciu z 1910, okna parteru z okiennicami, cegła ciemniejsza”"></textarea><div class="row" style="margin-top:6px"><button class="btn" id="bSave" disabled>zapisz notatkę</button><span class="msg" id="noteMsg"></span></div><div id="notes"></div></div>
     <div><h2>Odniesienia</h2><div id="refs">—</div></div>
   </aside>

@@ -84,12 +84,44 @@ function build(b, style, fresh = false) {
   const c = centroid(b.ring.map(xz));
   g.position.set(-c[0], 0, -c[1]);
   scene.add(g); group = g; window.__house = h;
+  if (wallLabels) addWallLabels(g, h);
+  $('tree').value = h ? treeText(h.drzewo) : '';
   // an arrow towards the street the door faces
   if (h && h.door) { const dir = new THREE.Vector3(h.door.nx, 0, h.door.nz); arrow = new THREE.ArrowHelper(dir, new THREE.Vector3(h.door.x - c[0], 0.3, h.door.z - c[1]), 5, 0xd9b45a, 1.2, 0.6); scene.add(arrow); }
   const size = Math.sqrt(b.area) * 1.6 + 12; const eaves = h ? h.eaves : 8;
   controls.target.set(0, eaves * 0.5, 0);
   if (fresh) { const dn = h && h.door ? new THREE.Vector3(h.door.nx, 0, h.door.nz) : new THREE.Vector3(0, 0, 1); camera.position.copy(dn.multiplyScalar(size)).add(new THREE.Vector3(size * 0.5, eaves * 0.9 + 4, 0)); }
   return h;
+}
+
+/** Numery ścian na budynku — żeby dało się powiedzieć, która ściana drzewa jest
+ *  którą na zdjęciu.  Etykieta stoi przed środkiem ściany, na połowie okapu. */
+let wallLabels = false;
+function addWallLabels(g, h) {
+  if (!h || !h.drzewo) return;
+  for (const E of h.drzewo.elewacje) {
+    const a = h.ring[E.sciana], q = h.ring[(E.sciana + 1) % h.ring.length];
+    const len = Math.hypot(q[0] - a[0], q[1] - a[1]); const nx = (q[1] - a[1]) / len, nz = -(q[0] - a[0]) / len;
+    const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
+    x.fillStyle = E.slepa ? 'rgba(90,90,90,0.85)' : E.ulica ? 'rgba(170,60,30,0.92)' : 'rgba(20,40,90,0.9)';
+    x.beginPath(); x.arc(64, 64, 60, 0, Math.PI * 2); x.fill();
+    x.fillStyle = '#fff'; x.font = 'bold 70px sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(String(E.sciana), 64, 68);
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c) }));
+    sp.scale.set(1.6, 1.6, 1);
+    sp.position.set((a[0] + q[0]) / 2 + nx * 1.2, (h.eaves || 8) * 0.55, (a[1] + q[1]) / 2 + nz * 1.2);
+    sp.userData.label = true; g.add(sp);
+  }
+}
+
+/** drzewo czytelnie: każda kondygnacja w jednej linii, żeby dało się je przejrzeć i przepisać */
+function treeText(t) {
+  if (!t) return '';
+  const j = (v) => JSON.stringify(v);
+  const el = t.elewacje.map((E) => {
+    const head = { ...E }; delete head.pietra;
+    return `  ${j(head).slice(0, -1)}, "pietra": [\n${E.pietra.map((l) => `    ${j(l)}`).join(',\n')}\n  ]}`;
+  });
+  return `{"cokol": ${t.cokol}, "kondygnacje": ${j(t.kondygnacje)}, "okap": ${t.okap},\n"bryly": [\n${t.bryly.map((b) => '  ' + j(b)).join(',\n')}\n],\n"elewacje": [\n${el.join(',\n')}\n]}`;
 }
 
 function show(b, row) {
@@ -102,7 +134,7 @@ function show(b, row) {
   $('facts').innerHTML = [
     ['id OSM', b.id], ['adres dziś', b.addr ? `${b.addr.street || ''} ${b.addr.housenumber || ''}` : '—'], ['powierzchnia', `${Math.round(b.area)} m²`], ['wysokość LiDAR', b.h ? `${b.h.toFixed(2)} m (GUGiK LoD1)` : 'brak'], ['kondygnacje OSM', b.levels ?? '—'], ['typ OSM', b.type], ['odległość od Mickiewicza 43', `${Math.round(b.dist)} m`], ['w 1920', b.id === 'bahnwaerter' ? 'dom dróżnika (Bärenweg 6, Schulist)' : 'istniał — dom spółdzielni Neuschottland (1907–15)'],
   ].map(([k, v]) => `<div><span>${k}:</span> ${v}</div>`).join('');
-  $('bApply').disabled = $('bReset').disabled = $('bGlb').disabled = $('bSave').disabled = false;
+  $('bTree').disabled = $('bApply').disabled = $('bReset').disabled = $('bGlb').disabled = $('bSave').disabled = false;
   $('styleMsg').textContent = ''; $('noteMsg').textContent = '';
   refs(b); loadNotes(b);
   history.replaceState(null, '', `?id=${b.id}`);
@@ -146,6 +178,17 @@ $('bApply').addEventListener('click', () => {
   try { const style = JSON.parse($('style').value); build(current, style); $('styleMsg').textContent = 'zastosowano (tylko podgląd)'; $('styleMsg').className = 'msg ok'; }
   catch (e) { $('styleMsg').textContent = 'błąd JSON: ' + e.message; $('styleMsg').className = 'msg err'; }
 });
+// drzewo do stylu: od tej chwili ten budynek ma jawne bryły i klocki, które można przestawiać ręcznie
+$('bTree').addEventListener('click', () => {
+  try {
+    const t = window.__house?.drzewo; if (!t) return;
+    const style = JSON.parse($('style').value);
+    style.kondygnacje = t.kondygnacje; style.bryly = t.bryly;
+    style.elewacje = Object.fromEntries(t.elewacje.filter((E) => !E.slepa).map((E) => [E.sciana, E.pietra]));
+    $('style').value = JSON.stringify(style, null, 1); $('styleMsg').textContent = 'drzewo w stylu — zmień i zastosuj'; $('styleMsg').className = 'msg ok';
+  } catch (e) { $('styleMsg').textContent = 'błąd JSON: ' + e.message; $('styleMsg').className = 'msg err'; }
+});
+$('bWalls').addEventListener('click', () => { window.__admin.walls(!wallLabels); $('bWalls').classList.toggle('alt', !wallLabels); });
 $('bReset').addEventListener('click', () => { $('style').value = JSON.stringify(current.style || {}, null, 1); build(current, JSON.parse(JSON.stringify(current.style || {}))); $('styleMsg').textContent = ''; });
 $('bSave').addEventListener('click', async () => {
   const note = $('note').value.trim(); if (!note) return;
@@ -206,6 +249,8 @@ window.__admin = {
       roofKind: h.roofKind ?? null, pitch: h.pitch ?? null,
       door: h.door ? { nx: +h.door.nx.toFixed(3), nz: +h.door.nz.toFixed(3) } : null,
       style,
+      // bryły i klocki elewacji, tak jak generator je ułożył (albo jak je nadpisał styl)
+      drzewo: h.drzewo || null,
       // proporcje do porównania ze zdjęciem — bez metrów, więc bez perspektywy
       ratios: {
         szerokosc_do_okapu: eaves ? +(w / eaves).toFixed(2) : null,
@@ -213,6 +258,13 @@ window.__admin = {
         dach_do_elewacji: eaves && ridge ? +((ridge - eaves) / eaves).toFixed(2) : null,
       },
     };
+  },
+  /** numery ścian drzewa na budynku (czerwony = ulica, szary = ślepa) */
+  walls(on = true) {
+    wallLabels = !!on;
+    if (!group) return;
+    for (const o of group.children.filter((c) => c.userData.label)) group.remove(o);
+    if (wallLabels) addWallLabels(group, window.__house);
   },
   /** azimuth/elevation in degrees, distance in metres, around the current target */
   setCam(az, el, dist) { const t = controls.target; const a = az * Math.PI / 180, e = el * Math.PI / 180;

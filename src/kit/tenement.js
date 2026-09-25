@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { xz, ensureCCW, polyArea, obb, offsetPoly, wallQuad, polyGeom, faceGeom, hash, pointInPoly } from '../core/util.js';
+import { wallFrame, buildFacades, DOMYSLNE } from './klocki.js';
 
 /* ------------------------------------------------------------------ *
  * The 1920 building generator: Langfuhr tenements (Mietshäuser) in red
@@ -13,6 +14,18 @@ import { xz, ensureCCW, polyArea, obb, offsetPoly, wallQuad, polyGeom, faceGeom,
  * the LiDAR height where the building still stands, and a style record.
  * The footprint is decomposed into rectangles in its own oriented frame
  * and each rectangle gets a roof whose ridge runs along it.
+ *
+ * Drzewo budynku.  Generator najpierw układa budynek, a dopiero potem go
+ * buduje, i ten układ zwraca jako `drzewo`:
+ *   kondygnacje  wysokości kondygnacji od parteru [m]
+ *   bryly        prostokąty z własnym dachem: { cx, cz, w, h, kat, dach, spadek, lukarny, kominy, zwerch }
+ *                (kalenica biegnie wzdłuż `w`)
+ *   elewacje     dla każdej ściany obrysu: { sciana, dl, azymut, ulica, slepa, pietra: [[klocek…], …] }
+ *                klocki (klocki.js) ustawione w metrach od lewego narożnika ściany
+ * Każdą z tych gałęzi styl może nadpisać tymi samymi kluczami: `kondygnacje`,
+ * `bryly` (cała lista) i `elewacje` — { "<nr ściany>": { "<nr kondygnacji>": [klocki] } }
+ * albo tablica list dla wszystkich kondygnacji ściany.  Reszta budynków
+ * dostaje drzewo wyliczone z dotychczasowych reguł.
  * ------------------------------------------------------------------ */
 
 const OVERHANG = 0.35, GABLE_OVER = 0.25;
@@ -119,6 +132,8 @@ export function buildBuilding(b, ctx, st = {}) {
   // a hero building may carry its own massing: [cx, cz, w, h, angDeg] in world metres,
   // the street wing first.  The walls still follow the real footprint.
   if (st.rects) { rects = st.rects.map(([cx, cz, w, h, deg]) => ({ cx, cz, w, h, ang: deg * Math.PI / 180, area: w * h })); rectilinear = true; }
+  // the tree's own massing: each volume may also carry its roof, pitch, dormers and chimneys
+  if (Array.isArray(st.bryly) && st.bryly.length) { rects = st.bryly.map((q) => ({ cx: q.cx, cz: q.cz, w: q.w, h: q.h, ang: (q.kat || 0) * Math.PI / 180, area: q.w * q.h, o: q })); rectilinear = true; }
   // street architecture (mansard, Zwerchhaus, dormers) belongs on the volume that fronts the
   // street, which on an L-plan is not always the largest one
   if (st.streetFirst && !st.rects && rects.length > 1 && doorWall >= 0) {
@@ -126,7 +141,7 @@ export function buildBuilding(b, ctx, st = {}) {
     rects.sort((p, q) => Math.hypot(p.cx - mx, p.cz - mz) - Math.hypot(q.cx - mx, q.cz - mz));
   }
   const main = rects[0];
-  let roofKind = st.roofKind || (isShed ? (area < 12 ? 'shed' : 'gable') : kind === 'workshop' ? (main.w / main.h > 1.6 ? 'gable' : 'flat') : (!rectilinear && main.w / main.h < 1.3 ? 'hip' : (main.w / main.h < 1.2 && area > 160 ? 'hip' : 'gable')));
+  let roofKind = st.roofKind || rects[0].o?.dach || (isShed ? (area < 12 ? 'shed' : 'gable') : kind === 'workshop' ? (main.w / main.h > 1.6 ? 'gable' : 'flat') : (!rectilinear && main.w / main.h < 1.3 ? 'hip' : (main.w / main.h < 1.2 && area > 160 ? 'hip' : 'gable')));
   const pitch = THREE.MathUtils.degToRad(st.pitch || (roofKind === 'hip' ? 38 : roofKind === 'shed' ? 18 : isShed ? 32 : kind === 'workshop' ? 25 : 45));
   const tanP = Math.tan(pitch);
   // storeys and eaves: from the style, else the LiDAR height, else the kind
@@ -136,8 +151,11 @@ export function buildBuilding(b, ctx, st = {}) {
     else storeys = isShed ? 1 : kind === 'tenement' ? 3 : kind === 'workshop' ? 1 : 2;
     if (kind === 'tenement') storeys = Math.min(4, Math.max(2, storeys));
   }
+  const heights = Array.isArray(st.kondygnacje) && st.kondygnacje.length ? st.kondygnacje.map(Number) : Array(storeys).fill(STOREY);
+  storeys = heights.length;
   const plinthH = isShed ? 0.2 : kind === 'tenement' ? 0.9 : 0.5;
-  const eaves = roofKind === 'flat' ? plinthH + storeys * STOREY : plinthH + storeys * STOREY + 0.25;
+  const floorY = (s) => { let y = plinthH; for (let k = 0; k < s; k++) y += heights[Math.min(k, heights.length - 1)]; return y; };
+  const eaves = roofKind === 'flat' ? floorY(storeys) : floorY(storeys) + 0.25;
   // the whole building sits on one level: the terrain height at its centre (highest corner on a slope)
   let baseY = 0;
   if (baker.ground) { baseY = -Infinity; for (const p of ring) baseY = Math.max(baseY, baker.ground(p[0], p[1])); baseY = Math.min(baseY, baker.ground(main.cx, main.cz) + 0.35); }
@@ -145,26 +163,33 @@ export function buildBuilding(b, ctx, st = {}) {
 
   // ---------------- walls.  A carriage archway (Durchfahrt) is a real opening,
   // so its wall quad is built around the hole.
-  const arch = st.archway ? { t: st.archAt ?? 0.45, w: st.archW ?? 3.0, h: st.archH ?? (plinthH + STOREY - 0.2), wall: doorWall } : null;
+  // The facades are laid out first (the tree), then built.  The archway is a klocek like any
+  // other, but it cuts the wall itself, so the walls need to know where it is.
+  const frames = ring.map((_, i) => wallFrame(ring, i));
+  const winK = st.window || (isBrick ? (seed < 0.5 ? 'window' : 'window_green') : (seed < 0.5 ? 'window' : 'window_brown'));
+  const L = { ring, frames, eaves, storeys, floorY, b, ctx, st, kind, isShed, isBrick, plinthH, doorWall, winK };
+  const elewacje = layoutFacades(L);
+  let arch = null;
+  for (const E of elewacje) { const el = (E.pietra[0] || []).find((q) => q.typ === 'brama'); if (el) { arch = { t: frames[E.sciana].T(el.x), w: el.w, h: el.h, wall: E.sciana }; break; } }
   for (let i = 0; i < ring.length; i++) {
     const a = ring[i], q = ring[(i + 1) % ring.length];
-    if (arch && i === doorWall && Math.hypot(q[0] - a[0], q[1] - a[1]) > arch.w + 4) { archWall(baker, a, q, -1.0, eaves, wallK, arch); continue; }
+    if (arch && i === arch.wall) { archWall(baker, a, q, -1.0, eaves, wallK, arch); continue; }
     baker.add(wallQuad(a[0], a[1], q[0], q[1], -1.0, eaves, 2, true), null, wallK);
   }
-  if (arch && arch.built) archPassage(baker, ring[doorWall], ring[(doorWall + 1) % ring.length], arch, isBrick);
+  if (arch && arch.built) archPassage(baker, ring[arch.wall], ring[(arch.wall + 1) % ring.length], arch, isBrick);
   // the colony houses: brick ground floor under plastered upper storeys (Heimatstil, 1908-1912)
   // brickBase may name the brick to use (e.g. 'brick_dark' for a clinker ground floor)
   const baseK = typeof st.brickBase === 'string' ? st.brickBase : 'brick_red';
   if (st.brickBase && !isBrick) { const pb = offsetPoly(ring, 0.02); for (let i = 0; i < pb.length; i++) { const a = pb[i], q = pb[(i + 1) % pb.length];
-    if (arch && arch.built && i === doorWall) { const keep = arch.built; archWall(baker, a, q, plinthH - 0.05, plinthH + STOREY - 0.15, baseK, arch); arch.built = keep; continue; }
-    baker.add(wallQuad(a[0], a[1], q[0], q[1], plinthH - 0.05, plinthH + STOREY - 0.15, 2, true), null, baseK); } }
+    if (arch && arch.built && i === arch.wall) { const keep = arch.built; archWall(baker, a, q, plinthH - 0.05, floorY(1) - 0.15, baseK, arch); arch.built = keep; continue; }
+    baker.add(wallQuad(a[0], a[1], q[0], q[1], plinthH - 0.05, floorY(1) - 0.15, 2, true), null, baseK); } }
   // plinth
   const pl = offsetPoly(ring, 0.03);
   for (let i = 0; i < pl.length; i++) { const a = pl[i], q = pl[(i + 1) % pl.length]; baker.add(wallQuad(a[0], a[1], q[0], q[1], -1.0, plinthH, 2, true), null, isShed ? 'plinth' : kind === 'tenement' ? 'rustic' : 'plinth'); }
   // storey cornices and the main cornice (tenements and plastered houses)
   if (!isShed && kind !== 'workshop') {
     const bands = [];
-    for (let s = 1; s < storeys; s++) bands.push([plinthH + s * STOREY - 0.05, 0.12, 0.07]);
+    for (let s = 1; s < storeys; s++) bands.push([floorY(s) - 0.05, 0.12, 0.07]);
     bands.push([eaves - 0.36, 0.34, isBrick ? 0.16 : 0.24]);
     for (const [y, hh, out] of bands) {
       const ring2 = offsetPoly(ring, out); const key = isBrick ? 'brick_dark' : 'trim_stone';
@@ -192,30 +217,35 @@ export function buildBuilding(b, ctx, st = {}) {
     if (chimneys) chimney(baker, [main.cx, main.cz], eaves + 0.1, 1.6, main.ang, 'chimney');
   } else {
     for (let k = 0; k < rects.length; k++) {
-      const r = rects[k];
-      const rk = roofKind === 'hip' && k === 0 ? 'hip' : roofKind === 'mansard' && k === 0 ? 'mansard' : (roofKind === 'shed' ? 'shed' : 'gable');
-      const rr = roofOnRect(baker, r, eaves, tanP, rk, roofK, wallK, b, isShed, (x, z) => pointInPoly(x, z, ring), st.gableK || wallK, st.gableWins || 0);
+      const r = rects[k], o = r.o || {};
+      const rk = o.dach || (roofKind === 'hip' && k === 0 ? 'hip' : roofKind === 'mansard' && k === 0 ? 'mansard' : (roofKind === 'shed' ? 'shed' : 'gable'));
+      const tanK = o.spadek ? Math.tan(o.spadek * Math.PI / 180) : tanP;
+      const rr = roofOnRect(baker, r, eaves, tanK, rk, roofK, wallK, b, isShed, (x, z) => pointInPoly(x, z, ring), st.gableK || wallK, st.gableWins || 0);
       roofRects.push(rr);
-      if (k === 0 && chimneys) {
-        for (let c = 0; c < chimneys; c++) { const u = (c + 1) / (chimneys + 1) * r.w - r.w / 2 + (hash(seed * 31 + c) - 0.5) * 1.5; const cx = r.cx + u * Math.cos(r.ang), cz = r.cz + u * Math.sin(r.ang); chimney(baker, [cx, cz], rr.ridgeY, kind === 'tenement' ? 2.0 : 1.4, r.ang, 'chimney'); }
-      }
+      const nc = o.kominy ?? (k === 0 ? chimneys : 0);
+      for (let c = 0; c < nc; c++) { const u = (c + 1) / (nc + 1) * r.w - r.w / 2 + (hash(seed * 31 + c) - 0.5) * 1.5; const cx = r.cx + u * Math.cos(r.ang), cz = r.cz + u * Math.sin(r.ang); chimney(baker, [cx, cz], rr.ridgeY, kind === 'tenement' ? 2.0 : 1.4, r.ang, 'chimney'); }
       // dormers on the street side of tenements
-      const nd = st.dormers ?? (kind === 'tenement' && rk === 'gable' ? Math.max(0, Math.floor(r.w / 6)) : 0);
+      const nd = o.lukarny ?? st.dormers ?? (kind === 'tenement' && rk === 'gable' ? Math.max(0, Math.floor(r.w / 6)) : 0);
       if (nd && (rk === 'gable' || rk === 'mansard')) dormers(baker, r, rr, nd, roofK, wallK, ctx);
       // a big gabled wall dormer (Zwerchhaus) over the street front, as on the market-square blocks
-      if (k === 0 && st.zwerch) zwerchhaus(baker, r, rr, wallK, roofK, ctx, typeof st.zwerch === 'object' ? st.zwerch : {});
+      const zw = r.o ? o.zwerch : (k === 0 && st.zwerch);
+      if (zw) zwerchhaus(baker, r, rr, wallK, roofK, ctx, typeof zw === 'object' ? zw : {});
+      r.dach = rk; r.spadek = Math.atan(tanK) * 180 / Math.PI; r.lukarny = (rk === 'gable' || rk === 'mansard') ? nd : 0; r.kominy = nc; r.zwerch = zw || undefined;
     }
   }
 
   // ---------------- facade
-  const door = facade(baker, ring, eaves, storeys, b, ctx, wallK, kind, roofRects, plinthH, STOREY, st, seed, doorWall, arch);
-  if (st.oriel) cornerOriel(baker, ring, ctx, wallK, st.window || 'window', roofK, plinthH + STOREY + 0.1, plinthH + storeys * STOREY - 0.1, st.orielAt, st.orielCap);
+  const B = { ctx, kind, isShed, isBrick, winK, frame: !isBrick && kind === 'tenement', numberAt: st.number ?? b.addr?.housenumber, floorY, doorWall };
+  const door = buildFacades(baker, frames, elewacje, B);
+  atticWindows(baker, ring, ctx, roofRects, eaves, isShed);
+  if (st.oriel) cornerOriel(baker, ring, ctx, wallK, st.window || 'window', roofK, floorY(1) + 0.1, floorY(storeys) - 0.1, st.orielAt, st.orielCap);
   baker.base = null;
   ctx.world.addPolygon(ring);
   // kalenica najwyższego z dachów — warsztat porównuje z niej proporcję dachu do elewacji
   const ridge = roofRects.length ? Math.max(...roofRects.map((r) => r.ridgeY)) : eaves;
+  const drzewo = exportTree({ plinthH, heights, eaves, rects, roofKind, elewacje, B });
   return { ring, eaves, ridge, roofKind, pitch: st.pitch || Math.round(Math.atan(tanP) * 180 / Math.PI),
-    storeys, door, kind, rects, roofK, wallK, style: st, baseY };
+    storeys, door, kind, rects, roofK, wallK, style: st, baseY, drzewo };
 }
 
 function chimney(baker, [x, z], ridgeY, hh, ang, key) {
@@ -503,106 +533,88 @@ function roofOnRect(baker, r, eaves, tanP, kind, roofK, wallK, b, isShed, inside
   return { ridgeY, eaveY, r };
 }
 
-/** windows, door, shop front, house number.  returns the door record */
-function facade(baker, ring, eaves, storeys, b, ctx, wallK, kind, roofRects, plinthH, STOREY, st, seed, doorWall, arch) {
-  const M = new THREE.Matrix4();
-  const isShed = kind === 'shed' || kind === 'barn';
-  const isBrick = wallK.startsWith('brick');
-  const walls = [];
-  for (let i = 0; i < ring.length; i++) {
-    const a = ring[i], q = ring[(i + 1) % ring.length]; const len = Math.hypot(q[0] - a[0], q[1] - a[1]);
-    const mx = (a[0] + q[0]) / 2, mz = (a[1] + q[1]) / 2; const nx = (q[1] - a[1]) / len, nz = -(q[0] - a[0]) / len;
-    walls.push({ a, q, len, mx, mz, nx, nz });
-  }
+/** Układ elewacji — pierwsza połowa dawnego `facade`: te same reguły (okna w równym
+ *  rozstawie, drzwi, sklep i brama na ścianie od ulicy, balkony, owal), ale zamiast
+ *  geometrii powstaje lista klocków w metrach.  Styl może podmienić dowolną ścianę
+ *  i kondygnację (`st.elewacje`); wtedy reguły dla niej milkną. */
+function layoutFacades(L) {
+  const { frames, eaves, storeys, floorY, ctx, st, kind, isShed, isBrick, plinthH, doorWall, winK } = L;
   const win = kind === 'tenement' ? { w: 1.15, h: 1.9 } : kind === 'workshop' ? { w: 1.6, h: 2.2 } : { w: 1.05, h: 1.5 };
-  const winK = st.window || (isBrick ? (seed < 0.5 ? 'window' : 'window_green') : (seed < 0.5 ? 'window' : 'window_brown'));
-  let door = null;
-  const numberAt = st.number ?? b.addr?.housenumber;
-  for (let i = 0; i < walls.length; i++) {
-    const w = walls[i]; if (w.len < 1.6) continue;
-    const dxw = w.q[0] - w.a[0], dzw = w.q[1] - w.a[1];
-    const ang = Math.atan2(dzw, -dxw);
-    const along = (t, y, out) => [w.a[0] + dxw * t + w.nx * out, y, w.a[1] + dzw * t + w.nz * out];
-    const patch = (t, y, wd, ht, out) => { const t0 = t - wd / 2 / w.len, t1 = t + wd / 2 / w.len; const A = along(t0, 0, out), B = along(t1, 0, out); const g = wallQuad(A[0], A[2], B[0], B[2], y - ht / 2, y + ht / 2, 1, true); g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 0, 1, 0, 1, 1, 0, 1], 2)); return g; };
-    const isDoorWall = i === doorWall;
+  const winDol = kind === 'tenement' ? 0.95 : 0.75;
+  const STOREY0 = floorY(1) - plinthH;
+  const out = [];
+  for (const W of frames) {
+    const E = { sciana: W.i, dl: W.len, azymut: W.azymut, ulica: W.i === doorWall, slepa: false, pietra: Array.from({ length: storeys }, () => []) };
+    out.push(E);
+    const P = E.pietra;
+    // ---- carriage archway: cut into the street wall even where that wall gets no other openings
+    let arch = null;
+    if (W.i === doorWall && st.archway) {
+      const aw = st.archW ?? 3.0;
+      if (W.len > aw + 4) { arch = { t: st.archAt ?? 0.45, w: aw, h: st.archH ?? (plinthH + STOREY0 - 0.2) }; (P[0] ||= []).push({ typ: 'brama', x: W.X(arch.t), w: aw, h: arch.h }); }
+    }
+    if (W.len < 1.6) continue;
     // is this wall buried against a neighbour (party wall)? then no openings
-    const probe = along(0.5, 0, 0.8); if (ctx.world.insideAnyBuilding(probe[0], probe[2])) continue;
+    const probe = W.along(0.5, 0, 0.8); if (ctx.world.insideAnyBuilding(probe[0], probe[2])) { E.slepa = true; continue; }
+    const isDoorWall = W.i === doorWall;
     // ---- sheds: a plank door and one small window
     if (isShed) {
-      if (isDoorWall && w.len > 1.8) { baker.add(patch(0.5, 1.0, 0.95, 1.95, 0.03), null, 'plank_door'); door = { x: along(0.5, 0, 0)[0], z: along(0.5, 0, 0)[2], nx: w.nx, nz: w.nz, wall: i }; }
-      else if (w.len > 3.5) baker.add(patch(0.5, 1.4, 0.8, 0.65, 0.03), null, 'window_small');
+      if (isDoorWall && W.len > 1.8) P[0].push({ typ: 'drzwi', x: W.X(0.5), w: 0.95, h: 1.95, dol: 1.0 - 0.975 - plinthH, mat: 'plank_door', obramienie: false, schody: 0 });
+      else if (W.len > 3.5) P[0].push({ typ: 'okno', x: W.X(0.5), w: 0.8, h: 0.65, dol: 1.4 - 0.325 - plinthH, mat: 'window_small', nadproze: false, parapet: false, obramienie: false });
       continue;
     }
-    // ---- door with a stone surround and steps
+    // ---- door, shop
     let doorT = -1, shopT = -1;
     if (isDoorWall) {
-      doorT = w.len > 9 ? (st.doorAt ?? 0.18) : 0.5;
-      const dw = kind === 'tenement' ? 1.5 : 1.1, dh = kind === 'tenement' ? 2.9 : 2.2;
-      baker.add(patch(doorT, plinthH + dh / 2 - 0.15, dw, dh, 0.075), null, st.door || (isBrick ? 'door' : 'door_brown'));
-      // surround: a frame standing just proud of the wall, behind the door leaf
-      const sp = along(doorT, plinthH + dh / 2 - 0.15, 0.0); const sg = new THREE.BoxGeometry(dw + 0.5, dh + 0.3, 0.12); M.makeRotationY(ang).setPosition(sp[0], sp[1], sp[2]); baker.add(sg, M.clone(), isBrick ? 'brick_dark' : 'trim_stone');
-      // steps
-      for (let s = 0; s < (kind === 'tenement' ? 3 : 2); s++) { const st2 = along(doorT, plinthH - 0.15 - s * 0.16 + 0.08, 0.3 + s * 0.3); const g = new THREE.BoxGeometry(dw + 0.6, 0.16, 0.6); M.makeRotationY(ang).setPosition(st2[0], Math.max(0.08, st2[1]), st2[2]); baker.add(g, M.clone(), 'trim_stone'); }
-      const p = along(doorT, 0, 0.6);
-      if (numberAt && ctx.plate) ctx.plate(numberAt, patch(doorT + (dw / 2 + 0.35) / w.len, plinthH + 1.9, 0.3, 0.24, 0.03), new THREE.Matrix4());
-      door = { x: p[0], z: p[2], nx: w.nx, nz: w.nz, wall: i, t: doorT };
-      // a shop at the corner end of the ground floor
-      if (st.shop && w.len > 8) {
+      doorT = W.len > 9 ? (st.doorAt ?? 0.18) : 0.5;
+      P[0].push({ typ: 'drzwi', x: W.X(doorT), w: kind === 'tenement' ? 1.5 : 1.1, h: kind === 'tenement' ? 2.9 : 2.2, dol: -0.15, mat: st.door || (isBrick ? 'door' : 'door_brown'), numer: true });
+      if (st.shop && W.len > 8) {
         shopT = st.shopAt ?? (doorT < 0.5 ? 0.68 : 0.25);
-        baker.add(patch(shopT, plinthH + 1.45, 3.2, 2.5, 0.06), null, 'shop');
-        const fp = along(shopT, plinthH + 2.95, 0.12); const fg = new THREE.BoxGeometry(3.7, 0.55, 0.14); M.makeRotationY(ang).setPosition(fp[0], fp[1], fp[2]); baker.add(fg, M.clone(), 'trim_brown');
-        if (ctx.sign) ctx.sign(st.shop, fp[0] + w.nx * 0.09, fp[1], fp[2] + w.nz * 0.09, ang, 3.5, 0.5);
-        const sp2 = along(shopT, plinthH + 0.8, 0.02); const sd = new THREE.BoxGeometry(3.4, 0.2, 0.3); M.makeRotationY(ang).setPosition(sp2[0], plinthH + 0.1, sp2[2]); baker.add(sd, M.clone(), 'trim_stone');
+        P[0].push({ typ: 'witryna', x: W.X(shopT), w: 3.2, h: 2.5, dol: 0.2, szyld: st.shop });
       }
     }
-    // ---- windows per storey
+    // ---- windows per storey, iron balconies on the street front
     const spacing = kind === 'tenement' ? 2.6 : kind === 'workshop' ? 3.2 : 2.4;
-    const n = Math.max(1, Math.floor((w.len - 0.8) / spacing));
+    const n = Math.max(1, Math.floor((W.len - 0.8) / spacing));
     for (let s = 0; s < storeys; s++) {
-      const y = plinthH + s * STOREY + (kind === 'tenement' ? 0.95 : 0.75) + win.h / 2;
+      const y = floorY(s) + winDol + win.h / 2;
       if (y + win.h / 2 > eaves - 0.35) break;
       for (let k = 0; k < n; k++) {
         const t = (k + 1) / (n + 1);
-        if (s === 0 && doorT >= 0 && Math.abs(t - doorT) * w.len < 1.5) continue;
-        if (s === 0 && shopT >= 0 && Math.abs(t - shopT) * w.len < 2.3) continue;
-        if (arch && arch.built && i === doorWall && Math.abs(t - arch.t) * w.len < arch.w / 2 + 1.0 && y - win.h / 2 < arch.h + 0.6) continue;
-        baker.add(patch(t, y, win.w, win.h, 0.025), null, winK);
-        // ground-floor shutters of the colony houses
-        if (st.shutters && s === 0) for (const e of [-1, 1]) { const sp = along(t + e * (win.w / 2 + 0.3) / w.len, y, 0.05); const sg = new THREE.BoxGeometry(0.5, win.h - 0.05, 0.05); M.makeRotationY(ang).setPosition(sp[0], sp[1], sp[2]); baker.add(sg, M.clone(), st.shutterK || 'trim_green'); }
-        // segmental arch / lintel above, sill below
-        const lp = along(t, y + win.h / 2 + 0.12, 0.05); const lg = new THREE.BoxGeometry(win.w + 0.36, 0.26, 0.09); M.makeRotationY(ang).setPosition(lp[0], lp[1], lp[2]); baker.add(lg, M.clone(), isBrick ? 'brick_dark' : 'trim_stone');
-        const sl = along(t, y - win.h / 2 - 0.04, 0.08); const sg = new THREE.BoxGeometry(win.w + 0.24, 0.09, 0.18); M.makeRotationY(ang).setPosition(sl[0], sl[1], sl[2]); baker.add(sg, M.clone(), 'trim_stone');
-        // ground-floor windows of tenements get a little iron grille line, upper ones of plaster houses a flat surround
-        if (!isBrick && kind === 'tenement') { const fr = along(t, y, 0.03); const fg = new THREE.BoxGeometry(win.w + 0.3, win.h + 0.2, 0.05); M.makeRotationY(ang).setPosition(fr[0], fr[1], fr[2]); baker.add(fg, M.clone(), 'trim_stone'); }
-        // (the balcony is placed once per storey, below)
-        if (false) {
-          const y0 = 0;
-          const sp = along(t, y0, 0.62); const sg = new THREE.BoxGeometry(2.6, 0.16, 1.2); M.makeRotationY(ang).setPosition(sp[0], sp[1], sp[2]); baker.add(sg, M.clone(), 'trim_stone');
-          const rp = along(t, y0 + 0.56, 1.18); const rg = new THREE.PlaneGeometry(2.6, 1.0); const ruv = rg.attributes.uv; for (let q2 = 0; q2 < ruv.count; q2++) ruv.setXY(q2, ruv.getX(q2) * 2.6, ruv.getY(q2)); M.makeRotationY(ang).setPosition(rp[0], rp[1], rp[2]); baker.add(rg, M.clone(), 'railing');
-          for (const e of [-1, 1]) { const q3 = along(t + e * 1.28 / w.len, y0 + 0.56, 0.62); const g3 = new THREE.PlaneGeometry(1.15, 1.0); M.makeRotationY(ang + Math.PI / 2).setPosition(q3[0], q3[1], q3[2]); baker.add(g3, M.clone(), 'railing'); }
-          for (const e of [-1, 1]) { const q4 = along(t + e * 1.0 / w.len, y0 - 0.35, 0.3); const g4 = new THREE.ConeGeometry(0.22, 0.6, 4); M.makeRotationY(ang + Math.PI / 4).setPosition(q4[0], q4[1], q4[2]); baker.add(g4, M.clone(), 'trim_stone'); }
-        }
+        if (s === 0 && doorT >= 0 && Math.abs(t - doorT) * W.len < 1.5) continue;
+        if (s === 0 && shopT >= 0 && Math.abs(t - shopT) * W.len < 2.3) continue;
+        if (arch && Math.abs(t - arch.t) * W.len < arch.w / 2 + 1.0 && y - win.h / 2 < arch.h + 0.6) continue;
+        const el = { typ: 'okno', x: W.X(t), w: win.w, h: win.h, dol: winDol, mat: winK };
+        if (st.shutters && s === 0) el.okiennice = st.shutterK || true;
+        P[s].push(el);
       }
-      // iron balconies: one on the middle storey, or a list of { s, t }
       const balc = st.balconies ? st.balconies.filter((q) => q.s === s) : (st.balcony && s === 1 && storeys >= 3 ? [{ s, t: st.balconyAt ?? 0.32 }] : []);
-      for (const bq of (isDoorWall && w.len > 10 ? balc : [])) {
-        const t = bq.t, yB = plinthH + s * STOREY + 0.6;
-        const sp = along(t, yB, 0.66); const sg = new THREE.BoxGeometry(2.8, 0.16, 1.3); M.makeRotationY(ang).setPosition(sp[0], sp[1], sp[2]); baker.add(sg, M.clone(), 'trim_stone');
-        const rp = along(t, yB + 0.56, 1.26); const rg = new THREE.PlaneGeometry(2.8, 1.0); { const uv2 = rg.attributes.uv; for (let q2 = 0; q2 < uv2.count; q2++) uv2.setXY(q2, uv2.getX(q2) * 2.8, uv2.getY(q2)); } M.makeRotationY(ang).setPosition(rp[0], rp[1], rp[2]); baker.add(rg, M.clone(), 'railing');
-        for (const e of [-1, 1]) { const q3 = along(t + e * 1.38 / w.len, yB + 0.56, 0.66); const g3 = new THREE.PlaneGeometry(1.25, 1.0); M.makeRotationY(ang + Math.PI / 2).setPosition(q3[0], q3[1], q3[2]); baker.add(g3, M.clone(), 'railing'); }
-        for (const e of [-1, 1]) { const q4 = along(t + e * 1.05 / w.len, yB - 0.42, 0.34); const g4 = new THREE.ConeGeometry(0.24, 0.66, 4); M.makeRotationY(ang + Math.PI / 4).setPosition(q4[0], q4[1], q4[2]); baker.add(g4, M.clone(), 'trim_stone'); }
-      }
+      for (const bq of (isDoorWall && W.len > 10 ? balc : [])) P[s].push({ typ: 'balkon', x: W.X(bq.t) });
     }
   }
   // an oval window (Ochsenauge) in a stone frame on the street front
   if (st.oval && doorWall >= 0 && !isShed) {
-    const w = walls[doorWall]; const dxw = w.q[0] - w.a[0], dzw = w.q[1] - w.a[1]; const ang = Math.atan2(dzw, -dxw);
-    const t = st.oval.t ?? 0.5, y = plinthH + (st.oval.s ?? 1) * STOREY + 1.9;
-    const p = [w.a[0] + dxw * t + w.nx * 0.03, y, w.a[1] + dzw * t + w.nz * 0.03];
-    const g = new THREE.CircleGeometry(0.5, 20); g.scale(1, 0.68, 1); M.makeRotationY(ang).setPosition(p[0], p[1], p[2]); baker.add(g, M.clone(), 'glass_dark');
-    const fr = new THREE.TorusGeometry(0.52, 0.08, 6, 24); fr.scale(1, 0.7, 1); M.makeRotationY(ang).setPosition(p[0] + w.nx * 0.03, p[1], p[2] + w.nz * 0.03); baker.add(fr, M.clone(), 'trim_stone');
+    const W = frames[doorWall], s = st.oval.s ?? 1;
+    (out[doorWall].pietra[s] ||= []).push({ typ: 'owal', x: W.X(st.oval.t ?? 0.5), dol: 1.9 - 0.34 });
   }
-  // attic window in the street gable
+  // the style's own facades replace the rules, wall by wall and storey by storey
+  const ov = st.elewacje;
+  if (ov && typeof ov === 'object') for (const [key, val] of Object.entries(ov)) {
+    const E = out[Number(key)]; if (!E || !val) continue;
+    const src = Array.isArray(val) ? Object.fromEntries(val.map((l, s) => [s, l])) : (val.pietra ? (Array.isArray(val.pietra) ? Object.fromEntries(val.pietra.map((l, s) => [s, l])) : val.pietra) : val);
+    for (const [sk, list] of Object.entries(src)) { const s = Number(sk); if (Number.isInteger(s) && s >= 0 && Array.isArray(list)) E.pietra[s] = list.map(fillDefaults); }
+  }
+  return out;
+}
+
+/** klocek z panelu albo od agenta może pominąć pola; uzupełnij je jak generator */
+function fillDefaults(el) {
+  const d = { okno: { w: 1.15, h: 1.9, dol: 0.95 }, drzwi: { w: 1.5, h: 2.9, dol: -0.15 }, witryna: { w: 3.2, h: 2.5, dol: 0.2 }, balkon: {}, owal: { dol: 1.56 }, brama: { w: 3.0, h: 4.0 } }[el.typ] || {};
+  return { ...d, ...el };
+}
+
+/** attic window in the street gable */
+function atticWindows(baker, ring, ctx, roofRects, eaves, isShed) {
   if (roofRects.length && !isShed && roofRects[0] && !roofRects[0].hip) {
     const rr = roofRects[0].r; const cos = Math.cos(rr.ang), sin = Math.sin(rr.ang);
     for (const e of [-1, 1]) {
@@ -617,5 +629,27 @@ function facade(baker, ring, eaves, storeys, b, ctx, wallK, kind, roofRects, pli
       baker.add(g, null, 'window_small');
     }
   }
-  return door;
+}
+
+/** drzewo do pokazania ludziom i agentowi: liczby do centymetra, pola równe domyślnym pominięte */
+function exportTree({ plinthH, heights, eaves, rects, roofKind, elewacje, B }) {
+  const r2 = (v) => Math.round(v * 100) / 100;
+  const klocek = (el) => {
+    const o = {}; const def = { ...DOMYSLNE[el.typ], obramienie: el.typ === 'okno' ? B.frame : el.typ === 'drzwi' ? !B.isShed : undefined };
+    for (const [k, v] of Object.entries(el)) { if (v === undefined || def[k] === v) continue; o[k] = typeof v === 'number' ? r2(v) : v; }
+    return o;
+  };
+  return {
+    cokol: r2(plinthH), kondygnacje: heights.map(r2), okap: r2(eaves),
+    bryly: rects.map((r) => {
+      const o = { cx: r2(r.cx), cz: r2(r.cz), w: r2(r.w), h: r2(r.h), kat: r2(r.ang * 180 / Math.PI), dach: r.dach || (roofKind === 'flat' ? 'flat' : undefined) };
+      if (r.spadek) o.spadek = Math.round(r.spadek * 10) / 10;
+      if (r.lukarny) o.lukarny = r.lukarny;
+      if (r.kominy) o.kominy = r.kominy;
+      if (r.zwerch) o.zwerch = r.zwerch;
+      return o;
+    }),
+    // ściany krótsze niż 1,6 m nie niosą otworów — pomijamy je, numer `sciana` zostaje
+    elewacje: elewacje.filter((E) => E.dl >= 1.6 || E.pietra.some((l) => l && l.length)).map((E) => ({ sciana: E.sciana, dl: r2(E.dl), azymut: Math.round(E.azymut), ...(E.ulica ? { ulica: true } : {}), ...(E.slepa ? { slepa: true } : {}), pietra: E.pietra.map((l) => (l || []).map(klocek).sort((p, q) => (p.x ?? 0) - (q.x ?? 0))) })),
+  };
 }
