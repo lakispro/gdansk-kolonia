@@ -23,22 +23,24 @@
     105.4
    ]
   ],
-  "pitch": 52,
-  "roofKind": "gable",
-  "zwerch": false,
+  "pitch": 55,
+  "roofKind": "hip",
+  "zwerch": {
+   "w": 6.5,
+   "h": 2.6,
+   "apex": 4.2,
+   "winRow": 3,
+   "at": 0
+  },
   "gableWins": 3,
-  "dormers": 2,
+  "dormers": 0,
   "chimneys": 2,
-  "archway": true,
+  "archway": false,
   "archAt": 0.86,
   "archW": 3.4,
   "doorAt": 0.25,
   "shop": "Bärenweg 9",
   "shopAt": 0.5,
-  "oval": {
-   "t": 0.36,
-   "s": 2
-  },
   "gableK": "wall_sand",
   "oriel": true,
   "orielAt": [
@@ -46,12 +48,7 @@
    10.0
   ],
   "orielCap": "mansard",
-  "balconies": [
-   {
-    "s": 1,
-    "t": 0.62
-   }
-  ],
+  "balconies": [],
   "shutters": false,
   "number": "9"
  }
