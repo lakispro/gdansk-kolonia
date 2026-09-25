@@ -23,14 +23,15 @@
     105.4
    ]
   ],
-  "pitch": 50,
+  "pitch": 42,
   "roofKind": "hip",
   "zwerch": {
-   "w": 6.5,
-   "h": 2.6,
-   "apex": 4.2,
+   "w": 7.0,
+   "h": 2.2,
+   "apex": 3.2,
    "winRow": 3,
-   "at": 0.3
+   "sciana": 7,
+   "x": 8.8
   },
   "gableWins": 3,
   "dormers": 0,
