@@ -163,7 +163,7 @@ function loop() {
     const name = r.s && r.d < r.s.width / 2 + 5 ? (r.s.name1920 || r.s.name) : '';
     if (name !== lastPlace) { lastPlace = name; if (name) { ui.place.querySelector('.a').textContent = name; ui.place.querySelector('.b').textContent = (r.s.name && r.s.name1920 ? `dziś ${r.s.name} · ` : '') + 'Langfuhr · Danzig'; ui.place.classList.add('on'); } else ui.place.classList.remove('on'); }
   }
-  frames++; fpsT += dt; if (fpsT > 0.5) { fps = frames / fpsT; frames = 0; fpsT = 0; }
+  frames++; fpsT += dt; if (fpsT > 0.5) { fps = frames / fpsT; frames = 0; fpsT = 0; $('fps').textContent = `${fps.toFixed(0)} fps`; }
   if (ui.debug.classList.contains('on')) ui.debug.textContent = `${fps.toFixed(0)} fps\ncalls ${renderer.info.render.calls}  tris ${(renderer.info.render.triangles / 1000).toFixed(0)}k\nx ${player.pos.x.toFixed(1)} z ${player.pos.z.toFixed(1)} yaw ${player.yaw.toFixed(2)}`;
   renderer.render(scene, camera);
 }

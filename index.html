@@ -107,9 +107,11 @@
   #end p { color: #e2d8c4; text-align: left; line-height: 1.55; }
   #map { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none; z-index: 5; border-radius: 50%; box-shadow: 0 4px 30px rgba(0,0,0,.5); }
   #map.on { display: block; }
-  #debug { position: absolute; right: 10px; top: 60px; display: none; font: 11px/1.5 ui-monospace, Menlo, monospace; text-align: right;
+  #debug { position: absolute; right: 10px; top: 96px; display: none; font: 11px/1.5 ui-monospace, Menlo, monospace; text-align: right;
     background: var(--card); padding: 6px 9px; border-radius: 8px; white-space: pre; }
   #debug.on { display: block; }
+  #fps { position: absolute; right: max(12px, env(safe-area-inset-right)); top: calc(max(10px, env(safe-area-inset-top)) + 66px); z-index: 4;
+    font: 11px/1 ui-monospace, Menlo, monospace; background: var(--card); padding: 4px 7px; border-radius: 6px; opacity: .85; }
 </style>
 </head>
 <body>
@@ -134,6 +136,7 @@
       <div class="row"><div class="btn" id="bJump">skok</div><div class="btn" id="bAct">działaj</div></div>
     </div>
     <div id="keys"><b>WASD</b> chodź · <b>Shift</b> biegnij · <b>Spacja</b> skok · <b>mysz</b> rozglądaj się · <b>E</b> działaj · <b>M</b> mapa · <b>N</b> dźwięk</div>
+    <div id="fps">– fps</div>
     <div id="debug"></div>
   </div>
 
