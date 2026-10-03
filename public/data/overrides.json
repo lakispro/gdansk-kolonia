@@ -361,7 +361,7 @@
    2.95
   ],
   "glb": {
-   "src": "models/kamienica_narozna.glb",
+   "src": "models/kamienica_web_draco.glb",
    "at": [
     28.37,
     6.58
@@ -411,7 +411,21 @@
     0,
     1
    ],
-   "envIntensity": 0.85
+   "envIntensity": 0.85,
+   "chimneys": [
+    [
+     12.6,
+     -8.6
+    ],
+    [
+     24.1,
+     -7.1
+    ],
+    [
+     3.6,
+     -9.6
+    ]
+   ]
   }
  }
 }
