@@ -7,6 +7,8 @@ import { Audio } from './core/audio.js';
 import { World } from './world/world.js';
 import { Streets } from './world/streets.js';
 import { buildBuilding } from './kit/tenement.js';
+import { buildGlbHouse } from './kit/glbHouse.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { Minimap } from './core/minimap.js';
 import { buildPlots } from './world/plots.js';
 import { buildVegetation } from './world/vegetation.js';
@@ -59,6 +61,8 @@ const worldGroup = new THREE.Group(); scene.add(worldGroup);
 let player, story, streets, world, minimap, plan, houses = [], people = [], cart = null, smoke = null;
 const RADIUS = 150;
 
+let studio = null;
+const studioEnv = () => studio || (studio = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture);
 async function build() {
   const [sceneData, veg, parcels, terrain] = await Promise.all(['scene', 'vegetation', 'parcels', 'terrain'].map((n) => fetch(`data/${n}.json`).then((r) => r.json())));
   const overrides = await fetch('data/overrides.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
@@ -77,7 +81,9 @@ async function build() {
   const sign = (text, x, y, z, ang, w, h) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshLambertMaterial({ map: T.shopSign(text) })); m.position.set(x, y, z); m.rotation.y = ang; worldGroup.add(m); };
   const ctx = { baker, world, streetDist: (x, z) => streets.dist(x, z, ['setts', 'sand', 'dirt']), plate, sign };
   for (const b of plan.buildings) {
-    const h = buildBuilding(b, ctx, b.style || {});
+    const h = b.style?.glb ? await buildGlbHouse(b, { ground, world, envMap: studioEnv() }, worldGroup, b.style) : buildBuilding(b, ctx, b.style || {});
+    // a modelled house smokes from its own chimneys, not from the generic spot over its centre
+    if (h?.chimneys && plan.chimneys) plan.chimneys = plan.chimneys.filter((q) => !(q[0] === b.c[0] && q[2] === -b.c[1])).concat(h.chimneys.map((q) => [q[0], q[1] - ground(q[0], q[2]), q[2]]));
     if (h) { h.b = b; houses.push(h); }
   }
   buildPlots(parcels, houses, streets, baker, world, RADIUS, { skip: plan.skipParcel });
