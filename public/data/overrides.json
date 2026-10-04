@@ -361,80 +361,71 @@
    2.95
   ],
   "glb": {
-   "src": "models/corner_newest.glb",
+   "src": "models/skrzyzowanie.glb",
    "at": [
     28.37,
     6.58
    ],
    "rot": 159.2,
-   "plan": [
-    [
-     0,
-     0
-    ],
-    [
-     5.6,
-     0
-    ],
-    [
-     5.6,
-     0.7
-    ],
-    [
-     15.7,
-     0.7
-    ],
-    [
-     15.7,
-     0
-    ],
-    [
-     22,
-     0
-    ],
-    [
-     22,
-     -12
-    ],
-    [
-     11,
-     -12
-    ],
-    [
-     11,
-     -22
-    ],
-    [
-     0,
-     -22
-    ]
+   "envIntensity": 0.3,
+   "brightness": 0.6,
+   "nodes": [
+    "Mickiewicza_45"
+   ]
+  }
+ },
+ "92358185": {
+  "glb": {
+   "src": "models/skrzyzowanie.glb",
+   "at": [
+    28.37,
+    6.58
+   ],
+   "rot": 159.2,
+   "envIntensity": 0.3,
+   "brightness": 0.6,
+   "nodes": [
+    "Mickiewicza_47",
+    "Kochanowskiego_75"
+   ]
+  }
+ },
+ "92358725": {
+  "glb": {
+   "src": "models/skrzyzowanie.glb",
+   "at": [
+    28.37,
+    6.58
+   ],
+   "rot": 159.2,
+   "envIntensity": 0.3,
+   "brightness": 0.6,
+   "nodes": [
+    "Mickiewicza_42",
+    "Kochanowskiego_79a",
+    "Kochanowskiego_79b_79c"
+   ]
+  }
+ },
+ "92358118": {
+  "glb": {
+   "src": "models/skrzyzowanie.glb",
+   "at": [
+    28.37,
+    6.58
+   ],
+   "rot": 159.2,
+   "envIntensity": 0.3,
+   "brightness": 0.6,
+   "nodes": [
+    "Kochanowskiego_76"
    ],
    "door": [
-    6.8,
-    0.8,
-    0,
-    1
-   ],
-   "envIntensity": 0.3,
-   "chimneys": [
-    [
-     12.5,
-     -9.5
-    ],
-    [
-     17.6,
-     -6.5
-    ],
-    [
-     3.5,
-     -7.0
-    ],
-    [
-     5.0,
-     -15.0
-    ]
-   ],
-   "brightness": 0.6
+    -0.4,
+    -22.5,
+    -1,
+    0
+   ]
   }
  }
 }

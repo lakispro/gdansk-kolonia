@@ -81,7 +81,7 @@ async function build() {
   const sign = (text, x, y, z, ang, w, h) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshLambertMaterial({ map: T.shopSign(text) })); m.position.set(x, y, z); m.rotation.y = ang; worldGroup.add(m); };
   const ctx = { baker, world, streetDist: (x, z) => streets.dist(x, z, ['setts', 'sand', 'dirt']), plate, sign };
   for (const b of plan.buildings) {
-    const h = b.style?.glb ? await buildGlbHouse(b, { ground, world, envMap: studioEnv() }, worldGroup, b.style) : buildBuilding(b, ctx, b.style || {});
+    const h = b.style?.glb ? await buildGlbHouse(b, { ground, world, envMap: studioEnv(), streetDist: ctx.streetDist }, worldGroup, b.style) : buildBuilding(b, ctx, b.style || {});
     // a modelled house smokes from its own chimneys, not from the generic spot over its centre
     if (h?.chimneys && plan.chimneys) plan.chimneys = plan.chimneys.filter((q) => !(q[0] === b.c[0] && q[2] === -b.c[1])).concat(h.chimneys.map((q) => [q[0], q[1] - ground(q[0], q[2]), q[2]]));
     if (h) { h.b = b; houses.push(h); }
