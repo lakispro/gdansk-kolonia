@@ -1,0 +1,1078 @@
+{
+ "radius": 240,
+ "objects": [
+  {
+   "id": 549642,
+   "name": "Adama Mickiewicza 45",
+   "lat": 54.38246,
+   "lon": 18.626595000000002,
+   "e": 21.3,
+   "n": -4.5,
+   "dist": 21.8,
+   "photo": 1819856,
+   "photos": [
+    1819856
+   ],
+   "osm": [
+    92356369
+   ]
+  },
+  {
+   "id": 64728,
+   "name": "Kochanowskiego 76",
+   "lat": 54.382271,
+   "lon": 18.6265365,
+   "e": 17.5,
+   "n": -25.5,
+   "dist": 31.0,
+   "photo": 268391,
+   "photos": [
+    1819856,
+    268390,
+    268391,
+    268392,
+    268393,
+    1395253
+   ],
+   "osm": [
+    92358118
+   ]
+  },
+  {
+   "id": 328986,
+   "name": "Kochanowskiego 74",
+   "lat": 54.382057,
+   "lon": 18.6263535,
+   "e": 5.6,
+   "n": -49.3,
+   "dist": 49.7,
+   "photo": 1395299,
+   "photos": [
+    1395843
+   ],
+   "osm": [
+    92358117
+   ]
+  },
+  {
+   "id": 64729,
+   "name": "Kochanowskiego 75",
+   "lat": 54.3821755,
+   "lon": 18.6268365,
+   "e": 37.0,
+   "n": -36.2,
+   "dist": 51.7,
+   "photo": 1395243,
+   "photos": [
+    268387,
+    268388,
+    268389
+   ]
+  },
+  {
+   "id": 350597,
+   "name": "Kochanowskiego 79",
+   "lat": 54.3828565,
+   "lon": 18.6271155,
+   "e": 55.0,
+   "n": 39.7,
+   "dist": 67.8,
+   "photo": 1498923,
+   "photos": [
+    1498923,
+    1499033
+   ]
+  },
+  {
+   "id": 328985,
+   "name": "Kochanowskiego 73",
+   "lat": 54.381932,
+   "lon": 18.6268475,
+   "e": 37.7,
+   "n": -63.3,
+   "dist": 73.6,
+   "photo": 1395296,
+   "photos": [
+    1395296
+   ],
+   "osm": [
+    92350262
+   ]
+  },
+  {
+   "id": 328987,
+   "name": "Kochanowskiego 72",
+   "lat": 54.381832,
+   "lon": 18.6263,
+   "e": 2.2,
+   "n": -74.4,
+   "dist": 74.4,
+   "photo": 1395847,
+   "photos": [
+    1395847,
+    1395631,
+    1819856
+   ],
+   "osm": [
+    92358121
+   ]
+  },
+  {
+   "id": 328990,
+   "name": "Kochanowskiego 71",
+   "lat": 54.381732,
+   "lon": 18.6268255,
+   "e": 36.2,
+   "n": -85.5,
+   "dist": 92.9,
+   "photo": 1395632,
+   "photos": [
+    1395845,
+    1395632
+   ],
+   "osm": [
+    92350261
+   ]
+  },
+  {
+   "id": 328992,
+   "name": "Kochanowskiego 70",
+   "lat": 54.381663,
+   "lon": 18.6262355,
+   "e": -2.0,
+   "n": -93.2,
+   "dist": 93.2,
+   "photo": 1395844,
+   "photos": [
+    2409840,
+    1395844,
+    1395637,
+    1819856
+   ],
+   "osm": [
+    92358120
+   ]
+  },
+  {
+   "id": 328993,
+   "name": "Kochanowskiego 69",
+   "lat": 54.3815695,
+   "lon": 18.626783,
+   "e": 33.5,
+   "n": -103.6,
+   "dist": 108.9,
+   "photo": 1395636,
+   "photos": [
+    1395842,
+    1395634,
+    1395636
+   ],
+   "osm": [
+    92350260
+   ]
+  },
+  {
+   "id": 328994,
+   "name": "Kochanowskiego 68",
+   "lat": 54.381507,
+   "lon": 18.6261715,
+   "e": -6.2,
+   "n": -110.6,
+   "dist": 110.7,
+   "photo": 1395639,
+   "photos": [
+    1395844,
+    1395639
+   ],
+   "osm": [
+    92358119
+   ]
+  },
+  {
+   "id": 550194,
+   "name": "Kochanowskiego 81-83-85",
+   "lat": 54.383353,
+   "lon": 18.6273945,
+   "e": 73.1,
+   "n": 94.9,
+   "dist": 119.8,
+   "photo": 1793969,
+   "photos": [
+    1793969
+   ],
+   "osm": [
+    93307409,
+    93307406,
+    90722541
+   ]
+  },
+  {
+   "id": 64725,
+   "name": "Kochanowskiego 67",
+   "lat": 54.381398,
+   "lon": 18.6267185,
+   "e": 29.3,
+   "n": -122.7,
+   "dist": 126.2,
+   "photo": 268386,
+   "photos": [
+    268386
+   ],
+   "osm": [
+    88463274
+   ]
+  },
+  {
+   "id": 328995,
+   "name": "Kochanowskiego 66",
+   "lat": 54.38132,
+   "lon": 18.626085500000002,
+   "e": -11.7,
+   "n": -131.4,
+   "dist": 131.9,
+   "photo": 1395844,
+   "photos": [
+    1395844,
+    1395640
+   ],
+   "osm": [
+    90722442
+   ]
+  },
+  {
+   "id": 119892,
+   "name": "Klonowicza 2C-F",
+   "lat": 54.3836,
+   "lon": 18.6253885,
+   "e": -56.9,
+   "n": 122.4,
+   "dist": 135.0,
+   "photo": 487654,
+   "photos": [
+    487654
+   ],
+   "osm": [
+    93304322,
+    93304325,
+    93304328,
+    93304330
+   ]
+  },
+  {
+   "id": 328996,
+   "name": "Kochanowskiego 65",
+   "lat": 54.3812635,
+   "lon": 18.6265575,
+   "e": 18.9,
+   "n": -137.7,
+   "dist": 139.0,
+   "photo": 1395641,
+   "photos": [
+    1395862,
+    1395641
+   ],
+   "osm": [
+    90722503
+   ]
+  },
+  {
+   "id": 549630,
+   "name": "Kochanowskiego 82-84-86",
+   "lat": 54.383641999999995,
+   "lon": 18.6272795,
+   "e": 65.7,
+   "n": 127.1,
+   "dist": 143.1,
+   "photo": 2409826,
+   "photos": [
+    2409826,
+    1105033,
+    1793969
+   ],
+   "osm": [
+    89767273,
+    93308862,
+    93308863
+   ]
+  },
+  {
+   "id": 328997,
+   "name": "Kochanowskiego 64",
+   "lat": 54.3811695,
+   "lon": 18.6258925,
+   "e": -24.2,
+   "n": -148.1,
+   "dist": 150.1,
+   "photo": 1395642,
+   "photos": [
+    1395642
+   ],
+   "osm": [
+    88463291
+   ]
+  },
+  {
+   "id": 93577,
+   "name": "Mickiewicza 32-36",
+   "lat": 54.383402000000004,
+   "lon": 18.6244225,
+   "e": -119.5,
+   "n": 100.4,
+   "dist": 156.1,
+   "photo": 384032,
+   "photos": [
+    384032
+   ],
+   "osm": [
+    93303778,
+    93303777,
+    93303776
+   ]
+  },
+  {
+   "id": 328998,
+   "name": "Kochanowskiego 63",
+   "lat": 54.381069499999995,
+   "lon": 18.6266755,
+   "e": 26.5,
+   "n": -159.3,
+   "dist": 161.5,
+   "photo": 1395335,
+   "photos": [
+    1395335
+   ],
+   "osm": [
+    88463270
+   ]
+  },
+  {
+   "id": 549633,
+   "name": "Jana Kochanowskiego 88",
+   "lat": 54.383919,
+   "lon": 18.6274375,
+   "e": 75.9,
+   "n": 157.9,
+   "dist": 175.2,
+   "photo": 2409826,
+   "photos": [
+    2409826
+   ]
+  },
+  {
+   "id": 328999,
+   "name": "Kochanowskiego 62",
+   "lat": 54.380845,
+   "lon": 18.6257205,
+   "e": -35.4,
+   "n": -184.3,
+   "dist": 187.6,
+   "photo": 1395644,
+   "photos": [
+    1395644
+   ]
+  },
+  {
+   "id": 329002,
+   "name": "Kochanowskiego 61",
+   "lat": 54.380751000000004,
+   "lon": 18.6265895,
+   "e": 20.9,
+   "n": -194.7,
+   "dist": 195.9,
+   "photo": 1395334,
+   "photos": [
+    1395334
+   ]
+  },
+  {
+   "id": 64726,
+   "name": "Kochanowskiego 94",
+   "lat": 54.384394,
+   "lon": 18.6277165,
+   "e": 94.0,
+   "n": 210.8,
+   "dist": 230.8,
+   "photo": 268394,
+   "photos": [
+    268394
+   ]
+  }
+ ],
+ "photos": {
+  "1819856": {
+   "id": 1819856,
+   "thumb": "/foto/m/1819/1819856.jpg",
+   "year": "1907-1908",
+   "page": "https://fotopolska.eu/1819856,foto.html",
+   "caption": "Skrzyżowanie Kochanowskiego i Mickiewicza.",
+   "object": 549642,
+   "objectName": "Adama Mickiewicza 45",
+   "file": "https://fotopolska.eu/foto/1819/1819856.jpg",
+   "description": "Skrzyżowanie Kochanowskiego i Mickiewicza. - Lata 1907-1908",
+   "title": "Kochanowskiego 76, Gdańsk - 1908 rok",
+   "author": "",
+   "w": 1400,
+   "h": 875
+  },
+  "268390": {
+   "id": 268390,
+   "thumb": "/foto/m/268/268390.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/268390,gdansk-ul-kochanowskiego-jana-kochanowskiego-76,zdjecie.html",
+   "caption": "Na pierwszym planie dom pod nr 45 przy ul. Mickiewicza, w lewo dom nr 76 przy Kochanowskiego.",
+   "object": 64728,
+   "objectName": "Kochanowskiego 76",
+   "file": "https://fotopolska.eu/foto/268/268390.jpg",
+   "description": "Na pierwszym planie dom pod nr 45 przy ul. Mickiewicza, w lewo dom nr 76 przy Kochanowskiego. - 2011",
+   "title": "Kochanowskiego 76, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1200,
+   "h": 1001
+  },
+  "268391": {
+   "id": 268391,
+   "thumb": "/foto/m/268/268391.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/268391,gdansk-ul-kochanowskiego-jana-kochanowskiego-76,zdjecie.html",
+   "caption": "Kamienica widziana od strony płd.-wschodniej.",
+   "object": 64728,
+   "objectName": "Kochanowskiego 76",
+   "file": "https://fotopolska.eu/foto/268/268391.jpg",
+   "description": "Kamienica widziana od strony płd.-wschodniej. - 2011",
+   "title": "Kochanowskiego 76, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1200,
+   "h": 992
+  },
+  "268392": {
+   "id": 268392,
+   "thumb": "/foto/m/268/268392.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/268392,gdansk-ul-kochanowskiego-jana-kochanowskiego-76,zdjecie.html",
+   "caption": "Dom nr 76 widziany od południa.",
+   "object": 64728,
+   "objectName": "Kochanowskiego 76",
+   "file": "https://fotopolska.eu/foto/268/268392.jpg",
+   "description": "Dom nr 76 widziany od południa. - 2011",
+   "title": "Kochanowskiego 76, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 900,
+   "h": 1200
+  },
+  "268393": {
+   "id": 268393,
+   "thumb": "/foto/m/268/268393.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/268393,gdansk-ul-kochanowskiego-jana-kochanowskiego-76,zdjecie.html",
+   "caption": "Szczegóły.",
+   "object": 64728,
+   "objectName": "Kochanowskiego 76",
+   "file": "https://fotopolska.eu/foto/268/268393.jpg",
+   "description": "Szczegóły. - 2011",
+   "title": "Kochanowskiego 76, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 961,
+   "h": 800
+  },
+  "1395253": {
+   "id": 1395253,
+   "thumb": "/foto/m/1395/1395253.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395253,gdansk-ul-kochanowskiego-jana-kochanowskiego-76,zdjecie.html",
+   "caption": "Kochanowskiego 76 - już po odnowieniu elewacji",
+   "object": 64728,
+   "objectName": "Kochanowskiego 76",
+   "file": "https://fotopolska.eu/foto/1395/1395253.jpg",
+   "description": "Kochanowskiego 76 - już po odnowieniu elewacji - 2019",
+   "title": "Kochanowskiego 76, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1046
+  },
+  "1395843": {
+   "id": 1395843,
+   "thumb": "/foto/m/1395/1395843.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/1395843,gdansk-ul-kochanowskiego-jana-kochanowskiego-74,zdjecie.html",
+   "caption": "Kochanowskiego 74, z prawej fragment nr 76.",
+   "object": 328986,
+   "objectName": "Kochanowskiego 74",
+   "file": "https://fotopolska.eu/foto/1395/1395843.jpg",
+   "description": "Kochanowskiego 74, z prawej fragment nr 76. - 2011",
+   "title": "Kochanowskiego 74, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1071
+  },
+  "268387": {
+   "id": 268387,
+   "thumb": "/foto/m/268/268387.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/268387,gdansk-ul-kochanowskiego-jana-kochanowskiego-75,zdjecie.html",
+   "caption": "Kamienica pod nr 75, widziana od strony płd.-zachodniej.",
+   "object": 64729,
+   "objectName": "Kochanowskiego 75",
+   "file": "https://fotopolska.eu/foto/268/268387.jpg",
+   "description": "Kamienica pod nr 75, widziana od strony płd.-zachodniej. - 2011",
+   "title": "Kochanowskiego 75, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1200,
+   "h": 1005
+  },
+  "268388": {
+   "id": 268388,
+   "thumb": "/foto/m/268/268388.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/268388,gdansk-ul-kochanowskiego-jana-kochanowskiego-75,zdjecie.html",
+   "caption": "Na pierwszym planie kamienica pod nr 47 przy ul. Mickiewicza, w prawo dom nr 75 przy Kochanowskiego.",
+   "object": 64729,
+   "objectName": "Kochanowskiego 75",
+   "file": "https://fotopolska.eu/foto/268/268388.jpg",
+   "description": "Na pierwszym planie kamienica pod nr 47 przy ul. Mickiewicza, w prawo dom nr 75 przy Kochanowskiego. - 2011",
+   "title": "Kochanowskiego 75, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1200,
+   "h": 915
+  },
+  "268389": {
+   "id": 268389,
+   "thumb": "/foto/m/268/268389.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395243,gdansk-ul-kochanowskiego-jana-kochanowskiego-75,zdjecie.html",
+   "caption": "Kochanowskiego 75",
+   "object": 64729,
+   "objectName": "Kochanowskiego 75",
+   "file": "https://fotopolska.eu/foto/268/268389.jpg",
+   "description": "Na budynku zachowało się napomnienie obywatelskie!!! - 2011",
+   "title": "Kochanowskiego 75, Gdańsk - zdjęcia",
+   "author": "TW40",
+   "w": 1000,
+   "h": 589
+  },
+  "1498923": {
+   "id": 1498923,
+   "thumb": "/foto/m/1498/1498923.jpg",
+   "year": "1939",
+   "page": "https://fotopolska.eu/1498923,gdansk-ul-kochanowskiego-jana-kochanowskiego-79,zdjecie.html",
+   "caption": "Uroczystości odsłonięcia pomnika poświęconego poległym marynarzom Cesarskiej Marynarki Wojennej (Kaiserliche Marine) w 33 rocznicę \"Bitwy Jutlandzkiej\". \nW głębi budynek Kochanowskiego 79.",
+   "object": 350597,
+   "objectName": "Kochanowskiego 79",
+   "file": "https://fotopolska.eu/foto/1498/1498923.jpg",
+   "description": "Uroczystości odsłonięcia pomnika poświęconego poległym marynarzom Cesarskiej Marynarki Wojennej (Kaiserliche Marine) w 33 rocznicę Bitwy Jutlandzkiej. W głębi budynek Kochanowskiego 79. - 1939",
+   "title": "Kochanowskiego 79, Gdańsk - 1939 rok",
+   "author": "",
+   "w": 1300,
+   "h": 906
+  },
+  "1499033": {
+   "id": 1499033,
+   "thumb": "/foto/m/1499/1499033.jpg",
+   "year": "1939",
+   "page": "https://fotopolska.eu/1499033,gdansk-ul-kochanowskiego-jana-kochanowskiego-79,zdjecie.html",
+   "caption": "Uroczystości odsłonięcia pomnika poświęconego poległym marynarzom Cesarskiej Marynarki Wojennej (Kaiserliche Marine) w 33 rocznicę \"Bitwy Jutlandzkiej\".\nW głębi budynek Kochanowskiego 79",
+   "object": 350597,
+   "objectName": "Kochanowskiego 79",
+   "file": "https://fotopolska.eu/foto/1499/1499033.jpg",
+   "description": "Uroczystości odsłonięcia pomnika poświęconego poległym marynarzom Cesarskiej Marynarki Wojennej (Kaiserliche Marine) w 33 rocznicę Bitwy Jutlandzkiej. W głębi budynek Kochanowskiego 79 - 1939",
+   "title": "Kochanowskiego 79, Gdańsk - 1939 rok",
+   "author": "",
+   "w": 1024,
+   "h": 381
+  },
+  "1395296": {
+   "id": 1395296,
+   "thumb": "/foto/m/1395/1395296.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395296,foto.html",
+   "caption": "Kochanowskiego 73",
+   "object": 328985,
+   "objectName": "Kochanowskiego 73",
+   "file": "https://fotopolska.eu/foto/1395/1395296.jpg",
+   "description": "Kochanowskiego 73 - 2019",
+   "title": "Kochanowskiego 73, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 947
+  },
+  "1395847": {
+   "id": 1395847,
+   "thumb": "/foto/m/1395/1395847.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/1395847,gdansk-ul-kochanowskiego-jana-kochanowskiego-72,zdjecie.html",
+   "caption": "Dom pod nr 72.",
+   "object": 328987,
+   "objectName": "Kochanowskiego 72",
+   "file": "https://fotopolska.eu/foto/1395/1395847.jpg",
+   "description": "Dom pod nr 72. - 2011",
+   "title": "Kochanowskiego 72, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1089
+  },
+  "1395631": {
+   "id": 1395631,
+   "thumb": "/foto/m/1395/1395631.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395631,gdansk-ul-kochanowskiego-jana-kochanowskiego-72,zdjecie.html",
+   "caption": "Kochanowskiego 72",
+   "object": 328987,
+   "objectName": "Kochanowskiego 72",
+   "file": "https://fotopolska.eu/foto/1395/1395631.jpg",
+   "description": "Kochanowskiego 72 - 2019",
+   "title": "Kochanowskiego 72, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1089
+  },
+  "1395845": {
+   "id": 1395845,
+   "thumb": "/foto/m/1395/1395845.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/1395845,gdansk-ul-kochanowskiego-jana-kochanowskiego-71,zdjecie.html",
+   "caption": "Kochanowskiego nr 71.",
+   "object": 328990,
+   "objectName": "Kochanowskiego 71",
+   "file": "https://fotopolska.eu/foto/1395/1395845.jpg",
+   "description": "Kochanowskiego nr 71. - 2011",
+   "title": "Kochanowskiego 71, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 995
+  },
+  "1395632": {
+   "id": 1395632,
+   "thumb": "/foto/m/1395/1395632.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395632,gdansk-ul-kochanowskiego-jana-kochanowskiego-71,zdjecie.html",
+   "caption": "Kochanowskiego 71",
+   "object": 328990,
+   "objectName": "Kochanowskiego 71",
+   "file": "https://fotopolska.eu/foto/1395/1395632.jpg",
+   "description": "Kochanowskiego 71 - 2019",
+   "title": "Kochanowskiego 71, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1097
+  },
+  "2409840": {
+   "id": 2409840,
+   "thumb": "/foto/m/2409/2409840.jpg",
+   "year": "1907-1908",
+   "page": "https://fotopolska.eu/2409840,gdansk-ul-kochanowskiego-jana-kochanowskiego-70,zdjecie.html",
+   "caption": "Dom przy Kochanowskiego 70.",
+   "object": 328992,
+   "objectName": "Kochanowskiego 70",
+   "file": "https://fotopolska.eu/foto/2409/2409840.jpg",
+   "description": "Dom przy Kochanowskiego 70. - Lata 1907-1908",
+   "title": "Kochanowskiego 70, Gdańsk - 1907 rok",
+   "author": "",
+   "w": 983,
+   "h": 1400
+  },
+  "1395844": {
+   "id": 1395844,
+   "thumb": "/foto/m/1395/1395844.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/1395844,gdansk-ul-kochanowskiego-jana-kochanowskiego-70,zdjecie.html",
+   "caption": "Od lewej Kochanowskiego nr 66, 68 i 70 oraz fragment nr 72.",
+   "object": 328992,
+   "objectName": "Kochanowskiego 70",
+   "file": "https://fotopolska.eu/foto/1395/1395844.jpg",
+   "description": "Od lewej Kochanowskiego nr 66, 68 i 70 oraz fragment nr 72. - 2011",
+   "title": "Kochanowskiego 70, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1015
+  },
+  "1395637": {
+   "id": 1395637,
+   "thumb": "/foto/m/1395/1395637.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395637,gdansk-ul-kochanowskiego-jana-kochanowskiego-70,zdjecie.html",
+   "caption": "Kochanowskiego 70",
+   "object": 328992,
+   "objectName": "Kochanowskiego 70",
+   "file": "https://fotopolska.eu/foto/1395/1395637.jpg",
+   "description": "Kochanowskiego 70 - 2019",
+   "title": "Kochanowskiego 70, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1060
+  },
+  "1395842": {
+   "id": 1395842,
+   "thumb": "/foto/m/1395/1395842.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/1395842,gdansk-ul-kochanowskiego-jana-kochanowskiego-69,zdjecie.html",
+   "caption": "Kochanowskiego 69.",
+   "object": 328993,
+   "objectName": "Kochanowskiego 69",
+   "file": "https://fotopolska.eu/foto/1395/1395842.jpg",
+   "description": "Kochanowskiego 69. - 2011",
+   "title": "Kochanowskiego 69, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 989
+  },
+  "1395634": {
+   "id": 1395634,
+   "thumb": "/foto/m/1395/1395634.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395634,gdansk-ul-kochanowskiego-jana-kochanowskiego-69,zdjecie.html",
+   "caption": "Kochanowskiego 69",
+   "object": 328993,
+   "objectName": "Kochanowskiego 69",
+   "file": "https://fotopolska.eu/foto/1395/1395634.jpg",
+   "description": "Kochanowskiego 69 - 2019",
+   "title": "Kochanowskiego 69, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1066
+  },
+  "1395636": {
+   "id": 1395636,
+   "thumb": "/foto/m/1395/1395636.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395636,gdansk-ul-kochanowskiego-jana-kochanowskiego-69,zdjecie.html",
+   "caption": "Kochanowskiego 69",
+   "object": 328993,
+   "objectName": "Kochanowskiego 69",
+   "file": "https://fotopolska.eu/foto/1395/1395636.jpg",
+   "description": "Kochanowskiego 69 - 2019",
+   "title": "Kochanowskiego 69, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1046
+  },
+  "1395639": {
+   "id": 1395639,
+   "thumb": "/foto/m/1395/1395639.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395639,gdansk-ul-kochanowskiego-jana-kochanowskiego-68,zdjecie.html",
+   "caption": "Kochanowskiego 68",
+   "object": 328994,
+   "objectName": "Kochanowskiego 68",
+   "file": "https://fotopolska.eu/foto/1395/1395639.jpg",
+   "description": "Kochanowskiego 68 - 2019",
+   "title": "Kochanowskiego 68, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1131
+  },
+  "1793969": {
+   "id": 1793969,
+   "thumb": "/foto/m/1793/1793969.jpg",
+   "year": "1910-1913",
+   "page": "https://fotopolska.eu/1793969,foto.html",
+   "caption": "Fragment osiedla przy ul. Kochanowskiego. Od prawej dom 81-85, dalej rosnąco.",
+   "object": 550194,
+   "objectName": "Kochanowskiego 81-83-85",
+   "file": "https://fotopolska.eu/foto/1793/1793969.jpg",
+   "description": "Fragment osiedla przy ul. Kochanowskiego. Od prawej dom 81-85, dalej rosnąco. - Lata 1910-1913",
+   "title": "Kochanowskiego 81-83-85 (Posadowskyweg 81-83-85), Gdańsk - 1912 rok",
+   "author": "",
+   "w": 1400,
+   "h": 895
+  },
+  "268386": {
+   "id": 268386,
+   "thumb": "/foto/m/268/268386.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/268386,foto.html",
+   "caption": "Dom na Kochanowskiego pod nr 67. Mozaika ... elewacji.",
+   "object": 64725,
+   "objectName": "Kochanowskiego 67",
+   "file": "https://fotopolska.eu/foto/268/268386.jpg",
+   "description": "Dom na Kochanowskiego pod nr 67. Mozaika ... elewacji. - 2011",
+   "title": "Kochanowskiego 67, Gdańsk - zdjęcia",
+   "author": "† Yanek",
+   "w": 1400,
+   "h": 1057
+  },
+  "1395640": {
+   "id": 1395640,
+   "thumb": "/foto/m/1395/1395640.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395640,gdansk-ul-kochanowskiego-jana-kochanowskiego-66,zdjecie.html",
+   "caption": "Kochanowskiego 66",
+   "object": 328995,
+   "objectName": "Kochanowskiego 66",
+   "file": "https://fotopolska.eu/foto/1395/1395640.jpg",
+   "description": "Kochanowskiego 66 - 2019",
+   "title": "Kochanowskiego 66, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1020
+  },
+  "487654": {
+   "id": 487654,
+   "thumb": "/foto/m/487/487654.jpg",
+   "year": "2012",
+   "page": "https://fotopolska.eu/487654,foto.html",
+   "caption": "Klatka C budynku pod nr 2.",
+   "object": 119892,
+   "objectName": "Klonowicza 2C-F",
+   "file": "https://fotopolska.eu/foto/487/487654.jpg",
+   "description": "Klatka C budynku pod nr 2. - 2012",
+   "title": "Klonowicza 2C-F, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1300,
+   "h": 975
+  },
+  "1395862": {
+   "id": 1395862,
+   "thumb": "/foto/m/1395/1395862.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/1395862,gdansk-ul-kochanowskiego-jana-kochanowskiego-65,zdjecie.html",
+   "caption": "Kochanowskiego 65.",
+   "object": 328996,
+   "objectName": "Kochanowskiego 65",
+   "file": "https://fotopolska.eu/foto/1395/1395862.jpg",
+   "description": "Kochanowskiego 65. - 2011",
+   "title": "Kochanowskiego 65, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1050
+  },
+  "1395641": {
+   "id": 1395641,
+   "thumb": "/foto/m/1395/1395641.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395641,gdansk-ul-kochanowskiego-jana-kochanowskiego-65,zdjecie.html",
+   "caption": "Kochanowskiego 65",
+   "object": 328996,
+   "objectName": "Kochanowskiego 65",
+   "file": "https://fotopolska.eu/foto/1395/1395641.jpg",
+   "description": "Kochanowskiego 65 - 2019",
+   "title": "Kochanowskiego 65, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1031
+  },
+  "2409826": {
+   "id": 2409826,
+   "thumb": "/foto/m/2409/2409826.jpg",
+   "year": "1907-1908",
+   "page": "https://fotopolska.eu/2409826,gdansk-ul-kochanowskiego-jana-kochanowskiego-82-84-86,zdjecie.html",
+   "caption": "Domy przy Kochanowskiego, od prawej 88 dalej malejąco.",
+   "object": 549630,
+   "objectName": "Kochanowskiego 82-84-86",
+   "file": "https://fotopolska.eu/foto/2409/2409826.jpg",
+   "description": "Domy przy Kochanowskiego, od prawej 88 dalej malejąco. - Lata 1907-1908",
+   "title": "Kochanowskiego 82-84-86 ( Posadowskyweg 82-84-86), Gdańsk - 1908 rok",
+   "author": "",
+   "w": 1400,
+   "h": 902
+  },
+  "1105033": {
+   "id": 1105033,
+   "thumb": "/foto/m/1105/1105033.jpg",
+   "year": "1910",
+   "page": "https://fotopolska.eu/1105033,gdansk-ul-kochanowskiego-jana-kochanowskiego-82-84-86,zdjecie.html",
+   "caption": "Kochanowskiego. Jeśli znów się nie pomylę, to od lewej 82 rosnąco ku prawej. z pisma Moderne Bauformen 1910, dostępnego stronie Uniwersytetu w Heidelbergu.",
+   "object": 549630,
+   "objectName": "Kochanowskiego 82-84-86",
+   "file": "https://fotopolska.eu/foto/1105/1105033.jpg",
+   "description": "Kochanowskiego. Jeśli znów się nie pomylę, to od lewej 82 rosnąco ku prawej. z pisma Moderne Bauformen 1910, dostępnego stronie Uniwersytetu w Heidelbergu. - 1910",
+   "title": "Kochanowskiego 82-84-86 ( Posadowskyweg 82-84-86), Gdańsk - 1910 rok",
+   "author": "",
+   "w": 1400,
+   "h": 951
+  },
+  "1395642": {
+   "id": 1395642,
+   "thumb": "/foto/m/1395/1395642.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395642,foto.html",
+   "caption": "Kochanowskiego 64",
+   "object": 328997,
+   "objectName": "Kochanowskiego 64",
+   "file": "https://fotopolska.eu/foto/1395/1395642.jpg",
+   "description": "Kochanowskiego 64 - 2019",
+   "title": "Kochanowskiego 64, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 966
+  },
+  "384032": {
+   "id": 384032,
+   "thumb": "/foto/m/384/384032.jpg",
+   "year": "2012",
+   "page": "https://fotopolska.eu/384032,foto.html",
+   "caption": "Dom pod nr (od lewej) 32, 34 i 36. Z prawej fragment nr 36A.",
+   "object": 93577,
+   "objectName": "Mickiewicza 32-36",
+   "file": "https://fotopolska.eu/foto/384/384032.jpg",
+   "description": "Dom pod nr (od lewej) 32, 34 i 36. Z prawej fragment nr 36A. - 2012",
+   "title": "Mickiewicza 32-36, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1200,
+   "h": 900
+  },
+  "1395335": {
+   "id": 1395335,
+   "thumb": "/foto/m/1395/1395335.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395335,foto.html",
+   "caption": "Kochanowskiego 63",
+   "object": 328998,
+   "objectName": "Kochanowskiego 63",
+   "file": "https://fotopolska.eu/foto/1395/1395335.jpg",
+   "description": "Kochanowskiego 63 - 2019",
+   "title": "Kochanowskiego 63, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 1076
+  },
+  "1395644": {
+   "id": 1395644,
+   "thumb": "/foto/m/1395/1395644.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395644,foto.html",
+   "caption": "Kochanowskiego 62",
+   "object": 328999,
+   "objectName": "Kochanowskiego 62",
+   "file": "https://fotopolska.eu/foto/1395/1395644.jpg",
+   "description": "Kochanowskiego 62 - 2019",
+   "title": "Kochanowskiego 62, Gdańsk - zdjęcia",
+   "author": "ZPKSoft",
+   "w": 1400,
+   "h": 1018
+  },
+  "1395334": {
+   "id": 1395334,
+   "thumb": "/foto/m/1395/1395334.jpg",
+   "year": "2019",
+   "page": "https://fotopolska.eu/1395334,foto.html",
+   "caption": "Kochanowskiego 61",
+   "object": 329002,
+   "objectName": "Kochanowskiego 61",
+   "file": "https://fotopolska.eu/foto/1395/1395334.jpg",
+   "description": "Kochanowskiego 61 - 2019",
+   "title": "Kochanowskiego 61, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1400,
+   "h": 996
+  },
+  "268394": {
+   "id": 268394,
+   "thumb": "/foto/m/268/268394.jpg",
+   "year": "2011",
+   "page": "https://fotopolska.eu/268394,foto.html",
+   "caption": "Dom pod nr 94 przy zachodniej pierzei ulicy.",
+   "object": 64726,
+   "objectName": "Kochanowskiego 94",
+   "file": "https://fotopolska.eu/foto/268/268394.jpg",
+   "description": "Dom pod nr 94 przy zachodniej pierzei ulicy. - 2011",
+   "title": "Kochanowskiego 94, Gdańsk - zdjęcia",
+   "author": "",
+   "w": 1200,
+   "h": 900
+  }
+ },
+ "byBuilding": {
+  "92356369": [
+   1819856
+  ],
+  "92358118": [
+   1819856,
+   268390,
+   268391,
+   268392,
+   268393,
+   1395253
+  ],
+  "92358117": [
+   1395843
+  ],
+  "92350262": [
+   1395296
+  ],
+  "92358121": [
+   1395847,
+   1395631,
+   1819856
+  ],
+  "92350261": [
+   1395845,
+   1395632
+  ],
+  "92358120": [
+   2409840,
+   1395844,
+   1395637,
+   1819856
+  ],
+  "92350260": [
+   1395842,
+   1395634,
+   1395636
+  ],
+  "92358119": [
+   1395844,
+   1395639
+  ],
+  "93307409": [
+   1793969
+  ],
+  "93307406": [
+   1793969
+  ],
+  "90722541": [
+   1793969
+  ],
+  "88463274": [
+   268386
+  ],
+  "90722442": [
+   1395844,
+   1395640
+  ],
+  "93304322": [
+   487654
+  ],
+  "93304325": [
+   487654
+  ],
+  "93304328": [
+   487654
+  ],
+  "93304330": [
+   487654
+  ],
+  "90722503": [
+   1395862,
+   1395641
+  ],
+  "89767273": [
+   2409826,
+   1105033,
+   1793969
+  ],
+  "93308862": [
+   2409826,
+   1105033,
+   1793969
+  ],
+  "93308863": [
+   2409826,
+   1105033,
+   1793969
+  ],
+  "88463291": [
+   1395642
+  ],
+  "93303778": [
+   384032
+  ],
+  "93303777": [
+   384032
+  ],
+  "93303776": [
+   384032
+  ],
+  "88463270": [
+   1395335
+  ]
+ }
+}
