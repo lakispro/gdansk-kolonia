@@ -6,6 +6,10 @@ import * as THREE from 'three';
  * Desktop: pointer-lock mouse look, WASD, Shift sprint, Space jump, E act.
  * Touch:   a virtual stick on the left drives movement, any drag on the
  *          rest of the screen turns the view, buttons act / sprint / jump.
+ * Flight:  holding Space (or the jump button) for FLY_HOLD seconds takes off.
+ *          In the air: hold Space to climb, C to sink, and moving
+ *          follows the view's pitch (look down + forward = dive).  Touching
+ *          the ground lands.
  *
  * Collision is a 2-D circle against building footprints (segment
  * distance) plus circular props, sub-stepped so a sprint cannot tunnel
@@ -16,6 +20,7 @@ import * as THREE from 'three';
 export const EYE = 1.66;
 export const RADIUS = 0.36;
 const GRAVITY = 18.5, JUMP_V = 6.6;   // 1.2 m: enough to vault a picket fence
+const FLY_HOLD = 0.35, FLY_WALK = 9, FLY_RUN = 24, FLY_CLIMB = 7, FLY_CEIL = 160;
 
 export class Player {
   constructor(camera, dom, world, opts = {}) {
@@ -25,6 +30,7 @@ export class Player {
     this.pos = new THREE.Vector3(this.spawn.x, 0, this.spawn.z);
     this.pos.y = this.ground(this.pos.x, this.pos.z);
     this.vy = 0; this.onGround = true; this.airTime = 0;
+    this.flying = false; this.jumpHeld = false; this.holdT = 0;
     this.yaw = this.spawn.yaw; this.pitch = 0;
     this.keys = new Set();
     this.locked = false; this.touch = false; this.frozen = true;
@@ -33,7 +39,7 @@ export class Player {
     this.bob = 0; this.moving = 0; this.lastStepPhase = 0;
     this.stick = { active: false, id: null, cx: 0, cy: 0, dx: 0, dy: 0 };
     this.look = { id: null, lx: 0, ly: 0 };
-    this.onAct = null; this.onKey = null; this.onStep = null; this.onJump = null; this.onLand = null;
+    this.onAct = null; this.onKey = null; this.onStep = null; this.onJump = null; this.onLand = null; this.onFly = null;
     this._bind(); this.applyCamera(0);
   }
 
@@ -45,17 +51,17 @@ export class Player {
     });
     document.addEventListener('pointerlockchange', () => {
       this.locked = document.pointerLockElement === this.dom;
-      if (!this.locked) this.keys.clear();
+      if (!this.locked) { this.keys.clear(); this.jumpHeld = false; }
     });
     window.addEventListener('keydown', (e) => {
       if (e.repeat) return; this.keys.add(e.code);
       if (e.code === 'KeyE' && !this.frozen) this.onAct?.();
-      if (e.code === 'Space' && !this.frozen) this.jump();
+      if (e.code === 'Space' && !this.frozen) { this.jumpHeld = true; this.jump(); }
       this.onKey?.(e.code, e);
       if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'Space', 'ArrowUp', 'ArrowDown'].includes(e.code)) e.preventDefault();
     });
-    window.addEventListener('keyup', (e) => this.keys.delete(e.code));
-    window.addEventListener('blur', () => this.keys.clear());
+    window.addEventListener('keyup', (e) => { this.keys.delete(e.code); if (e.code === 'Space') this.jumpHeld = false; });
+    window.addEventListener('blur', () => { this.keys.clear(); this.jumpHeld = false; });
 
     // ---- touch
     const stick = document.getElementById('stick'), knob = stick.querySelector('.knob');
@@ -97,7 +103,9 @@ export class Player {
     const bAct = document.getElementById('bAct'), bRun = document.getElementById('bRun'), bJump = document.getElementById('bJump');
     bAct.addEventListener('pointerdown', (e) => { e.preventDefault(); e.stopPropagation(); if (!this.frozen) this.onAct?.(); });
     bRun.addEventListener('pointerdown', (e) => { e.preventDefault(); e.stopPropagation(); this.running = !this.running; bRun.classList.toggle('hot', this.running); });
-    bJump.addEventListener('pointerdown', (e) => { e.preventDefault(); e.stopPropagation(); if (!this.frozen) this.jump(); });
+    bJump.addEventListener('pointerdown', (e) => { e.preventDefault(); e.stopPropagation(); bJump.setPointerCapture?.(e.pointerId); if (!this.frozen) { this.jumpHeld = true; this.jump(); } });
+    const endJump = () => { this.jumpHeld = false; };
+    bJump.addEventListener('pointerup', endJump); bJump.addEventListener('pointercancel', endJump);
   }
 
   enableTouch() { this.touch = true; document.body.classList.add('touch'); }
@@ -106,7 +114,7 @@ export class Player {
     try { const r = this.dom.requestPointerLock?.(); if (r && r.catch) r.catch(() => {}); } catch { /* fallback: drag look */ }
   }
 
-  reset() { this.pos.set(this.spawn.x, 0, this.spawn.z); this.pos.y = this.ground(this.pos.x, this.pos.z); this.vy = 0; this.yaw = this.spawn.yaw; this.pitch = 0; }
+  reset() { this.pos.set(this.spawn.x, 0, this.spawn.z); this.pos.y = this.ground(this.pos.x, this.pos.z); this.vy = 0; this.flying = false; this.onGround = true; this.yaw = this.spawn.yaw; this.pitch = 0; }
 
   jump() { if (!this.onGround) return; this.vy = JUMP_V; this.onGround = false; this.onJump?.(); }
 
@@ -123,13 +131,18 @@ export class Player {
     if (this.stick.active) { fwd -= this.stick.dy; side += this.stick.dx; }
     const mag = Math.hypot(fwd, side);
     const run = this.isRunning;
-    let speed = run ? this.run : this.walk;
+    // a long press of jump takes off
+    this.holdT = this.jumpHeld ? this.holdT + dt : 0;
+    if (!this.flying && this.holdT > FLY_HOLD) { this.flying = true; this.onGround = false; this.vy = 0; this.onFly?.(true); }
+    let speed = this.flying ? (run ? FLY_RUN : FLY_WALK) : (run ? this.run : this.walk);
     if (mag > 1) { fwd /= mag; side /= mag; }
     this.moving = Math.min(1, mag);
     // yaw = 0 faces -z (north).  forward = (-sin yaw, -cos yaw)
     const fx = -Math.sin(this.yaw), fz = -Math.cos(this.yaw);
     const rx = Math.cos(this.yaw), rz = -Math.sin(this.yaw);
-    let vx = (fx * fwd + rx * side) * speed, vz = (fz * fwd + rz * side) * speed;
+    // in flight, forward follows the pitch of the view
+    const fh = this.flying ? Math.cos(this.pitch) : 1;
+    let vx = (fx * fh * fwd + rx * side) * speed, vz = (fz * fh * fwd + rz * side) * speed;
     const dist = Math.hypot(vx, vz) * dt;
     const steps = Math.max(1, Math.ceil(dist / 0.15));
     for (let i = 0; i < steps; i++) {
@@ -137,7 +150,12 @@ export class Player {
     }
     // vertical
     const g = this.ground(this.pos.x, this.pos.z);
-    if (this.onGround) {
+    if (this.flying) {
+      const down = this.keys.has('KeyC');
+      this.vy = (this.jumpHeld ? FLY_CLIMB : 0) - (down ? FLY_CLIMB : 0) + Math.sin(this.pitch) * fwd * speed;
+      this.pos.y = Math.min(g + FLY_CEIL, this.pos.y + this.vy * dt); this.airTime += dt;
+      if (this.pos.y <= g) { this.pos.y = g; this.flying = false; this.onGround = true; this.vy = 0; this.onLand?.(0.4); this.airTime = 0; this.onFly?.(false); }
+    } else if (this.onGround) {
       this.pos.y = g;
     } else {
       this.vy -= GRAVITY * dt; this.pos.y += this.vy * dt; this.airTime += dt;

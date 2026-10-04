@@ -415,7 +415,7 @@
     0,
     1
    ],
-   "envIntensity": 0.85,
+   "envIntensity": 0.3,
    "chimneys": [
     [
      12.5,
@@ -433,7 +433,8 @@
      5.0,
      -15.0
     ]
-   ]
+   ],
+   "brightness": 0.6
   }
  }
 }

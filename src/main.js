@@ -110,8 +110,8 @@ async function build() {
   story = new Story(plan.chapters({ houses, people }), worldGroup, ui, audio, { ground, onChapter: (c) => { if (c.cartStart !== undefined) cartT0 = clock.elapsedTime; } });
   window.__world = { player, camera, renderer, scene, houses, streets, plan, audio, get minimap() { return minimap; }, get story() { return story; }, setView: (x, z, yaw, pitch = 0) => { player.pos.x = x; player.pos.z = z; player.pos.y = plan.ground(x, z); player.yaw = yaw; player.pitch = pitch; player.applyCamera(0); } };
   $('how').innerHTML = isTouch
-    ? '<b>lewy drążek</b> — chodzenie · <b>przeciągnij</b> po ekranie — rozglądanie · <b>skok</b>, <b>bieg</b>, <b>działaj</b> — przyciski po prawej'
-    : '<b>WASD</b> chodzenie · <b>mysz</b> rozglądanie · <b>Shift</b> bieg · <b>Spacja</b> skok · <b>E</b> działaj · <b>M</b> mapa · <b>N</b> dźwięk';
+    ? '<b>lewy drążek</b> — chodzenie · <b>przeciągnij</b> po ekranie — rozglądanie · <b>skok</b>, <b>bieg</b>, <b>działaj</b> — przyciski po prawej · <b>przytrzymaj skok</b> — lot (patrz w dół, by zejść)'
+    : '<b>WASD</b> chodzenie · <b>mysz</b> rozglądanie · <b>Shift</b> bieg · <b>Spacja</b> skok · <b>przytrzymaj Spację</b> — lot (<b>C</b> w dół) · <b>E</b> działaj · <b>M</b> mapa · <b>N</b> dźwięk';
   $('start').classList.add('ready');
   $('loading').textContent = '';
   return meshes.length;

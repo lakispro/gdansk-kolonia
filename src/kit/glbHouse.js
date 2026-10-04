@@ -6,7 +6,8 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
  * A building that comes as a finished glTF model instead of from the generator
  * (style.glb in overrides.json):
  *   { src, at: [x, z] world metres, rot: degrees, plan: [[x, z], …] local footprint, door: [x, z, nx, nz] local,
- *     chimneys: [[x, z], …] local, for a model without a separate Chimneys mesh }
+ *     chimneys: [[x, z], …] local, for a model without a separate Chimneys mesh,
+ *     envIntensity: studio light strength, brightness: base-colour multiplier to match the game's darker look }
  * The model's origin is placed at `at` and turned by `rot` (three.js Y rotation, so local +x
  * points along ENU azimuth `rot`).  It stands on the lowest terrain point of its footprint.
  * Returns the same kind of house record the generator does (ring, door, eaves…), so the
@@ -31,7 +32,10 @@ export async function buildGlbHouse(b, ctx, group, st) {
   // environment (the game's own materials are Lambert and ignore it)
   model.traverse((o) => {
     if (!o.isMesh) return; o.castShadow = true; o.receiveShadow = true;
-    for (const m of [].concat(o.material)) if (ctx.envMap) { m.envMap = ctx.envMap; m.envMapIntensity = g.envIntensity ?? 1; }
+    for (const m of [].concat(o.material)) {
+      if (ctx.envMap) { m.envMap = ctx.envMap; m.envMapIntensity = g.envIntensity ?? 1; }
+      if (g.brightness != null && m.color && !m.userData.dimmed) { m.color.multiplyScalar(g.brightness); m.userData.dimmed = true; }
+    }
   });
   group.add(model);
   model.updateMatrixWorld(true);
